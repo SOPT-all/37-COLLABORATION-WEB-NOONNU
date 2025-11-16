@@ -1,8 +1,7 @@
-function App() {
+import "./styles/global.css";
 
-  return (
-    <p>App.tsx</p>
-  )
+function App() {
+  return <p>App.tsx</p>;
 }
 
-export default App
+export default App;
