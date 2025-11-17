@@ -1,5 +1,5 @@
 export const routePath = {
-  ROOT: '/',
+  LAYOUT: '/',
   FREE: '/free',
   STORAGE: '/storage',
 } as const;
