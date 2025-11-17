@@ -1,8 +1,5 @@
 function App() {
-
-  return (
-    <p>App.tsx</p>
-  )
+  return <></>;
 }
 
-export default App
+export default App;
