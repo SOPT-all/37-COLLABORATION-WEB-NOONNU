@@ -27,25 +27,23 @@ export default defineConfig([
     languageOptions: {
       ecmaVersion: 2020,
       globals: globals.browser,
-      parser: tseslint.parser,
-      parserOptions: {
-        project: ['./tsconfig.app.json', './tsconfig.node.json'],
-      },
     },
 
     rules: {
-      '@typescript-eslint/no-unused-vars': [
-        'warn',
-        { argsIgnorePattern: '^_|^args$' },
-      ],
-      'react/prop-types': 'off',
-
-      'prettier/prettier': ['error', { endOfLine: 'auto' }],
       curly: ['error', 'all'],
       'no-console': 'warn',
       eqeqeq: ['error', 'always'],
       'no-var': 'error',
       'prefer-const': 'off',
+
+      '@typescript-eslint/no-unused-vars': [
+        'warn',
+        { argsIgnorePattern: '^_|^args$' },
+      ],
+
+      'react/prop-types': 'off',
+
+      'prettier/prettier': ['error', { endOfLine: 'auto' }],
 
       'simple-import-sort/imports': 'error',
       'simple-import-sort/exports': 'error',
