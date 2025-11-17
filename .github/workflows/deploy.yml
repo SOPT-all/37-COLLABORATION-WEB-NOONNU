@@ -1,4 +1,4 @@
-name: Sync to forked repo
+name: Deploy (Sync to forked Repo)
 
 on:
   push:
@@ -19,7 +19,7 @@ jobs:
 
       - name: Add remote-url
         run: |
-          git remote add forked-repo https://jogpfls:${{ secrets.FORKED_REPO_TOKEN }}@github.com/jogpfls/36-COLLABORATION-WEB-WATCHAPEDIA
+          git remote add forked-repo https://jogpfls:${{ secrets.FORKED_REPO_TOKEN }}@github.com/jogpfls/37-COLLABORATION-WEB-NOONNU
           git config user.name "jogpfls"
           git config user.email "joerin4177@gmail.com"
 
