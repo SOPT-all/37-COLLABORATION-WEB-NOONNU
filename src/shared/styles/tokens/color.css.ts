@@ -15,4 +15,4 @@ export const color = {
   gray_04: "#9CA3AF",
   gray_05: "#6B7280",
   black: "#333333",
-};
+} as const;
