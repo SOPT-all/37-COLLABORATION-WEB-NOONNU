@@ -45,6 +45,7 @@ export default defineConfig([
       'no-console': 'warn',
       eqeqeq: ['error', 'always'],
       'no-var': 'error',
+      'prefer-const': 'off',
 
       'simple-import-sort/imports': 'error',
       'simple-import-sort/exports': 'error',
