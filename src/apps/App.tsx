@@ -1,9 +1,10 @@
 import ThemeProvider from "../shared/styles/theme-provider";
 import * as styles from "./app.css";
+import { rootStyle } from "../shared/styles/global.css";
 
 function App() {
   return (
-    <ThemeProvider>
+    <ThemeProvider className={rootStyle}>
       <p className={styles.display36b}>display-36b</p>
       <p className={styles.display20r}>display-20r</p>
       <p className={styles.header16m}>header-16m</p>
