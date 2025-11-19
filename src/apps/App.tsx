@@ -1,6 +1,6 @@
-import ThemeProvider from "../shared/styles/theme-provider";
-import * as styles from "./app.css";
-import { rootStyle } from "../shared/styles/global.css";
+import { rootStyle } from '../shared/styles/global.css';
+import ThemeProvider from '../shared/styles/theme-provider';
+import * as styles from './app.css';
 
 function App() {
   return (
