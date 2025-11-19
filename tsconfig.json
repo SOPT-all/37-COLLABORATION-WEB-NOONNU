@@ -4,4 +4,8 @@
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }
   ],
+
+  "compilerOptions": {
+    "types": ["@vanilla-extract/css"]
+  }
 }
