@@ -5,7 +5,7 @@ import { createRoot } from 'react-dom/client';
 import { RouterProvider } from 'react-router';
 
 import { router } from '@/router/router.tsx';
-import { queryClient } from '@/shared/apis/query-clinet.ts';
+import { queryClient } from '@/shared/apis/query-client.ts';
 
 import App from './App.tsx';
 
