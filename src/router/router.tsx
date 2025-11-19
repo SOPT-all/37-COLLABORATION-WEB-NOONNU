@@ -1,7 +1,8 @@
 import { createBrowserRouter, Navigate } from 'react-router';
 
-import FreeFont from '../pages/free-font/free-font';
-import Storage from '../pages/storage/storage';
+import FreeFont from '@/pages/free-font/free-font';
+import Storage from '@/pages/storage/storage';
+
 import Layout from './layout';
 import { routePath } from './path';
 
