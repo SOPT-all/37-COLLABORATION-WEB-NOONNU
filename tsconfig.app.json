@@ -14,7 +14,7 @@
       "@apps/*": ["apps/*"],
       "@pages/*": ["pages/*"],
       "@shared/*": ["shared/*"],
-      "@widgets/*": ["widgets/*"],
+      "@widgets/*": ["widgets/*"]
     },
 
     /* Bundler mode */
