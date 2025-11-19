@@ -1,8 +1,8 @@
 import { createTheme } from '@vanilla-extract/css';
 
+import { color } from './tokens/color.css';
 import { fontStyles } from './tokens/font-style';
 import { typography } from './tokens/typography';
-import { color } from './tokens/color.css';
 
 const tokens = {
   color: color,
