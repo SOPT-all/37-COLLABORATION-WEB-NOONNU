@@ -1,4 +1,4 @@
-import { instance } from "./instance";
+import { instance } from './instance';
 
 export const get = async <T>(...args: Parameters<typeof instance.get>) => {
   try {
@@ -13,7 +13,7 @@ export const get = async <T>(...args: Parameters<typeof instance.get>) => {
 export const post = async <T, B = unknown>(
   url: string,
   body?: B,
-  config?: Parameters<typeof instance.post>[2]
+  config?: Parameters<typeof instance.post>[2],
 ) => {
   try {
     const response = await instance.post<T>(url, body, config);
@@ -23,4 +23,3 @@ export const post = async <T, B = unknown>(
     throw error;
   }
 };
-
