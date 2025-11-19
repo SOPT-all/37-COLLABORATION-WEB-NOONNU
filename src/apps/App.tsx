@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import ThemeProvider from "../shared/styles/theme-provider";
 import * as styles from "./app.css";
 import { rootStyle } from "../shared/styles/global.css";
@@ -17,6 +18,10 @@ function App() {
       <p className={styles.body14r}>body-14r</p>
     </ThemeProvider>
   );
+=======
+function App() {
+  return <></>;
+>>>>>>> 338e6d1a97421d6345832d0e29b1c79608cec228
 }
 
 export default App;
