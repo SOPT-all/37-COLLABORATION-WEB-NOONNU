@@ -1,8 +1,8 @@
-import { globalStyle, style } from "@vanilla-extract/css";
-import { themeVars } from "./theme.css";
+import { globalStyle, style } from '@vanilla-extract/css';
+import { themeVars } from './theme.css';
 
-globalStyle("html, body", {
-  fontSize: "62.5%",
+globalStyle('html, body', {
+  fontSize: '62.5%',
   fontFamily: `'Pretendard Variable', sans-serif`,
 });
 

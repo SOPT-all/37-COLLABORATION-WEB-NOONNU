@@ -1,7 +1,7 @@
-import { type ReactNode } from "react";
+import { type ReactNode } from 'react';
 
-import "./reset.css";
-import { themeClass } from "./theme.css";
+import './reset.css';
+import { themeClass } from './theme.css';
 
 export default function ThemeProvider({
   theme,
