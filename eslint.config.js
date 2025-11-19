@@ -7,6 +7,7 @@ import reactRefresh from 'eslint-plugin-react-refresh';
 import simpleImportSortPlugin from 'eslint-plugin-simple-import-sort';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
+import importPlugin from 'eslint-plugin-import';
 
 export default defineConfig([
   globalIgnores(['dist']),
@@ -23,6 +24,14 @@ export default defineConfig([
     plugins: {
       prettier: prettierPlugin,
       'simple-import-sort': simpleImportSortPlugin,
+      import: importPlugin,
+    },
+    settings: {
+      'import/resolver': {
+        typescript: {
+          project: ['./tsconfig.app.json'],
+        }
+      }
     },
     languageOptions: {
       ecmaVersion: 2020,
@@ -47,6 +56,8 @@ export default defineConfig([
 
       'simple-import-sort/imports': 'error',
       'simple-import-sort/exports': 'error',
+
+      'import/no-unresolved': 'error',
     },
   },
 ]);
