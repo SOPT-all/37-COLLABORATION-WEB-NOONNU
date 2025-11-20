@@ -21,8 +21,8 @@ const ListView = () => {
           </div>
         </div>
 
-        <div>
-          <p>샘플 텍스트</p>
+        <div className={styles.sampleTextContainer}>
+          <p className={styles.sampleText}>샘플 텍스트</p>
         </div>
       </div>
     </>

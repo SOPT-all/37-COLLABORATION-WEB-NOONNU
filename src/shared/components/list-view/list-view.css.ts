@@ -57,3 +57,20 @@ export const actionButtonContainer = style({
   alignItems: 'center',
   gap: '1.2rem',
 });
+
+export const sampleTextContainer = style({
+  display: 'flex',
+  alignItems: 'center',
+  padding: '4rem 2rem',
+  borderRadius: '0 0 4px 4px',
+  borderRight: `1px solid ${themeVars.color.gray_02}`,
+  borderBottom: `1px solid ${themeVars.color.gray_02}`,
+  borderLeft: `1px solid ${themeVars.color.gray_02}`,
+});
+
+export const sampleText = style({
+  fontFamily: 'Pretendard',
+  fontSize: '3rem',
+  fontWeight: 600,
+  lineHeight: '3rem',
+});
