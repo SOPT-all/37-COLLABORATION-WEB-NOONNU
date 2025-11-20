@@ -3,15 +3,14 @@ import { style } from '@vanilla-extract/css';
 import { themeVars } from '@/shared/styles';
 
 export const listViewContainer = style({
-  display: 'grid',
-  gridTemplateRows: 'auto 1fr',
+  display: 'flex',
+  flexDirection: 'column',
 });
 
 export const listTitleContainer = style({
   display: 'flex',
   justifyContent: 'space-between',
-  alignItems: 'flex-start',
-  alignSelf: 'stretch',
+  alignItems: 'center',
   height: '5.2rem',
   padding: '1.2rem 2rem',
   border: `1px solid ${themeVars.color.gray_02}`,

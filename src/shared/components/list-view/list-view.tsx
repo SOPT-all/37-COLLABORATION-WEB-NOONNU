@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 
 import {
   AddFilledIcon,
@@ -31,8 +31,13 @@ const ListView = ({
   const [isCompared, setisCompared] = useState(initialisCompared);
   const [isLiked, setIsLiked] = useState(initialIsLiked);
 
-  const [currentPhrase, setCurrentPhrase] = useState(phrase);
-  const inputRef = useRef<HTMLTextAreaElement>(null);
+  const [currentPhrase, setCurrentPhrase] = useState('');
+
+  const handlePhraseClick = () => {
+    if (currentPhrase === phrase) {
+      setCurrentPhrase('');
+    }
+  };
 
   const handleToggleAdd = () => {
     setisCompared((prev) => !prev);
@@ -44,13 +49,6 @@ const ListView = ({
 
   const handlePhraseChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setCurrentPhrase(e.target.value);
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (currentPhrase === phrase && e.key.length === 1) {
-      e.preventDefault();
-      setCurrentPhrase(e.key);
-    }
   };
 
   const handleEditEnd = () => {
@@ -102,11 +100,11 @@ const ListView = ({
 
       <div className={styles.phraseContainer}>
         <textarea
-          ref={inputRef}
           value={currentPhrase}
           onChange={handlePhraseChange}
           onBlur={handleEditEnd}
-          onKeyDown={handleKeyDown}
+          onClick={handlePhraseClick}
+          placeholder={phrase}
           className={styles.editInput}
         />
       </div>
