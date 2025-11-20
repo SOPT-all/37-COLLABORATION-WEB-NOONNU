@@ -6,6 +6,7 @@ export const toastContainer = style({
   height: '5.2rem',
   minHeight: '5.2rem',
   padding: '1.6rem',
+  marginRight: '1.1rem',
 
   border: `1px solid ${themeVars.color.gray_03}`,
   backgroundColor: themeVars.color.white,

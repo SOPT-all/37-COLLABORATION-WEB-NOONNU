@@ -1,4 +1,3 @@
-import 'react-toastify/dist/ReactToastify.css';
 import * as styles from './toast.css';
 import { XIcon } from '@/shared/icons';
 
