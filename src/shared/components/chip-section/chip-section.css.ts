@@ -28,14 +28,9 @@ export const chip = recipe({
       },
       false: {},
     },
-    variant: {
-      default: {},
-      title: {},
-    },
   },
   defaultVariants: {
     selected: false,
-    variant: 'default',
   },
 });
 

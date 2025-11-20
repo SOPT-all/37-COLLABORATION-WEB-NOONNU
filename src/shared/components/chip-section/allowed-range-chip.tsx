@@ -14,7 +14,7 @@ const AllowedRangeChip = ({
   return (
     <button
       type='button'
-      className={styles.chip({ selected: isSelected, variant: 'default' })}
+      className={styles.chip({ selected: isSelected })}
       onClick={onClick}
     >
       {label}

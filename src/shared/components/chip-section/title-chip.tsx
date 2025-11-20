@@ -16,7 +16,7 @@ const TitleChip = ({
   return (
     <button
       type='button'
-      className={styles.chip({ selected: isSelected, variant: 'title' })}
+      className={styles.chip({ selected: isSelected })}
       onClick={onClick}
     >
       <img className={styles.titleImage} src={iconSrc} alt={alt} />
