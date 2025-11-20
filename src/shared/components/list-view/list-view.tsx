@@ -55,14 +55,22 @@ const ListView = ({
           <div className={styles.userActionContainer}>
             <p className={styles.fontWeightNum}>{weightNum}가지 굵기</p>
             <div className={styles.actionButtonContainer}>
-              <button type='button' onClick={handleToggleAdd}>
+              <button
+                type='button'
+                onClick={handleToggleAdd}
+                aria-label='비교하기 목록에 추가'
+              >
                 {isAdded ? (
                   <AddFilledIcon width={24} height={24} />
                 ) : (
                   <AddLineIcon width={24} height={24} />
                 )}
               </button>
-              <button type='button' onClick={handleToggleLiked}>
+              <button
+                type='button'
+                onClick={handleToggleLiked}
+                aria-label='찜 목록에 추가'
+              >
                 {isLiked ? (
                   <StarColorIcon width={24} height={24} />
                 ) : (
