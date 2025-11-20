@@ -31,10 +31,7 @@ export const fontInfoContainer = style({
 });
 
 export const fontName = style({
-  fontFamily: 'Pretendard',
-  fontSize: '2rem',
-  fontWeight: 700,
-  lineHeight: '2rem',
+  ...themeVars.fontStyles.font_title,
 
   selectors: {
     [`${listViewContainer}:hover &`]: {
@@ -43,11 +40,8 @@ export const fontName = style({
   },
 });
 
-export const fontCompany = style({
-  fontFamily: 'Pretendard',
-  fontSize: '1.4rem',
-  fontWeight: 700,
-  lineHeight: '2.8rem',
+export const fontProducer = style({
+  ...themeVars.fontStyles.font_detail,
 });
 
 export const userActionContainer = style({
@@ -57,11 +51,8 @@ export const userActionContainer = style({
   gap: '3.2rem',
 });
 
-export const fontWeightNum = style({
-  fontFamily: 'Pretendard',
-  fontSize: '1.4rem',
-  fontWeight: 700,
-  lineHeight: '2.8rem',
+export const fontThicknessNum = style({
+  ...themeVars.fontStyles.font_detail,
 });
 
 export const actionButtonContainer = style({
@@ -70,7 +61,7 @@ export const actionButtonContainer = style({
   gap: '1.2rem',
 });
 
-export const sampleTextContainer = style({
+export const phraseContainer = style({
   display: 'flex',
   alignItems: 'center',
   padding: '4rem 2rem',
@@ -80,11 +71,8 @@ export const sampleTextContainer = style({
   borderLeft: `1px solid ${themeVars.color.gray_02}`,
 });
 
-export const sampleText = style({
-  fontFamily: 'Pretendard',
-  fontSize: '3rem',
-  fontWeight: 600,
-  lineHeight: '3rem',
+export const phrase = style({
+  ...themeVars.fontStyles.font_sample,
 });
 
 export const arrowIcon = style({

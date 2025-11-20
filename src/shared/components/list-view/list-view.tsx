@@ -13,26 +13,29 @@ import * as styles from './list-view.css';
 interface FontData {
   id: number;
   name: string;
-  company: string;
-  weightNum: number;
-  sampleText: string;
+  producer: string;
+  thicknessNum: number;
+  phrase: string;
   isLiked: boolean;
-  isAdded: boolean;
+  isCompared: boolean;
+  fontFamily?: '폰트패밀리';
+  fontSource?: 'https://~~~';
+  fontWeight?: 'wide';
 }
 
 const ListView = ({
   name,
-  company,
-  weightNum,
-  sampleText,
-  isAdded: initialIsAdded,
+  producer,
+  thicknessNum,
+  phrase,
+  isCompared: initialisCompared,
   isLiked: initialIsLiked,
 }: FontData) => {
-  const [isAdded, setIsAdded] = useState(initialIsAdded);
+  const [isCompared, setisCompared] = useState(initialisCompared);
   const [isLiked, setIsLiked] = useState(initialIsLiked);
 
   const handleToggleAdd = () => {
-    setIsAdded((prev) => !prev);
+    setisCompared((prev) => !prev);
   };
 
   const handleToggleLiked = () => {
@@ -45,7 +48,7 @@ const ListView = ({
         <div className={styles.listTitleContainer}>
           <div className={styles.fontInfoContainer}>
             <p className={styles.fontName}>{name}</p>
-            <p className={styles.fontCompany}>{company}</p>
+            <p className={styles.fontProducer}>{producer}</p>
             <ArrowRightMdIcon
               width={24}
               height={24}
@@ -53,14 +56,14 @@ const ListView = ({
             />
           </div>
           <div className={styles.userActionContainer}>
-            <p className={styles.fontWeightNum}>{weightNum}가지 굵기</p>
+            <p className={styles.fontThicknessNum}>{thicknessNum}가지 굵기</p>
             <div className={styles.actionButtonContainer}>
               <button
                 type='button'
                 onClick={handleToggleAdd}
                 aria-label='비교하기 목록에 추가'
               >
-                {isAdded ? (
+                {isCompared ? (
                   <AddFilledIcon width={24} height={24} />
                 ) : (
                   <AddLineIcon width={24} height={24} />
@@ -81,8 +84,8 @@ const ListView = ({
           </div>
         </div>
 
-        <div className={styles.sampleTextContainer}>
-          <p className={styles.sampleText}>{sampleText}</p>
+        <div className={styles.phraseContainer}>
+          <p className={styles.phrase}>{phrase}</p>
         </div>
       </div>
     </>
