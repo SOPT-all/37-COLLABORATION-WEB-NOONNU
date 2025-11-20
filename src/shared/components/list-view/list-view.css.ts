@@ -87,5 +87,11 @@ export const arrowIcon = style({
 
 export const editInput = style({
   width: '100%',
+  whiteSpace: 'nowrap',
+  overflowX: 'auto',
   ...themeVars.fontStyles.font_sample,
+
+  '::-webkit-scrollbar': {
+    display: 'none',
+  },
 });
