@@ -19,6 +19,7 @@ export const chip = style({
   fontSize: '14px',
   fontWeight: 500,
   cursor: 'pointer',
+  whiteSpace: 'nowrap',
 });
 
 export const chipSelected = style({
