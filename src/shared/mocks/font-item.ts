@@ -2,7 +2,7 @@
 
 import type { FontItemType } from '../types/font';
 
-export const fontListMock: FontItemType[] = [
+export const fontItem: FontItemType[] = [
   {
     id: 1,
     name: '어그로체 Light',
