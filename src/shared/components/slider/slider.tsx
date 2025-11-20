@@ -1,23 +1,45 @@
+import { type ChangeEvent } from 'react';
 import * as styles from './slider.css';
 
 interface SliderProps {
   label: string;
-  value: string;
+  valueNumber: number;
+  valueUnit: string;
+  onChange: (value: number) => void;
+  min?: number;
+  max?: number;
 }
 
-const Slider = ({ label, value }: SliderProps) => {
+const Slider = ({
+  label,
+  valueNumber,
+  valueUnit,
+  onChange,
+  min,
+  max,
+}: SliderProps) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    onChange(Number(event.target.value));
+  };
+
   return (
     <div className={styles.container}>
       <label className={styles.label}>{label}</label>
+
       <label className={styles.sliderContainer}>
         <input
           className={styles.slider}
+          id='slider_handle'
           type='range'
-          min='0'
-          max='100'
-          defaultValue='20'
+          min={min}
+          max={max}
+          value={valueNumber}
+          onChange={handleChange}
         />
-        <span className={styles.value}>{value}</span>
+        <span className={styles.value} id='value'>
+          {valueNumber}
+          {valueUnit}
+        </span>
       </label>
     </div>
   );
