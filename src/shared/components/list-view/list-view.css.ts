@@ -3,8 +3,8 @@ import { style } from '@vanilla-extract/css';
 import { themeVars } from '@/shared/styles';
 
 export const listViewContainer = style({
-  display: 'flex',
-  flexDirection: 'column',
+  display: 'grid',
+  gridTemplateRows: 'auto 1fr',
 });
 
 export const listTitleContainer = style({
@@ -63,7 +63,8 @@ export const actionButtonContainer = style({
 
 export const phraseContainer = style({
   display: 'flex',
-  alignItems: 'center',
+  alignItems: 'flex-start',
+  height: '10.8rem',
   padding: '4rem 2rem',
   borderRadius: '0 0 4px 4px',
   borderRight: `1px solid ${themeVars.color.gray_02}`,
@@ -83,4 +84,9 @@ export const arrowIcon = style({
       opacity: 1,
     },
   },
+});
+
+export const editInput = style({
+  width: '100%',
+  ...themeVars.fontStyles.font_sample,
 });

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 import {
   AddFilledIcon,
@@ -18,9 +18,6 @@ interface FontData {
   phrase: string;
   isLiked: boolean;
   isCompared: boolean;
-  fontFamily?: '폰트패밀리';
-  fontSource?: 'https://~~~';
-  fontWeight?: 'wide';
 }
 
 const ListView = ({
@@ -34,6 +31,9 @@ const ListView = ({
   const [isCompared, setisCompared] = useState(initialisCompared);
   const [isLiked, setIsLiked] = useState(initialIsLiked);
 
+  const [currentPhrase, setCurrentPhrase] = useState(phrase);
+  const inputRef = useRef<HTMLTextAreaElement>(null);
+
   const handleToggleAdd = () => {
     setisCompared((prev) => !prev);
   };
@@ -42,53 +42,75 @@ const ListView = ({
     setIsLiked((prev) => !prev);
   };
 
-  return (
-    <>
-      <div className={styles.listViewContainer}>
-        <div className={styles.listTitleContainer}>
-          <div className={styles.fontInfoContainer}>
-            <p className={styles.fontName}>{name}</p>
-            <p className={styles.fontProducer}>{producer}</p>
-            <ArrowRightMdIcon
-              width={24}
-              height={24}
-              className={styles.arrowIcon}
-            />
-          </div>
-          <div className={styles.userActionContainer}>
-            <p className={styles.fontThicknessNum}>{thicknessNum}가지 굵기</p>
-            <div className={styles.actionButtonContainer}>
-              <button
-                type='button'
-                onClick={handleToggleAdd}
-                aria-label='비교하기 목록에 추가'
-              >
-                {isCompared ? (
-                  <AddFilledIcon width={24} height={24} />
-                ) : (
-                  <AddLineIcon width={24} height={24} />
-                )}
-              </button>
-              <button
-                type='button'
-                onClick={handleToggleLiked}
-                aria-label='찜 목록에 추가'
-              >
-                {isLiked ? (
-                  <StarColorIcon width={24} height={24} />
-                ) : (
-                  <StarFillIcon width={24} height={24} />
-                )}
-              </button>
-            </div>
-          </div>
-        </div>
+  const handlePhraseChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setCurrentPhrase(e.target.value);
+  };
 
-        <div className={styles.phraseContainer}>
-          <p className={styles.phrase}>{phrase}</p>
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (currentPhrase === phrase && e.key.length === 1) {
+      e.preventDefault();
+      setCurrentPhrase(e.key);
+    }
+  };
+
+  const handleEditEnd = () => {
+    if (currentPhrase.trim() === '') {
+      setCurrentPhrase(phrase);
+    }
+  };
+
+  return (
+    <div className={styles.listViewContainer}>
+      <div className={styles.listTitleContainer}>
+        <div className={styles.fontInfoContainer}>
+          <p className={styles.fontName}>{name}</p>
+          <p className={styles.fontProducer}>{producer}</p>
+          <ArrowRightMdIcon
+            width={24}
+            height={24}
+            className={styles.arrowIcon}
+          />
+        </div>
+        <div className={styles.userActionContainer}>
+          <p className={styles.fontThicknessNum}>{thicknessNum}가지 굵기</p>
+          <div className={styles.actionButtonContainer}>
+            <button
+              type='button'
+              onClick={handleToggleAdd}
+              aria-label='비교하기 목록에 추가'
+            >
+              {isCompared ? (
+                <AddFilledIcon width={24} height={24} />
+              ) : (
+                <AddLineIcon width={24} height={24} />
+              )}
+            </button>
+            <button
+              type='button'
+              onClick={handleToggleLiked}
+              aria-label='찜 목록에 추가'
+            >
+              {isLiked ? (
+                <StarColorIcon width={24} height={24} />
+              ) : (
+                <StarFillIcon width={24} height={24} />
+              )}
+            </button>
+          </div>
         </div>
       </div>
-    </>
+
+      <div className={styles.phraseContainer}>
+        <textarea
+          ref={inputRef}
+          value={currentPhrase}
+          onChange={handlePhraseChange}
+          onBlur={handleEditEnd}
+          onKeyDown={handleKeyDown}
+          className={styles.editInput}
+        />
+      </div>
+    </div>
   );
 };
 
