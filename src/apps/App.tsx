@@ -8,12 +8,17 @@ import { queryClient } from '@/shared/apis/query-client';
 import { rootStyle } from '@/shared/styles';
 import ThemeProvider from '@/shared/styles/theme-provider';
 import { ToastContainer } from 'react-toastify';
+import * as styles from '@/shared/components/toast/toast.css';
 
 function App() {
   return (
     <>
       <ThemeProvider className={rootStyle}>
-        <ToastContainer position='top-right' autoClose={3000} />
+        <ToastContainer
+          position='top-right'
+          autoClose={3000}
+          toastClassName={styles.toastContainer}
+        />
         <QueryClientProvider client={queryClient}>
           <RouterProvider router={router} />
           <ReactQueryDevtools initialIsOpen={false} />
