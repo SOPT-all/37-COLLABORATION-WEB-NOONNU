@@ -17,6 +17,8 @@ function App() {
         <ToastContainer
           position='top-right'
           autoClose={3000}
+          hideProgressBar={true}
+          closeButton={false}
           toastClassName={styles.toastContainer}
         />
         <QueryClientProvider client={queryClient}>

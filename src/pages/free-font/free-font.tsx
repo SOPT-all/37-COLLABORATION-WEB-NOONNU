@@ -1,21 +1,27 @@
 import { toast } from 'react-toastify';
-import Toast from '@/shared/components/toast/toast';
+import Toast, { type ToastProps } from '@/shared/components/toast/toast';
 
 const FreeFont = () => {
-  const showCustomToast = () => {
-    toast(<Toast />, {
-      autoClose: 3500,
-      hideProgressBar: true,
-      closeButton: false,
-    });
+  const showToast = (props: ToastProps) => {
+    toast(<Toast {...props} />);
   };
 
+  const FONT_NAME = '어그로체';
+
   return (
-    <div>
+    <div style={{ padding: '1rem' }}>
       <h2>무료폰트 페이지</h2>
 
-      <button onClick={showCustomToast}>
-        폰트 비교 목록에 추가 (토스트 테스트)
+      <button
+        onClick={() => showToast({ fontName: FONT_NAME, status: 'added' })}
+      >
+        추가
+      </button>
+      <div style={{ padding: '1rem' }}></div>
+      <button
+        onClick={() => showToast({ fontName: FONT_NAME, status: 'removed' })}
+      >
+        삭제
       </button>
     </div>
   );

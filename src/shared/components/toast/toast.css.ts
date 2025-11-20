@@ -6,15 +6,21 @@ export const toastContainer = style({
   height: '5.2rem',
   minHeight: '5.2rem',
   padding: '1.6rem',
+
+  border: `1px solid ${themeVars.color.gray_03}`,
+  backgroundColor: themeVars.color.white,
+  boxShadow: `0 2px 4px 0 rgba(0, 0, 0, 0.10)`,
+  borderRadius: '12px',
 });
 
 export const container = style({
   display: 'flex',
-  alignItems: 'center',
   width: '100%',
+  alignItems: 'center',
 });
 
 export const message = style({
+  margin: '0',
   ...themeVars.fontStyles.body_14m,
   color: themeVars.color.black,
 });
