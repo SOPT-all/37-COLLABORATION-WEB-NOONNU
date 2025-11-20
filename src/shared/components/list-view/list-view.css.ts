@@ -16,6 +16,12 @@ export const listTitleContainer = style({
   padding: '1.2rem 2rem',
   border: `1px solid ${themeVars.color.gray_02}`,
   borderRadius: '4px 4px 0 0',
+
+  selectors: {
+    [`${listViewContainer}:hover &`]: {
+      borderBottomColor: themeVars.color.primary,
+    },
+  },
 });
 
 export const fontInfoContainer = style({
@@ -29,6 +35,12 @@ export const fontName = style({
   fontSize: '2rem',
   fontWeight: 700,
   lineHeight: '2rem',
+
+  selectors: {
+    [`${listViewContainer}:hover &`]: {
+      backgroundColor: themeVars.color.primary,
+    },
+  },
 });
 
 export const fontCompany = style({
@@ -73,4 +85,14 @@ export const sampleText = style({
   fontSize: '3rem',
   fontWeight: 600,
   lineHeight: '3rem',
+});
+
+export const arrowIcon = style({
+  opacity: 0,
+
+  selectors: {
+    [`${listViewContainer}:hover &`]: {
+      opacity: 1,
+    },
+  },
 });
