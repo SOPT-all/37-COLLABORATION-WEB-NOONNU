@@ -45,7 +45,7 @@ export const userActionContainer = style({
   gap: '3.2rem',
 });
 
-export const fontBold = style({
+export const fontWeightNum = style({
   fontFamily: 'Pretendard',
   fontSize: '1.4rem',
   fontWeight: 700,
