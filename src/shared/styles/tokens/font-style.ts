@@ -54,4 +54,19 @@ export const fontStyles = {
     fontWeight: typography.fontWeight.regular,
     lineHeight: typography.lineHeight[145],
   },
+  font_sample: {
+    fontSize: typography.fontSize[30],
+    fontWeight: typography.fontWeight.medium,
+    lineHeight: typography.lineHeight[140],
+  },
+  font_title: {
+    fontSize: typography.fontSize[20],
+    fontWeight: typography.fontWeight.medium,
+    lineHeight: typography.lineHeight[100],
+  },
+  font_detail: {
+    fontSize: typography.fontSize[14],
+    fontWeight: typography.fontWeight.medium,
+    lineHeight: typography.lineHeight[145],
+  },
 };

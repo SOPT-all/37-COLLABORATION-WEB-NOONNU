@@ -19,6 +19,7 @@ export { default as PenIcon } from './assets/icn-pen.svg?react';
 export { default as ResetIcon } from './assets/icn-reset.svg?react';
 export { default as SearchIcon } from './assets/icn-search.svg?react';
 export { default as StarIcon } from './assets/icn-star.svg?react';
+export { default as StarColorIcon } from './assets/icn-star-color.svg?react';
 export { default as StarFillIcon } from './assets/icn-star-fill.svg?react';
 export { default as WordviewIcon } from './assets/icn-wordview.svg?react';
 export { default as XIcon } from './assets/icn-x.svg?react';
