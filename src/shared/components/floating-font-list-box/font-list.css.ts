@@ -3,10 +3,10 @@ import { themeVars } from '@/shared/styles';
 
 export const container = style({
   display: 'flex',
-  justifyContent: 'space-between',
   width: '22.7rem',
-  alignItems: 'center',
   padding: '0 1.6rem 0 2rem',
+  justifyContent: 'space-between',
+  alignItems: 'center',
 });
 
 export const fontStyle = style({ fontSize: '2rem' });
