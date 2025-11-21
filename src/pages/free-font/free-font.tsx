@@ -4,7 +4,7 @@ const FreeFont = () => {
   return (
     <div>
       무료폰트 페이지
-      <FontList />
+      <FontList fontName='프리텐다드' onDelete={() => {}} />
     </div>
   );
 };
