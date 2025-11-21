@@ -1,20 +1,20 @@
-import * as styles from './chip-section.css';
+import * as styles from './chip.css';
 
 interface AllowedRangeChipProps {
-  isSelected?: boolean;
+  isSelected: boolean;
   onClick?: () => void;
-  label?: string;
+  label: string;
 }
 
 const AllowedRangeChip = ({
-  isSelected = false,
+  isSelected,
   onClick,
-  label = '허용범위',
+  label,
 }: AllowedRangeChipProps) => {
   return (
     <button
       type='button'
-      className={styles.chip({ selected: isSelected })}
+      className={styles.chip({ isSelected })}
       onClick={onClick}
     >
       {label}

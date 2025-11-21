@@ -22,15 +22,11 @@ export const chip = recipe({
     ...themeVars.fontStyles.body_14m,
   },
   variants: {
-    selected: {
+    isSelected: {
       true: {
         border: `1px solid ${themeVars.color.primary_dark_01}`,
       },
-      false: {},
     },
-  },
-  defaultVariants: {
-    selected: false,
   },
 });
 
