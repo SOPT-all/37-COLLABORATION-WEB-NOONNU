@@ -1,5 +1,5 @@
 import { assignInlineVars } from '@vanilla-extract/dynamic';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useLoadFont } from '@/shared/hooks/use-load-font';
 import {
@@ -27,6 +27,7 @@ interface ListViewProps {
   isLiked: boolean;
   isCompared: boolean;
   fontMetadata: FontMetadataType;
+  globalPhrase: string;
   onToggleLike?: (id: number, isLiked: boolean) => void;
   onToggleCompare?: (id: number, isCompared: boolean) => void;
 }
@@ -40,6 +41,7 @@ const ListView = ({
   isCompared: initialisCompared,
   isLiked: initialIsLiked,
   fontMetadata,
+  globalPhrase,
   onToggleLike,
   onToggleCompare,
 }: ListViewProps) => {
@@ -53,6 +55,10 @@ const ListView = ({
     [styles.fontFamilyVar]: fontMetadata.fontFamily,
     [styles.fontWeightVar]: fontMetadata.fontWeight,
   });
+
+  useEffect(() => {
+    setCurrentPhrase(globalPhrase);
+  }, [globalPhrase]);
 
   const handleToggleAdd = () => {
     const state = !isCompared;
