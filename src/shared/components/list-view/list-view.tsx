@@ -38,14 +38,14 @@ const ListView = ({
   producer,
   thicknessNum,
   phrase,
-  isCompared: initialisCompared,
+  isCompared: initialIsCompared,
   isLiked: initialIsLiked,
   fontMetadata,
   globalPhrase,
   onToggleLike,
   onToggleCompare,
 }: ListViewProps) => {
-  const [isCompared, setIsCompared] = useState(initialisCompared);
+  const [isCompared, setIsCompared] = useState(initialIsCompared);
   const [isLiked, setIsLiked] = useState(initialIsLiked);
 
   const [currentPhrase, setCurrentPhrase] = useState('');
@@ -130,6 +130,7 @@ const ListView = ({
           placeholder={phrase}
           className={styles.editInput}
           style={fontStyleVars}
+          spellCheck={false}
         />
       </div>
     </div>
