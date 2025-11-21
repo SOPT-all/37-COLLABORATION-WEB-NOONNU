@@ -28,19 +28,13 @@ const ListView = ({
   isCompared: initialisCompared,
   isLiked: initialIsLiked,
 }: FontData) => {
-  const [isCompared, setisCompared] = useState(initialisCompared);
+  const [isCompared, setIsCompared] = useState(initialisCompared);
   const [isLiked, setIsLiked] = useState(initialIsLiked);
 
   const [currentPhrase, setCurrentPhrase] = useState('');
 
-  const handlePhraseClick = () => {
-    if (currentPhrase === phrase) {
-      setCurrentPhrase('');
-    }
-  };
-
   const handleToggleAdd = () => {
-    setisCompared((prev) => !prev);
+    setIsCompared((prev) => !prev);
   };
 
   const handleToggleLiked = () => {
@@ -49,12 +43,6 @@ const ListView = ({
 
   const handlePhraseChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setCurrentPhrase(e.target.value);
-  };
-
-  const handleEditEnd = () => {
-    if (currentPhrase.trim() === '') {
-      setCurrentPhrase(phrase);
-    }
   };
 
   return (
@@ -102,8 +90,6 @@ const ListView = ({
         <textarea
           value={currentPhrase}
           onChange={handlePhraseChange}
-          onBlur={handleEditEnd}
-          onClick={handlePhraseClick}
           placeholder={phrase}
           className={styles.editInput}
         />
