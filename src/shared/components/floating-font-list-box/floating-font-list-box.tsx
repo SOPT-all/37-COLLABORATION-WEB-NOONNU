@@ -12,12 +12,16 @@ const FONT_DATA = [
 
 const FloatingFontListBox = () => {
   return (
-    <div className={styles.container}>
-      {FONT_DATA.map((font) => (
-        <div className={styles.listContainer}>
-          <FontList key={font.id} fontName={font.name} onDelete={() => {}} />
-        </div>
-      ))}
+    <div className={styles.outerContainer}>
+      <div className={styles.innerContainer}>
+        {FONT_DATA.map((font) => {
+          return (
+            <div key={font.id} className={styles.listContainer}>
+              <FontList fontName={font.name} onDelete={() => {}} />
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };
