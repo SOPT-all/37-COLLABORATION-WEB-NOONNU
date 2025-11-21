@@ -4,11 +4,23 @@ import * as styles from './compare-floating-button.css';
 
 interface CompareFloatingButtonProps {
   count: number;
+  onClick?: () => void;
 }
 
-const CompareFloatingButton = ({ count }: CompareFloatingButtonProps) => {
+const CompareFloatingButton = ({
+  count,
+  onClick,
+}: CompareFloatingButtonProps) => {
+  if (count === 0) {
+    return (
+      <button className={styles.emptyButton} disabled>
+        폰트 탐색 중~
+      </button>
+    );
+  }
+
   return (
-    <button className={styles.compareBtnStyle}>
+    <button className={styles.compareButton} onClick={onClick}>
       <span className={styles.textContainer}>
         <span key={count} className={styles.animateText}>
           {count}개

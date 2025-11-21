@@ -2,7 +2,7 @@ import { keyframes, style } from '@vanilla-extract/css';
 
 import { themeVars } from '@/shared/styles';
 
-export const compareBtnStyle = style({
+export const compareButton = style({
   display: 'flex',
   width: '18.8rem',
   height: '7.6rem',
@@ -29,7 +29,7 @@ export const arrowIconStyle = style({
   flexShrink: 0,
 
   selectors: {
-    [`${compareBtnStyle}:hover &`]: {
+    [`${compareButton}:hover &`]: {
       maxWidth: '24px',
       opacity: 1,
     },
@@ -49,4 +49,18 @@ export const textContainer = style({
 
 export const animateText = style({
   animation: `${slideUp} 0.3s ease`,
+});
+
+export const emptyButton = style({
+  display: 'flex',
+  width: '18.8rem',
+  height: '7.6rem',
+  padding: '2.4rem 3.2rem',
+  justifyContent: 'center',
+  borderRadius: '99px',
+  border: `1px solid ${themeVars.color.gray_03}`,
+  backgroundColor: themeVars.color.gray_02,
+  cursor: 'pointer',
+  color: themeVars.color.gray_04,
+  ...themeVars.fontStyles.body_20sb,
 });
