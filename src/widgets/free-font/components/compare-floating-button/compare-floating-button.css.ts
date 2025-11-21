@@ -1,4 +1,4 @@
-import { style } from '@vanilla-extract/css';
+import { keyframes, style } from '@vanilla-extract/css';
 
 import { themeVars } from '@/shared/styles';
 
@@ -34,4 +34,19 @@ export const arrowIconStyle = style({
       opacity: 1,
     },
   },
+});
+
+const slideUp = keyframes({
+  '0%': { transform: 'translateY(100%)', opacity: 0 },
+  '100%': { transform: 'translateY(0)', opacity: 1 },
+});
+
+export const textContainer = style({
+  display: 'inline-flex',
+  overflow: 'hidden',
+  flexShrink: 0,
+});
+
+export const animateText = style({
+  animation: `${slideUp} 0.3s ease`,
 });
