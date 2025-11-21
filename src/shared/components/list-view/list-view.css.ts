@@ -1,6 +1,9 @@
-import { style } from '@vanilla-extract/css';
+import { createVar, style } from '@vanilla-extract/css';
 
 import { themeVars } from '@/shared/styles';
+
+export const fontFamilyVar = createVar();
+export const fontWeightVar = createVar();
 
 export const listViewContainer = style({
   display: 'flex',
@@ -31,6 +34,8 @@ export const fontInfoContainer = style({
 
 export const fontName = style({
   ...themeVars.fontStyles.font_title,
+  fontFamily: fontFamilyVar,
+  fontWeight: fontWeightVar,
 
   selectors: {
     [`${listViewContainer}:hover &`]: {
@@ -41,6 +46,8 @@ export const fontName = style({
 
 export const fontProducer = style({
   ...themeVars.fontStyles.font_detail,
+  fontFamily: fontFamilyVar,
+  fontWeight: fontWeightVar,
 });
 
 export const userActionContainer = style({
@@ -52,6 +59,8 @@ export const userActionContainer = style({
 
 export const fontThicknessNum = style({
   ...themeVars.fontStyles.font_detail,
+  fontFamily: fontFamilyVar,
+  fontWeight: fontWeightVar,
 });
 
 export const actionButtonContainer = style({
@@ -90,6 +99,8 @@ export const editInput = style({
   whiteSpace: 'nowrap',
   overflowX: 'auto',
   ...themeVars.fontStyles.font_sample,
+  fontFamily: fontFamilyVar,
+  fontWeight: fontWeightVar,
 
   '::-webkit-scrollbar': {
     display: 'none',

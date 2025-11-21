@@ -1,5 +1,7 @@
+import { assignInlineVars } from '@vanilla-extract/dynamic';
 import { useState } from 'react';
 
+import { useLoadFont } from '@/shared/hooks/use-load-font';
 import {
   AddFilledIcon,
   AddLineIcon,
@@ -10,7 +12,13 @@ import {
 
 import * as styles from './list-view.css';
 
-interface FontData {
+export interface FontMetadataType {
+  fontFamily: string;
+  fontSource: string;
+  fontWeight: string;
+  fontDisplay: FontDisplay;
+}
+interface ListViewProps {
   id: number;
   name: string;
   producer: string;
@@ -18,6 +26,7 @@ interface FontData {
   phrase: string;
   isLiked: boolean;
   isCompared: boolean;
+  fontMetadata: FontMetadataType;
 }
 
 const ListView = ({
@@ -27,11 +36,14 @@ const ListView = ({
   phrase,
   isCompared: initialisCompared,
   isLiked: initialIsLiked,
-}: FontData) => {
+  fontMetadata,
+}: ListViewProps) => {
   const [isCompared, setIsCompared] = useState(initialisCompared);
   const [isLiked, setIsLiked] = useState(initialIsLiked);
 
   const [currentPhrase, setCurrentPhrase] = useState('');
+
+  useLoadFont(fontMetadata);
 
   const handleToggleAdd = () => {
     setIsCompared((prev) => !prev);
@@ -49,8 +61,24 @@ const ListView = ({
     <div className={styles.listViewContainer}>
       <div className={styles.listTitleContainer}>
         <div className={styles.fontInfoContainer}>
-          <p className={styles.fontName}>{name}</p>
-          <p className={styles.fontProducer}>{producer}</p>
+          <p
+            className={styles.fontName}
+            style={assignInlineVars({
+              [styles.fontFamilyVar]: fontMetadata.fontFamily,
+              [styles.fontWeightVar]: fontMetadata.fontWeight,
+            })}
+          >
+            {name}
+          </p>
+          <p
+            className={styles.fontProducer}
+            style={assignInlineVars({
+              [styles.fontFamilyVar]: fontMetadata.fontFamily,
+              [styles.fontWeightVar]: fontMetadata.fontWeight,
+            })}
+          >
+            {producer}
+          </p>
           <ArrowRightMdIcon
             width={24}
             height={24}
@@ -58,7 +86,15 @@ const ListView = ({
           />
         </div>
         <div className={styles.userActionContainer}>
-          <p className={styles.fontThicknessNum}>{thicknessNum}가지 굵기</p>
+          <p
+            className={styles.fontThicknessNum}
+            style={assignInlineVars({
+              [styles.fontFamilyVar]: fontMetadata.fontFamily,
+              [styles.fontWeightVar]: fontMetadata.fontWeight,
+            })}
+          >
+            {thicknessNum}가지 굵기
+          </p>
           <div className={styles.actionButtonContainer}>
             <button
               type='button'
@@ -92,6 +128,10 @@ const ListView = ({
           onChange={handlePhraseChange}
           placeholder={phrase}
           className={styles.editInput}
+          style={assignInlineVars({
+            [styles.fontFamilyVar]: fontMetadata.fontFamily,
+            [styles.fontWeightVar]: fontMetadata.fontWeight,
+          })}
         />
       </div>
     </div>
