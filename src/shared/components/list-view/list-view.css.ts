@@ -80,10 +80,6 @@ export const phraseContainer = style({
   borderLeft: `1px solid ${themeVars.color.gray_02}`,
 });
 
-export const phrase = style({
-  ...themeVars.fontStyles.font_sample,
-});
-
 export const arrowIcon = style({
   opacity: 0,
 
