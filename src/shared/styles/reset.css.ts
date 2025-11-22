@@ -31,7 +31,6 @@ globalStyle('::before, ::after', {
 globalStyle('html, :host', {
   lineHeight: '1.5' /*1 */,
   WebkitTextSizeAdjust: '100%' /*2 */,
-  fontFamily: `'SUIT Variable', sans-serif`,
   fontFeatureSettings: 'normal' /*5 */,
   fontVariationSettings: 'normal' /*6 */,
   WebkitTapHighlightColor: 'transparent' /*7 */,
