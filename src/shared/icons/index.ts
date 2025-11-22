@@ -13,6 +13,8 @@ export { default as FilterIcon } from './assets/icn-filter.svg?react';
 export { default as GridviewIcon } from './assets/icn-gridview.svg?react';
 export { default as LanguageIcon } from './assets/icn-language.svg?react';
 export { default as ListviewIcon } from './assets/icn-listview.svg?react';
+export { default as LogoBlackIcon } from './assets/icn-logo-black.svg?react';
+export { default as LogoGrayIcon } from './assets/icn-logo-gray.svg?react';
 export { default as MenuIcon } from './assets/icn-menu.svg?react';
 export { default as NightIcon } from './assets/icn-night.svg?react';
 export { default as PenIcon } from './assets/icn-pen.svg?react';
