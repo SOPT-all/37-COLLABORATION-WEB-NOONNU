@@ -22,3 +22,4 @@ export { default as StarIcon } from './assets/icn-star.svg?react';
 export { default as StarFillIcon } from './assets/icn-star-fill.svg?react';
 export { default as WordviewIcon } from './assets/icn-wordview.svg?react';
 export { default as XIcon } from './assets/icn-x.svg?react';
+export { default as CharacterToastIcon } from './assets/icn-character-toast.svg?react';

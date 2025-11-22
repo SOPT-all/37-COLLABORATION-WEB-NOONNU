@@ -1,6 +1,6 @@
 import * as styles from './toast.css';
 import { XIcon } from '@/shared/icons';
-
+import { CharacterToastIcon } from '@/shared/icons';
 export interface ToastProps {
   fontName?: string;
   status?: 'added' | 'removed';
@@ -17,6 +17,7 @@ const Toast = ({ fontName, status }: ToastProps) => {
 
   return (
     <div className={styles.container}>
+      <CharacterToastIcon />
       <span className={styles.message}>
         {fontName} 폰트가 찜목록에서 {statusMessage}
       </span>
