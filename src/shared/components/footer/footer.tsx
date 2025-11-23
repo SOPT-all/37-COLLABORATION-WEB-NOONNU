@@ -20,8 +20,12 @@ const Footer = () => {
           </p>
           <p>제휴 및 광고 문의 team@noonnu.cc</p>
           <div className={styles.linkList}>
-            <a className={styles.linkItem}>이용약관</a>
-            <a className={styles.linkItem}>개인정보처리방침</a>
+            <a href='#' className={styles.linkItem}>
+              이용약관
+            </a>
+            <a href='#' className={styles.linkItem}>
+              개인정보처리방침
+            </a>
           </div>
           <div>
             <p>눈누 사업자 정보</p>
@@ -29,8 +33,8 @@ const Footer = () => {
               <p className={styles.linkItem}>주식회사 프로젝트 눈누</p>
               <p className={styles.linkItem}>대표 윤민지</p>
               <p className={styles.linkItem}>사업자등록번호 359-88-01705</p>
-              <p className={styles.linkItem}>
-                통신판매업신고번호 제2025-서울성동-1605 |
+              <p className={`${styles.linkItem} ${styles.addSeperator}`}>
+                통신판매업신고번호 제2025-서울성동-1605
               </p>
             </div>
             <div className={styles.linkList}>
@@ -49,14 +53,16 @@ const Footer = () => {
             <div>
               <p className={styles.sideTextName}>눈누</p>
               <div className={styles.sideTextContent}>
-                <a>무료 폰트 제보</a>
-                <a>기업 광고 문의</a>
-                <a>자주 묻는 질문</a>
+                <a href='#'>무료 폰트 제보</a>
+                <a href='#'>기업 광고 문의</a>
+                <a href='#'>자주 묻는 질문</a>
               </div>
             </div>
             <div>
               <p className={styles.sideTextName}>눈누 마켓</p>
-              <a className={styles.sideTextContent}>입점 신청</a>
+              <a href='#' className={styles.sideTextContent}>
+                입점 신청
+              </a>
             </div>
           </div>
           <div className={styles.iconContainer}>

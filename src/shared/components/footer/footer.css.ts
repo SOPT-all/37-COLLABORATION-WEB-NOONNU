@@ -11,12 +11,25 @@ export const footerContainer = style({
   padding: '5.6rem 5.2rem 6rem 5.2rem',
   backgroundColor: themeVars.color.black,
   color: themeVars.color.gray_03,
+  fontFamily: 'Pretendard',
   gap: '1.6rem',
+  whiteSpace: 'nowrap',
+});
+
+export const logo = style({
+  flexShrink: 0,
 });
 
 export const contentContainer = style({
   display: 'flex',
   justifyContent: 'space-between',
+});
+
+export const mainText = style({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '1.2rem',
+  ...themeVars.fontStyles.body_16m,
 });
 
 export const linkList = style({
@@ -30,23 +43,20 @@ export const linkItem = style({
   selectors: {
     '&:not(:last-of-type)::after': {
       content: '"|"',
-      margin: '0 2px',
+      margin: '0 0.2rem',
       color: themeVars.color.gray_03,
     },
   },
 });
 
-export const mainText = style({
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '1.2rem',
-  fontFamily: 'Pretendard',
-  ...themeVars.fontStyles.body_16m,
-});
-
-export const logo = style({
-  display: 'flex',
-  flexShrink: 0,
+export const addSeperator = style({
+  selectors: {
+    '&::after': {
+      content: '"|"',
+      margin: '0 0.2rem',
+      color: themeVars.color.gray_03,
+    },
+  },
 });
 
 export const sideContainer = style({
@@ -62,7 +72,6 @@ export const sideText = style({
 
 export const sideTextName = style({
   marginBottom: '1.2rem',
-  fontFamily: 'Pretendard',
   ...themeVars.fontStyles.body_16sb,
 });
 
@@ -70,7 +79,6 @@ export const sideTextContent = style({
   display: 'flex',
   flexDirection: 'column',
   gap: '0.4rem',
-  fontFamily: 'Pretendard',
   ...themeVars.fontStyles.body_16m,
 });
 
@@ -78,4 +86,5 @@ export const iconContainer = style({
   display: 'flex',
   justifyContent: 'flex-end',
   gap: '2.8rem',
+  cursor: 'pointer',
 });
