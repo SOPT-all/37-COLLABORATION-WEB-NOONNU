@@ -20,6 +20,12 @@ export const container = style({
   alignItems: 'center',
 });
 
+export const character = style({
+  width: '2rem',
+  height: '2rem',
+  marginRight: '1.2rem',
+});
+
 export const message = style({
   margin: '0',
   ...themeVars.fontStyles.body_14m,
