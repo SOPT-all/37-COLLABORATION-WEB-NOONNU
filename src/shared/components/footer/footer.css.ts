@@ -38,13 +38,10 @@ export const linkList = style({
 });
 
 export const linkItem = style({
-  color: themeVars.color.gray_03,
-
   selectors: {
     '&:not(:last-of-type)::after': {
       content: '"|"',
       margin: '0 0.2rem',
-      color: themeVars.color.gray_03,
     },
   },
 });
@@ -54,7 +51,6 @@ export const addSeperator = style({
     '&::after': {
       content: '"|"',
       margin: '0 0.2rem',
-      color: themeVars.color.gray_03,
     },
   },
 });
