@@ -1,16 +1,13 @@
 import { ArrowRightLineMdIcon } from '@/shared/icons';
 
-import * as styles from './compare-floating-button.css';
+import * as styles from './floating-button.css';
 
-interface CompareFloatingButtonProps {
+interface FloatingButtonProps {
   count: number;
   onClick?: () => void;
 }
 
-const CompareFloatingButton = ({
-  count,
-  onClick,
-}: CompareFloatingButtonProps) => {
+const FloatingButton = ({ count, onClick }: FloatingButtonProps) => {
   if (count === 0) {
     return (
       <button className={styles.emptyButton} disabled>
@@ -36,4 +33,4 @@ const CompareFloatingButton = ({
   );
 };
 
-export default CompareFloatingButton;
+export default FloatingButton;

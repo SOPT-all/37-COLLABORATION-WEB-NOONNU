@@ -1,11 +1,11 @@
 import { keyframes, style } from '@vanilla-extract/css';
 
 import { themeVars } from '@/shared/styles';
+
 const baseButtonStyle = style({
   display: 'flex',
-  width: '100%',
-  height: '100%',
-  padding: '2.4rem 3.2rem',
+  width: '18.8rem',
+  padding: '2.4rem 0',
   justifyContent: 'center',
   borderRadius: '99px',
   cursor: 'pointer',
