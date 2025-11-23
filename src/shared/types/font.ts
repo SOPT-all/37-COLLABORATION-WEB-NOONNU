@@ -2,6 +2,7 @@ export interface FontMetadataType {
   fontFamily: string;
   fontSource: string;
   fontWeight: string;
+  fontDisplay: FontDisplay;
 }
 
 export interface FontItemType {

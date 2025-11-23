@@ -22,11 +22,12 @@ interface ListViewProps {
   isCompared: boolean;
   fontMetadata: FontMetadataType;
   globalPhrase: string;
-  onToggleLike?: (id: number, isLiked: boolean) => void;
-  onToggleCompare?: (id: number, isCompared: boolean) => void;
+  onToggleLike: (id: number) => void;
+  onToggleCompare: (id: number) => void;
 }
 
 const ListView = ({
+  id,
   name,
   producer,
   thicknessNum,
@@ -35,8 +36,10 @@ const ListView = ({
   isLiked,
   fontMetadata,
   globalPhrase,
+  onToggleLike,
+  onToggleCompare,
 }: ListViewProps) => {
-  const [currentPhrase, setCurrentPhrase] = useState(globalPhrase || '');
+  const [currentPhrase, setCurrentPhrase] = useState(globalPhrase);
 
   useLoadFont(fontMetadata);
   const fontStyleVars = assignInlineVars({
@@ -46,6 +49,14 @@ const ListView = ({
 
   const handlePhraseChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setCurrentPhrase(e.target.value);
+  };
+
+  const handleToggleCompare = () => {
+    onToggleCompare(id);
+  };
+
+  const handleToggleLike = () => {
+    onToggleLike(id);
   };
 
   return (
@@ -69,14 +80,22 @@ const ListView = ({
             {thicknessNum}가지 굵기
           </p>
           <div className={styles.actionButtonContainer}>
-            <button type='button' aria-label='비교하기 목록에 추가'>
+            <button
+              type='button'
+              aria-label='비교하기 목록에 추가'
+              onClick={handleToggleCompare}
+            >
               {isCompared ? (
                 <AddFilledIcon width={24} height={24} />
               ) : (
                 <AddLineIcon width={24} height={24} />
               )}
             </button>
-            <button type='button' aria-label='찜 목록에 추가'>
+            <button
+              type='button'
+              aria-label='찜 목록에 추가'
+              onClick={handleToggleLike}
+            >
               {isLiked ? (
                 <StarColorIcon width={24} height={24} />
               ) : (
