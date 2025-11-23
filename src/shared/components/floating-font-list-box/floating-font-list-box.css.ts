@@ -1,4 +1,5 @@
 import { createVar, style } from '@vanilla-extract/css';
+
 import { themeVars } from '@/shared/styles';
 
 const FADE_SIZE = '29px';

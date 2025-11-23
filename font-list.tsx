@@ -1,5 +1,6 @@
-import * as styles from './src/shared/components/floating-font-list-box/font-list.css';
 import { DeleteIcon } from '@/shared/icons';
+
+import * as styles from './src/shared/components/floating-font-list-box/font-list.css';
 
 interface FontListProps {
   fontName: string;

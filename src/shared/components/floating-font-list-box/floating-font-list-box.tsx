@@ -1,6 +1,7 @@
-import * as styles from './floating-font-list-box.css';
-import FontList from './components/font-list/font-list';
 import { fontItem } from '@shared/mocks/font-item';
+
+import FontList from './components/font-list/font-list';
+import * as styles from './floating-font-list-box.css';
 
 const FloatingFontListBox = () => {
   return (
