@@ -1,9 +1,9 @@
 import { fontItem } from '@shared/mocks/font-item';
 
-import FontList from './components/font-list/font-list';
-import * as styles from './floating-font-list-box.css';
+import FontList from '../font-list/font-list';
+import * as styles from './font-list-box.css';
 
-const FloatingFontListBox = () => {
+const FontListBox = () => {
   return (
     <div className={styles.outerContainer}>
       <div className={styles.innerContainer}>
@@ -23,4 +23,4 @@ const FloatingFontListBox = () => {
   );
 };
 
-export default FloatingFontListBox;
+export default FontListBox;

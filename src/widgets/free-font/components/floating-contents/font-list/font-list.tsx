@@ -15,10 +15,6 @@ interface FontListProps {
 const FontList = ({ fontName, fontMetadata, onDelete }: FontListProps) => {
   useLoadFont(fontMetadata);
 
-  if (!fontMetadata) {
-    return null;
-  }
-
   return (
     <div className={styles.container}>
       <div
