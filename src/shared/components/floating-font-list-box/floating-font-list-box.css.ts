@@ -1,27 +1,30 @@
-import { style } from '@vanilla-extract/css';
+import { createVar, style } from '@vanilla-extract/css';
 import { themeVars } from '@/shared/styles';
 
 const FADE_SIZE = '29px';
 
+export const fontWeightVar = createVar();
+export const fontFamilyVar = createVar();
+
 export const outerContainer = style({
   display: 'flex',
   flexDirection: 'column',
-  overflowX: 'hidden',
 
   width: '22.8rem',
+  overflowX: 'hidden',
 
+  backgroundColor: themeVars.color.white,
   border: `1px solid ${themeVars.color.gray_03}`,
   borderRadius: '20px',
-  backgroundColor: themeVars.color.white,
 
   scrollBehavior: 'smooth',
 });
 
 export const innerContainer = style({
+  maxHeight: '22.8rem',
   overflowY: 'auto',
   scrollbarWidth: 'none',
 
-  maxHeight: '22.8rem',
   selectors: {
     '&:not(:empty)': {
       WebkitMaskImage: `
@@ -54,4 +57,10 @@ export const listContainer = style({
       borderBottom: 'none',
     },
   },
+});
+
+export const font = style({
+  fontFamily: fontFamilyVar,
+  fontSize: '1.4rem',
+  fontWeight: fontWeightVar,
 });
