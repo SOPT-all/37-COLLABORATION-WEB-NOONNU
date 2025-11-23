@@ -4,11 +4,13 @@ import { themeVars } from '@/shared/styles';
 
 const baseButtonStyle = style({
   display: 'flex',
+  position: 'fixed',
+  bottom: '4.8rem',
+  right: '2.8rem',
   width: '18.8rem',
   padding: '2.4rem 0',
   justifyContent: 'center',
   borderRadius: '99px',
-  cursor: 'pointer',
   whiteSpace: 'nowrap',
   ...themeVars.fontStyles.body_20sb,
 });
@@ -19,6 +21,7 @@ export const compareButton = style([
     border: `1px solid ${themeVars.color.primary_dark_01}`,
     backgroundColor: themeVars.color.primary,
     gap: '0.4rem',
+    cursor: 'pointer',
 
     ':hover': {
       backgroundColor: themeVars.color.primary_dark_01,
@@ -62,5 +65,6 @@ export const emptyButton = style([
     border: `1px solid ${themeVars.color.gray_03}`,
     backgroundColor: themeVars.color.gray_02,
     color: themeVars.color.gray_04,
+    cursor: 'not-allowed',
   },
 ]);

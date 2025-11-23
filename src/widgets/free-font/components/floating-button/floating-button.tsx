@@ -5,10 +5,19 @@ import * as styles from './floating-button.css';
 interface FloatingButtonProps {
   count: number;
   onClick?: () => void;
+  handleHoverStart?: () => void;
+  handleHoverEnd?: () => void;
 }
 
-const FloatingButton = ({ count, onClick }: FloatingButtonProps) => {
-  if (count === 0) {
+const FloatingButton = ({
+  count,
+  onClick,
+  handleHoverStart,
+  handleHoverEnd,
+}: FloatingButtonProps) => {
+  const isEmpty = count === 0;
+
+  if (isEmpty) {
     return (
       <button className={styles.emptyButton} disabled>
         폰트 탐색 중~
@@ -17,7 +26,12 @@ const FloatingButton = ({ count, onClick }: FloatingButtonProps) => {
   }
 
   return (
-    <button className={styles.compareButton} onClick={onClick}>
+    <button
+      className={styles.compareButton}
+      onClick={onClick}
+      onMouseEnter={handleHoverStart}
+      onMouseLeave={handleHoverEnd}
+    >
       <span className={styles.textContainer}>
         <span key={count} className={styles.animateText}>
           {count}개
