@@ -1,4 +1,5 @@
 import { style } from '@vanilla-extract/css';
+
 import { themeVars } from '@/shared/styles';
 
 export const toastContainer = style({
@@ -27,11 +28,11 @@ export const character = style({
 });
 
 export const message = style({
-  margin: '0',
   ...themeVars.fontStyles.body_14m,
   color: themeVars.color.black,
 });
 
 export const xIcon = style({
   marginLeft: 'auto',
+  cursor: 'pointer',
 });

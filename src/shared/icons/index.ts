@@ -8,6 +8,7 @@ export { default as ArrowRightLineSmIcon } from './assets/icn-arrow-right-line-s
 export { default as ArrowRightMdIcon } from './assets/icn-arrow-right-md.svg?react';
 export { default as ArrowUpLgIcon } from './assets/icn-arrow-up-lg.svg?react';
 export { default as ArrowUpSmIcon } from './assets/icn-arrow-up-sm.svg?react';
+export { default as CharacterToastIcon } from './assets/icn-character-toast.svg?react';
 export { default as DeleteIcon } from './assets/icn-delete.svg?react';
 export { default as FilterIcon } from './assets/icn-filter.svg?react';
 export { default as GridviewIcon } from './assets/icn-gridview.svg?react';
@@ -22,4 +23,3 @@ export { default as StarIcon } from './assets/icn-star.svg?react';
 export { default as StarFillIcon } from './assets/icn-star-fill.svg?react';
 export { default as WordviewIcon } from './assets/icn-wordview.svg?react';
 export { default as XIcon } from './assets/icn-x.svg?react';
-export { default as CharacterToastIcon } from './assets/icn-character-toast.svg?react';
