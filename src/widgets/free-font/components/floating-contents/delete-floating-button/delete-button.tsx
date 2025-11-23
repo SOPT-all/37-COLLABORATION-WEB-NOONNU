@@ -1,10 +1,10 @@
-import * as styles from './delete-floating-button.css';
+import * as styles from './delete-button.css';
 
 interface DeleteFloatingButtonProps {
   onClick: () => void;
 }
 
-const DeleteFloatingButton = ({ onClick }: DeleteFloatingButtonProps) => {
+const DeleteButton = ({ onClick }: DeleteFloatingButtonProps) => {
   return (
     <button onClick={onClick} className={styles.buttonContainer}>
       <p className={styles.buttonText}>전체 삭제</p>
@@ -12,4 +12,4 @@ const DeleteFloatingButton = ({ onClick }: DeleteFloatingButtonProps) => {
   );
 };
 
-export default DeleteFloatingButton;
+export default DeleteButton;
