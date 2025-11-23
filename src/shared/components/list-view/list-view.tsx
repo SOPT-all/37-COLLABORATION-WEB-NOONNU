@@ -59,6 +59,8 @@ const ListView = ({
     onToggleLike(id);
   };
 
+  const displayPhrase = globalPhrase !== '' ? globalPhrase : currentPhrase;
+
   return (
     <article className={styles.listViewContainer}>
       <div className={styles.listTitleContainer}>
@@ -108,7 +110,7 @@ const ListView = ({
 
       <div className={styles.phraseContainer}>
         <textarea
-          value={currentPhrase}
+          value={displayPhrase}
           onChange={handlePhraseChange}
           placeholder={phrase}
           className={styles.editInput}
