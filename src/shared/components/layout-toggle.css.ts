@@ -30,9 +30,6 @@ export const toggleButton = recipe({
         backgroundColor: themeVars.color.gray_01,
         color: themeVars.color.black,
       },
-      '&:svg': {
-        fill: 'currentColor',
-      },
     },
   },
 
