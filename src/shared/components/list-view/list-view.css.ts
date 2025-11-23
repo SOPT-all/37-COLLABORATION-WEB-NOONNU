@@ -18,6 +18,7 @@ export const listTitleContainer = style({
   padding: '1.2rem 2rem',
   border: `1px solid ${themeVars.color.gray_02}`,
   borderRadius: '4px 4px 0 0',
+  cursor: 'pointer',
 
   selectors: {
     [`${listViewContainer}:hover &`]: {
