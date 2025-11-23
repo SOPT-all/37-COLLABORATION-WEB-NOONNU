@@ -4,9 +4,9 @@ import * as styles from './compare-floating-button.css';
 
 interface CompareFloatingButtonProps {
   count: number;
-  onClick?: () => void;
-  handleHoverStart?: () => void;
-  handleHoverEnd?: () => void;
+  onClick: () => void;
+  handleHoverStart: () => void;
+  handleHoverEnd: () => void;
 }
 
 const CompareFloatingButton = ({
