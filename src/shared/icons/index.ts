@@ -8,7 +8,6 @@ export { default as ArrowRightLineSmIcon } from './assets/icn-arrow-right-line-s
 export { default as ArrowRightMdIcon } from './assets/icn-arrow-right-md.svg?react';
 export { default as ArrowUpLgIcon } from './assets/icn-arrow-up-lg.svg?react';
 export { default as ArrowUpSmIcon } from './assets/icn-arrow-up-sm.svg?react';
-export { default as CharacterEmptyIcon } from './assets/icn-character-empty.svg?react';
 export { default as DeleteIcon } from './assets/icn-delete.svg?react';
 export { default as FilterIcon } from './assets/icn-filter.svg?react';
 export { default as GridviewIcon } from './assets/icn-gridview.svg?react';
@@ -42,16 +41,16 @@ export { default as HandwritingButtonIcon } from './assets/button/icn-handwritin
 export { default as HeadlineButtonIcon } from './assets/button/icn-headline-button.svg?react';
 
 // Mood button icons
-export { default as AngularButtonIcon } from '../assets/Assets/icn-angular-button.svg?react';
-export { default as BoldButtonIcon } from '../assets/Assets/icn-bold-button.svg?react';
-export { default as ClassicButtonIcon } from '../assets/Assets/icn-classic-button.svg?react';
-export { default as CuteButtonIcon } from '../assets/Assets/icn-cute-button.svg?react';
-export { default as DistinctButtonIcon } from '../assets/Assets/icn-distinct-button.svg?react';
-export { default as EmotionalButtonIcon } from '../assets/Assets/icn-emotional-button.svg?react';
-export { default as FlashyButtonIcon } from '../assets/Assets/icn-flashy-button.svg?react';
-export { default as FreeButtonIcon } from '../assets/Assets/icn-free-button.svg?react';
-export { default as RetroButtonIcon } from '../assets/Assets/icn-retro-button.svg?react';
-export { default as RoundButtonIcon } from '../assets/Assets/icn-round-button.svg?react';
-export { default as SimpleButtonIcon } from '../assets/Assets/icn-simple-button.svg?react';
-export { default as StrongButtonIcon } from '../assets/Assets/icn-strong-button.svg?react';
-export { default as UniqueButtonIcon } from '../assets/Assets/icn-unique-button.svg?react';
+export { default as AngularButtonIcon } from './assets/button/icn-angular-button.svg?react';
+export { default as BoldButtonIcon } from './assets/button/icn-bold-button.svg?react';
+export { default as ClassicButtonIcon } from './assets/button/icn-classic-button.svg?react';
+export { default as CuteButtonIcon } from './assets/button/icn-cute-button.svg?react';
+export { default as DistinctButtonIcon } from './assets/button/icn-distinct-button.svg?react';
+export { default as EmotionalButtonIcon } from './assets/button/icn-emotional-button.svg?react';
+export { default as FlashyButtonIcon } from './assets/button/icn-flashy-button.svg?react';
+export { default as FreeButtonIcon } from './assets/button/icn-free-button.svg?react';
+export { default as RetroButtonIcon } from './assets/button/icn-retro-button.svg?react';
+export { default as RoundButtonIcon } from './assets/button/icn-round-button.svg?react';
+export { default as SimpleButtonIcon } from './assets/button/icn-simple-button.svg?react';
+export { default as StrongButtonIcon } from './assets/button/icn-strong-button.svg?react';
+export { default as UniqueButtonIcon } from './assets/button/icn-unique-button.svg?react';

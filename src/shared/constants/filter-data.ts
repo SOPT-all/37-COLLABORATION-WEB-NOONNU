@@ -34,10 +34,16 @@ export interface FilterItem {
   Icon?: React.FC<SVGProps<SVGSVGElement>>;
 }
 
+export interface IconFilterItem {
+  id: string;
+  label: string;
+  Icon: React.FC<SVGProps<SVGSVGElement>>;
+}
+
 export interface FilterSection {
   sectionId: string;
   title: string;
-  items: FilterItem[];
+  items: IconFilterItem[];
 }
 
 export const USAGE_SECTIONS: FilterSection[] = [
@@ -69,7 +75,7 @@ export const USAGE_SECTIONS: FilterSection[] = [
   },
 ];
 
-export const SHAPE_ITEMS: FilterItem[] = [
+export const SHAPE_ITEMS: IconFilterItem[] = [
   { id: 'batang', label: '바탕', Icon: BatangButtonIcon },
   { id: 'dotum', label: '돋움', Icon: DotumButtonIcon },
   { id: 'gothic', label: '굴림', Icon: GothicButtonIcon },
@@ -77,7 +83,7 @@ export const SHAPE_ITEMS: FilterItem[] = [
   { id: 'handwriting', label: '손글씨', Icon: HandwritingButtonIcon },
 ];
 
-export const MOOD_ITEMS: FilterItem[] = [
+export const MOOD_ITEMS: IconFilterItem[] = [
   { id: 'round', label: '둥근', Icon: RoundButtonIcon },
   { id: 'angular', label: '각진', Icon: AngularButtonIcon },
   { id: 'simple', label: '심플한', Icon: SimpleButtonIcon },
