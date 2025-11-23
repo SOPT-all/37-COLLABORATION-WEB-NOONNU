@@ -3,19 +3,19 @@ import { recipe } from '@vanilla-extract/recipes';
 
 import { themeVars } from '@/shared/styles';
 
+// 토글 컨테이너
 export const toggleContainer = style({
   display: 'flex',
   border: `1px solid ${themeVars.color.gray_03}`,
   borderRadius: '4px',
 });
 
-// 토글 스타일: 기본
+// 토글 버튼 스타일
 export const toggleButton = recipe({
   base: {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    width: '100%',
     padding: '0.4rem',
     backgroundColor: 'transparent',
     color: themeVars.color.gray_04,
@@ -29,6 +29,9 @@ export const toggleButton = recipe({
       '&:hover': {
         backgroundColor: themeVars.color.gray_01,
         color: themeVars.color.black,
+      },
+      '&:svg': {
+        fill: 'currentColor',
       },
     },
   },
