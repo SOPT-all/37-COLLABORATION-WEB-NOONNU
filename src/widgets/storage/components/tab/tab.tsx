@@ -2,58 +2,44 @@ import * as styles from './tab.css';
 
 export type TabLabelTypes = 'compare' | 'bookmark';
 
-export interface TabLabelProps {
+interface TabLabelProps {
   value: TabLabelTypes;
-  onChange: (nextValue: TabLabelTypes) => void;
-  labels?: {
-    compare?: string;
-    bookmark?: string;
-  };
+  onClick: (nextValue: TabLabelTypes) => void;
 }
 
-export const Tab = ({ value, onChange, labels }: TabLabelProps) => {
-  const compareLabel = labels?.compare ?? '폰트비교';
-  const bookmarkLabel = labels?.bookmark ?? '찜목록';
-
-  const handleCompareClick = () => {
-    if (value === 'compare') {
+const Tab = ({ value, onClick }: TabLabelProps) => {
+  const handleClick = (target: TabLabelTypes) => {
+    if (value === target) {
       return;
     }
-    onChange('compare');
-  };
-
-  const handleBookmarkClick = () => {
-    if (value === 'bookmark') {
-      return;
-    }
-    onChange('bookmark');
+    onClick(target);
   };
 
   return (
     <div className={styles.container}>
       <button
         type='button'
-        onClick={handleCompareClick}
+        onClick={() => handleClick('compare')}
         className={styles.tabButton({
           state: value === 'compare' ? 'active' : 'inactive',
         })}
-        aria-pressed={value === 'compare'}
       >
-        {compareLabel}
+        폰트비교
       </button>
 
-      <span className={styles.divider} aria-hidden='true' />
+      <span className={styles.divider} />
 
       <button
         type='button'
-        onClick={handleBookmarkClick}
+        onClick={() => handleClick('bookmark')}
         className={styles.tabButton({
           state: value === 'bookmark' ? 'active' : 'inactive',
         })}
-        aria-pressed={value === 'bookmark'}
       >
-        {bookmarkLabel}
+        찜목록
       </button>
     </div>
   );
 };
+
+export default Tab;
