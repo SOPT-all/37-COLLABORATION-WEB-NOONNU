@@ -16,7 +16,7 @@ import * as styles from './header.css';
 const TEXT = {
   FREE_FONT: '무료 폰트',
   RECOMMEND_FONT: '추천 폰트',
-  NOONNU_MARGET: '눈누 마켓',
+  NOONNU_MARKET: '눈누 마켓',
   QUESTION_FONT: '무슨 폰트?',
   SHARE_DESIGN: '디자인 공유',
 } as const;
@@ -72,11 +72,11 @@ const Header = () => {
           </button>
           <button
             className={styles.textButton({
-              isEqual: isEqual(TEXT.NOONNU_MARGET),
+              isEqual: isEqual(TEXT.NOONNU_MARKET),
             })}
-            onClick={() => handleClickMenu(TEXT.NOONNU_MARGET)}
+            onClick={() => handleClickMenu(TEXT.NOONNU_MARKET)}
           >
-            {TEXT.NOONNU_MARGET}
+            {TEXT.NOONNU_MARKET}
           </button>
           <button
             className={styles.textButton({
