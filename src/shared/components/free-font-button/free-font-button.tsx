@@ -2,7 +2,7 @@ import { ArrowRightLineSmIcon } from '../../icons';
 import * as styles from './free-font-button.css';
 
 interface FreeFontButtonProps {
-  onClick?: () => void;
+  onClick: () => void;
 }
 
 const FreeFontButton = ({ onClick }: FreeFontButtonProps) => {
