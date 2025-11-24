@@ -74,7 +74,7 @@ export const phraseContainer = style({
   display: 'flex',
   alignItems: 'flex-start',
   height: '10.8rem',
-  padding: '4rem 2rem',
+  padding: '3.3rem 2rem',
   borderRadius: '0 0 4px 4px',
   borderRight: `1px solid ${themeVars.color.gray_02}`,
   borderBottom: `1px solid ${themeVars.color.gray_02}`,

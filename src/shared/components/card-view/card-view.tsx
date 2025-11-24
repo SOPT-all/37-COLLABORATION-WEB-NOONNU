@@ -51,14 +51,6 @@ const CardView = ({
     setCurrentPhrase(e.target.value);
   };
 
-  const handleToggleCompare = () => {
-    onToggleCompare(id);
-  };
-
-  const handleToggleLike = () => {
-    onToggleLike(id);
-  };
-
   const displayPhrase = globalPhrase !== '' ? globalPhrase : currentPhrase;
 
   return (
@@ -96,7 +88,7 @@ const CardView = ({
             <button
               type='button'
               aria-label='비교하기 목록에 추가'
-              onClick={handleToggleCompare}
+              onClick={() => onToggleCompare(id)}
             >
               {isCompared ? (
                 <AddFilledIcon width={24} height={24} />
@@ -107,7 +99,7 @@ const CardView = ({
             <button
               type='button'
               aria-label='찜 목록에 추가'
-              onClick={handleToggleLike}
+              onClick={() => onToggleLike(id)}
             >
               {isLiked ? (
                 <StarColorIcon width={24} height={24} />
