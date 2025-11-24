@@ -5,13 +5,11 @@ import { themeVars } from '@/shared/styles';
 export const footerContainer = style({
   display: 'flex',
   flexDirection: 'column',
-  justifyContent: 'center',
   width: '100%',
   height: '41rem',
   padding: '5.6rem 5.2rem 6rem 5.2rem',
   backgroundColor: themeVars.color.black,
   color: themeVars.color.gray_03,
-  fontFamily: 'Pretendard',
   gap: '1.6rem',
   whiteSpace: 'nowrap',
 });
@@ -83,4 +81,11 @@ export const iconContainer = style({
   justifyContent: 'flex-end',
   gap: '2.8rem',
   cursor: 'pointer',
+});
+
+export const businessInformationText = style({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '0.4rem',
+  ...themeVars.fontStyles.body_14m,
 });

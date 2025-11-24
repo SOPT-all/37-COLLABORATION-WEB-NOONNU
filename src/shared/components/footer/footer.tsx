@@ -27,7 +27,7 @@ const Footer = () => {
               개인정보처리방침
             </a>
           </div>
-          <div>
+          <div className={styles.businessInformationText}>
             <p>눈누 사업자 정보</p>
             <div className={styles.linkList}>
               <p className={styles.linkItem}>주식회사 프로젝트 눈누</p>
