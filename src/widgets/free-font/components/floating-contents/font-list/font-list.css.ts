@@ -28,4 +28,8 @@ export const deleteBtn = style({
   padding: '0.6rem',
   color: themeVars.color.gray_03,
   transition: 'color 0.1s ease-in-out',
+
+  ':hover': {
+    color: themeVars.color.negative,
+  },
 });

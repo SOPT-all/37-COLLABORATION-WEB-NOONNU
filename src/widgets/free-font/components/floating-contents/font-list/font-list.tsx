@@ -1,4 +1,5 @@
 import { assignInlineVars } from '@vanilla-extract/dynamic';
+import { memo } from 'react';
 
 import { useLoadFont } from '@/shared/hooks/use-load-font';
 import { DeleteIcon } from '@/shared/icons';
@@ -7,12 +8,13 @@ import type { FontMetadataType } from '@/shared/types/font';
 import * as styles from './font-list.css';
 
 interface FontListProps {
+  id: number;
   fontName: string;
   fontMetadata: FontMetadataType;
-  onDelete: () => void;
+  onDelete: (id: number) => void;
 }
 
-const FontList = ({ fontName, fontMetadata, onDelete }: FontListProps) => {
+const FontList = ({ id, fontName, fontMetadata, onDelete }: FontListProps) => {
   useLoadFont(fontMetadata);
 
   return (
@@ -28,7 +30,7 @@ const FontList = ({ fontName, fontMetadata, onDelete }: FontListProps) => {
       </div>
       <button
         className={styles.deleteBtn}
-        onClick={onDelete}
+        onClick={() => onDelete(id)}
         aria-label='찜목록에서 제외'
       >
         <DeleteIcon />
@@ -37,4 +39,4 @@ const FontList = ({ fontName, fontMetadata, onDelete }: FontListProps) => {
   );
 };
 
-export default FontList;
+export default memo(FontList);

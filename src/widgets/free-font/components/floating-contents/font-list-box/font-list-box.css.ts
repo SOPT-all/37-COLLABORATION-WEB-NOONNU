@@ -17,8 +17,6 @@ export const outerContainer = style({
   backgroundColor: themeVars.color.white,
   border: `1px solid ${themeVars.color.gray_03}`,
   borderRadius: '20px',
-
-  scrollBehavior: 'smooth',
 });
 
 export const innerContainer = style({
