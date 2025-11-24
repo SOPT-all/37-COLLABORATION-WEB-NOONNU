@@ -15,7 +15,6 @@ export const inputFieldContainer = recipe({
     borderRadius: '99px',
     backgroundColor: themeVars.color.white,
     color: themeVars.color.black,
-    transition: 'all 0.25s ease',
 
     selectors: {
       '&:focus-within': {
@@ -28,9 +27,6 @@ export const inputFieldContainer = recipe({
 export const inputFieldInput = style({
   ...fontStyles.body_14m,
   flex: 1,
-  border: 'none',
-  outline: 'none',
-  backgroundColor: 'transparent',
   color: themeVars.color.black,
 
   selectors: {
@@ -41,14 +37,4 @@ export const inputFieldInput = style({
       color: themeVars.color.gray_03,
     },
   },
-});
-
-export const inputFieldIcon = style({
-  border: 'none',
-  backgroundColor: 'transparent',
-  padding: 0,
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  cursor: 'pointer',
 });

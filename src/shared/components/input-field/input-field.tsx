@@ -1,27 +1,25 @@
-import type { ChangeEventHandler, ReactNode } from 'react';
+import type { ChangeEventHandler } from 'react';
 
-import { PenIcon, XIcon } from '@/shared/icons';
+import { PenIcon, SearchIcon, XIcon } from '@/shared/icons';
 
 import * as styles from './input-field.css';
 
-const INPUT_FIELD_PLACEHOLDER = '문구 적고 폰트 미리보기';
+export type InputFieldVariant = 'write' | 'search';
 
 export interface InputFieldProps {
   value: string;
   onChange: (nextValue: string) => void;
-  placeholder?: string;
-  idleIcon?: ReactNode;
+  placeholder: string;
+  variant: InputFieldVariant;
 }
 
 export const InputField = ({
   value,
   onChange,
   placeholder,
-  idleIcon,
+  variant,
 }: InputFieldProps) => {
   const hasInputValue = value.length > 0;
-  const placeholderText = placeholder ?? INPUT_FIELD_PLACEHOLDER;
-  const idleIconElement = idleIcon ?? <PenIcon />;
 
   const handleInputChange: ChangeEventHandler<HTMLInputElement> = (event) => {
     onChange(event.target.value);
@@ -34,22 +32,20 @@ export const InputField = ({
     onChange('');
   };
 
+  const iconElement = variant === 'write' ? <PenIcon /> : <SearchIcon />;
+
   return (
     <div className={styles.inputFieldContainer()}>
       <input
         type='text'
         value={value}
         className={styles.inputFieldInput}
-        placeholder={placeholderText}
+        placeholder={placeholder}
         onChange={handleInputChange}
       />
 
-      <button
-        type='button'
-        className={styles.inputFieldIcon}
-        onClick={handleClear}
-      >
-        {hasInputValue ? <XIcon /> : idleIconElement}
+      <button type='button' onClick={handleClear}>
+        {hasInputValue ? <XIcon /> : iconElement}
       </button>
     </div>
   );
