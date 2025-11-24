@@ -79,6 +79,7 @@ export const phraseContainer = style({
   borderRight: `1px solid ${themeVars.color.gray_02}`,
   borderBottom: `1px solid ${themeVars.color.gray_02}`,
   borderLeft: `1px solid ${themeVars.color.gray_02}`,
+  overflow: 'hidden',
 });
 
 export const arrowIcon = style({
@@ -94,12 +95,9 @@ export const arrowIcon = style({
 export const editInput = style({
   width: '100%',
   whiteSpace: 'nowrap',
-  overflowX: 'auto',
+  outline: 'none',
+  resize: 'none',
   ...themeVars.fontStyles.font_sample,
   fontFamily: fontFamilyVar,
   fontWeight: fontWeightVar,
-
-  '::-webkit-scrollbar': {
-    display: 'none',
-  },
 });
