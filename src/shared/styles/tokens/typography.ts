@@ -1,6 +1,7 @@
 export const typography = {
   fontSize: {
     36: '3.6rem',
+    30: '3rem',
     28: '2.8rem',
     20: '2rem',
     18: '1.8rem',
@@ -20,5 +21,6 @@ export const typography = {
     140: '140%',
     125: '125%',
     120: '120%',
+    100: '100%',
   },
 } as const;
