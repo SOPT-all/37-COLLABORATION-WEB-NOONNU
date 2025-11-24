@@ -51,4 +51,52 @@ export const fontItem: FontItemType[] = [
       fontDisplay: 'swap',
     },
   },
+  {
+    id: 4,
+    name: '어그로체 Bold',
+    producer: '(주)샌드박스네트워크',
+    thicknessNum: 3,
+    phrase: '어그로가 필요한 순간엔 어그로체를',
+    isLiked: false,
+    isCompared: false,
+    fontMetadata: {
+      fontFamily: 'Aggravo',
+      fontSource:
+        'https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroB.woff',
+      fontWeight: '700',
+      fontDisplay: 'swap',
+    },
+  },
+  {
+    id: 5,
+    name: '어그로체 Bold',
+    producer: '(주)샌드박스네트워크',
+    thicknessNum: 3,
+    phrase: '어그로가 필요한 순간엔 어그로체를',
+    isLiked: false,
+    isCompared: false,
+    fontMetadata: {
+      fontFamily: 'Aggravo',
+      fontSource:
+        'https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroB.woff',
+      fontWeight: '700',
+      fontDisplay: 'swap',
+    },
+  },
+  {
+    id: 6,
+    name: '어그로체 Bold',
+    producer: '(주)샌드박스네트워크',
+    thicknessNum: 3,
+    phrase: '어그로가 필요한 순간엔 어그로체를',
+    isLiked: false,
+    isCompared: false,
+    fontMetadata: {
+      fontFamily: 'Aggravo',
+      fontSource:
+        'https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroB.woff',
+      fontWeight: '700',
+      fontDisplay: 'swap',
+    },
+  },
 ];
