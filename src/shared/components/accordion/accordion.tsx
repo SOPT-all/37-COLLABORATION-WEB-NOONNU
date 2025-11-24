@@ -51,7 +51,7 @@ const Header = ({ subtitle }: AccordionHeaderProps) => {
 
   return (
     <div className={styles.header}>
-      <h2 className={styles.subtitle}>{subtitle}</h2>
+      <p className={styles.subtitle}>{subtitle}</p>
       <button
         type='button'
         className={styles.toggleButton}
