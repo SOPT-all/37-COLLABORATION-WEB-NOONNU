@@ -1,7 +1,8 @@
+import { fontItem as initialData } from '@shared/mocks/font-item';
 import { useCallback, useState } from 'react';
+
 import FontList from '../font-list/font-list';
 import * as styles from './font-list-box.css';
-import { fontItem as initialData } from '@shared/mocks/font-item';
 
 const FontListBox = () => {
   const [fonts, setFonts] = useState(initialData);
