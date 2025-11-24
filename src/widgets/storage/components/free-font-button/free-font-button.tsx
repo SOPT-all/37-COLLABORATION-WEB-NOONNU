@@ -1,4 +1,5 @@
-import { ArrowRightLineSmIcon } from '../../icons';
+import { ArrowRightLineSmIcon } from '@/shared/icons';
+
 import * as styles from './free-font-button.css';
 
 interface FreeFontButtonProps {
