@@ -25,14 +25,7 @@ export const fontStyle = style({
 });
 
 export const deleteBtn = style({
-  margin: '0.6rem',
+  padding: '0.6rem',
   color: themeVars.color.gray_03,
   transition: 'color 0.1s ease-in-out',
-
-  selectors: {
-    '&:hover': {
-      color: themeVars.color.negative,
-      cursor: 'pointer',
-    },
-  },
 });

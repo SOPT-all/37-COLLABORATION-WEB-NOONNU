@@ -59,9 +59,3 @@ export const listContainer = style({
     },
   },
 });
-
-export const font = style({
-  fontFamily: fontFamilyVar,
-  fontSize: '1.4rem',
-  fontWeight: fontWeightVar,
-});

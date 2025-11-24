@@ -26,7 +26,11 @@ const FontList = ({ fontName, fontMetadata, onDelete }: FontListProps) => {
       >
         {fontName}
       </div>
-      <button className={styles.deleteBtn} onClick={onDelete}>
+      <button
+        className={styles.deleteBtn}
+        onClick={onDelete}
+        aria-label='찜목록에서 제외'
+      >
         <DeleteIcon />
       </button>
     </div>
