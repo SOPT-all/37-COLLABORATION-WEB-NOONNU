@@ -9,6 +9,7 @@ export { default as ArrowRightMdIcon } from './assets/icn-arrow-right-md.svg?rea
 export { default as ArrowUpLgIcon } from './assets/icn-arrow-up-lg.svg?react';
 export { default as ArrowUpSmIcon } from './assets/icn-arrow-up-sm.svg?react';
 export { default as CharacterEmptyIcon } from './assets/icn-character-empty.svg?react';
+export { default as CharacterToastIcon } from './assets/icn-character-toast.svg?react';
 export { default as DeleteIcon } from './assets/icn-delete.svg?react';
 export { default as FilterIcon } from './assets/icn-filter.svg?react';
 export { default as GridviewIcon } from './assets/icn-gridview.svg?react';
@@ -20,6 +21,7 @@ export { default as PenIcon } from './assets/icn-pen.svg?react';
 export { default as ResetIcon } from './assets/icn-reset.svg?react';
 export { default as SearchIcon } from './assets/icn-search.svg?react';
 export { default as StarIcon } from './assets/icn-star.svg?react';
+export { default as StarColorIcon } from './assets/icn-star-color.svg?react';
 export { default as StarFillIcon } from './assets/icn-star-fill.svg?react';
 export { default as WordviewIcon } from './assets/icn-wordview.svg?react';
 export { default as XIcon } from './assets/icn-x.svg?react';
