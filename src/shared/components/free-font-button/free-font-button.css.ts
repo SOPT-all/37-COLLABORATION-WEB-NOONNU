@@ -26,9 +26,6 @@ export const text = style({
 });
 
 export const icon = style({
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
   width: '2.4rem',
   height: '2.4rem',
 });
