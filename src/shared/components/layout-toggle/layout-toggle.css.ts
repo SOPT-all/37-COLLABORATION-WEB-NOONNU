@@ -6,6 +6,7 @@ import { themeVars } from '@/shared/styles';
 // 토글 컨테이너
 export const toggleContainer = style({
   display: 'flex',
+  width: '9.8rem',
   border: `1px solid ${themeVars.color.gray_03}`,
   borderRadius: '4px',
 });
