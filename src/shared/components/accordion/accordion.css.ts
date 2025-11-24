@@ -14,20 +14,12 @@ export const header = style({
 });
 
 export const subtitle = style({
-  margin: 0,
   color: themeVars.color.black,
   ...themeVars.fontStyles.body_16sb,
 });
 
 export const toggleButton = style({
   color: themeVars.color.gray_04,
-  background: 'none',
-  border: 'none',
-  cursor: 'pointer',
-  padding: 0,
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
 });
 
 export const filterSet = style({
