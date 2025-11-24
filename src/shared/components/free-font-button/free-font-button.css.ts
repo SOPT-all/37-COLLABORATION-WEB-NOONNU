@@ -13,7 +13,6 @@ export const button = style({
   borderRadius: '4px',
   border: `1px solid ${themeVars.color.primary_dark_01}`,
   backgroundColor: themeVars.color.primary,
-  cursor: 'pointer',
 
   ':hover': {
     opacity: 0.9,
