@@ -20,6 +20,7 @@ export const subtitle = style({
 });
 
 export const toggleButton = style({
+  color: themeVars.color.gray_04,
   background: 'none',
   border: 'none',
   cursor: 'pointer',
