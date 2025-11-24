@@ -10,12 +10,11 @@ interface AccordionContextValue {
 const AccordionContext = createContext<AccordionContextValue | null>(null);
 
 interface AccordionProps {
-  defaultOpen?: boolean;
   children: ReactNode;
 }
 
-const AccordionRoot = ({ defaultOpen = true, children }: AccordionProps) => {
-  const [isOpen, setIsOpen] = useState(defaultOpen);
+const AccordionRoot = ({ children }: AccordionProps) => {
+  const [isOpen, setIsOpen] = useState(true);
 
   const toggle = () => setIsOpen((prev) => !prev);
 
