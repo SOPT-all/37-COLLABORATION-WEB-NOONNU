@@ -1,43 +1,55 @@
-import type { ChangeEventHandler, FocusEventHandler } from 'react';
+import type { ChangeEventHandler, ReactNode } from 'react';
 
-import { PenIcon, XIcon } from '../../icons';
+import { PenIcon, XIcon } from '@/shared/icons';
+
 import * as styles from './input-field.css';
-import { INPUT_FIELD_STATE, type InputFieldState } from './input-field.state';
+
+const INPUT_FIELD_PLACEHOLDER = '문구 적고 폰트 미리보기';
 
 export interface InputFieldProps {
   value: string;
-  visualState: InputFieldState;
-  onChange: ChangeEventHandler<HTMLInputElement>;
-  onFocus: FocusEventHandler<HTMLInputElement>;
-  onBlur: FocusEventHandler<HTMLInputElement>;
-  onClear: () => void;
+  onChange: (nextValue: string) => void;
+  placeholder?: string;
+  idleIcon?: ReactNode;
 }
 
 export const InputField = ({
   value,
-  visualState,
   onChange,
-  onFocus,
-  onBlur,
-  onClear,
+  placeholder,
+  idleIcon,
 }: InputFieldProps) => {
-  const isTyping = visualState === INPUT_FIELD_STATE.TYPING;
-  const INPUT_FIELD_PLACEHOLDER = '문구 적고 폰트 미리보기';
+  const hasInputValue = value.length > 0;
+  const placeholderText = placeholder ?? INPUT_FIELD_PLACEHOLDER;
+  const idleIconElement = idleIcon ?? <PenIcon />;
+
+  const handleInputChange: ChangeEventHandler<HTMLInputElement> = (event) => {
+    onChange(event.target.value);
+  };
+
+  const handleClear = () => {
+    if (!hasInputValue) {
+      return;
+    }
+    onChange('');
+  };
 
   return (
-    <div className={styles.inputFieldContainer[visualState]}>
+    <div className={styles.inputFieldContainer()}>
       <input
         type='text'
         value={value}
-        className={styles.baseInput}
-        placeholder={INPUT_FIELD_PLACEHOLDER}
-        onChange={onChange}
-        onFocus={onFocus}
-        onBlur={onBlur}
+        className={styles.inputFieldInput}
+        placeholder={placeholderText}
+        onChange={handleInputChange}
       />
 
-      <button type='button' onClick={isTyping ? onClear : undefined}>
-        {isTyping ? <XIcon /> : <PenIcon />}
+      <button
+        type='button'
+        className={styles.inputFieldIcon}
+        onClick={handleClear}
+      >
+        {hasInputValue ? <XIcon /> : idleIconElement}
       </button>
     </div>
   );
