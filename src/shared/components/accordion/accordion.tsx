@@ -1,6 +1,8 @@
 import { createContext, useContext, useState, type ReactNode } from 'react';
+
+import { ArrowDownSmIcon, ArrowUpSmIcon } from '@/shared/icons';
+
 import * as styles from './accordion.css';
-import { ArrowUpSmIcon, ArrowDownSmIcon } from '@/shared/icons';
 
 interface AccordionContextValue {
   isOpen: boolean;
@@ -9,22 +11,23 @@ interface AccordionContextValue {
 
 const AccordionContext = createContext<AccordionContextValue | null>(null);
 
-interface AccordionProps {
+interface AccordionProviderProps {
   children: ReactNode;
 }
 
-const AccordionRoot = ({ children }: AccordionProps) => {
+const AccordionProvider = ({ children }: AccordionProviderProps) => {
   const [isOpen, setIsOpen] = useState(true);
-
   const toggle = () => setIsOpen((prev) => !prev);
 
   return (
-    <section className={styles.container}>
-      <AccordionContext.Provider value={{ isOpen, toggle }}>
-        {children}
-      </AccordionContext.Provider>
-    </section>
+    <AccordionContext.Provider value={{ isOpen, toggle }}>
+      {children}
+    </AccordionContext.Provider>
   );
+};
+
+const Container = ({ children }: { children: ReactNode }) => {
+  return <section className={styles.container}>{children}</section>;
 };
 
 interface AccordionHeaderProps {
@@ -68,7 +71,8 @@ const Panel = ({ children }: AccordionPanelProps) => {
   );
 };
 
-const Accordion = Object.assign(AccordionRoot, {
+const Accordion = Object.assign(AccordionProvider, {
+  Container,
   Header,
   Panel,
 });
