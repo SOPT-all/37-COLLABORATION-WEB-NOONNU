@@ -31,7 +31,6 @@ globalStyle('::before, ::after', {
 globalStyle('html, :host', {
   lineHeight: '1.5' /*1 */,
   WebkitTextSizeAdjust: '100%' /*2 */,
-  fontFamily: `'SUIT Variable', sans-serif`,
   fontFeatureSettings: 'normal' /*5 */,
   fontVariationSettings: 'normal' /*6 */,
   WebkitTapHighlightColor: 'transparent' /*7 */,
@@ -98,7 +97,6 @@ globalStyle('p', {
 4. Correct the odd `em` font sizing in all browsers.
 */
 globalStyle('code, kbd, samp, pre', {
-  fontFamily: 'monospace' /*1 */,
   fontFeatureSettings: 'normal' /*2 */,
   fontVariationSettings: 'normal' /*3 */,
   fontSize: '1em' /*4 */,
@@ -146,7 +144,6 @@ globalStyle('table', {
 3. Remove default padding in all browsers.
 */
 globalStyle('button, input, optgroup, select, textarea', {
-  fontFamily: 'inherit' /*1 */,
   fontFeatureSettings: 'inherit' /*1 */,
   fontVariationSettings: 'inherit' /*1 */,
   fontSize: '100%' /*1 */,

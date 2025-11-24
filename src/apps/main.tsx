@@ -1,5 +1,3 @@
-import 'pretendard/dist/web/variable/pretendardvariable.css';
-
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 
