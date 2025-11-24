@@ -32,7 +32,7 @@ export const chip = recipe({
 
 export const titleImage = style({
   display: 'flex',
-  width: '5rem',
+  width: '6.4rem',
   height: '2rem',
   padding: '0.25rem 0.5rem',
   flexDirection: 'column',
