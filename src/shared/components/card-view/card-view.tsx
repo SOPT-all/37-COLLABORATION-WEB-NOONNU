@@ -11,8 +11,8 @@ import {
 } from '@/shared/icons';
 import type { FontMetadataType } from '@/shared/types/font';
 
-import * as styles from './list-view.css';
-interface ListViewProps {
+import * as styles from './card-view.css';
+interface CardViewProps {
   id: number;
   name: string;
   producer: string;
@@ -26,7 +26,7 @@ interface ListViewProps {
   onToggleCompare: (id: number) => void;
 }
 
-const ListView = ({
+const CardView = ({
   id,
   name,
   producer,
@@ -38,7 +38,7 @@ const ListView = ({
   globalPhrase,
   onToggleLike,
   onToggleCompare,
-}: ListViewProps) => {
+}: CardViewProps) => {
   const [currentPhrase, setCurrentPhrase] = useState(globalPhrase);
 
   useLoadFont(fontMetadata);
@@ -54,14 +54,11 @@ const ListView = ({
   const displayPhrase = globalPhrase !== '' ? globalPhrase : currentPhrase;
 
   return (
-    <article className={styles.listViewContainer}>
-      <div className={styles.listTitleContainer}>
-        <div className={styles.fontInfoContainer}>
+    <article className={styles.cardViewContainer}>
+      <div className={styles.cardTitleContainer}>
+        <div className={styles.fontNameContainer}>
           <p className={styles.fontName} style={fontStyleVars}>
             {name}
-          </p>
-          <p className={styles.fontProducer} style={fontStyleVars}>
-            {producer}
           </p>
           <ArrowRightMdIcon
             width={24}
@@ -69,6 +66,20 @@ const ListView = ({
             className={styles.arrowIcon}
           />
         </div>
+        <p className={styles.fontProducer} style={fontStyleVars}>
+          {producer}
+        </p>
+      </div>
+
+      <div className={styles.phraseContainer}>
+        <textarea
+          value={displayPhrase}
+          onChange={handlePhraseChange}
+          placeholder={phrase}
+          className={styles.editInput}
+          style={fontStyleVars}
+          spellCheck={false}
+        />
         <div className={styles.userActionContainer}>
           <p className={styles.fontThicknessNum} style={fontStyleVars}>
             {thicknessNum}가지 굵기
@@ -99,19 +110,8 @@ const ListView = ({
           </div>
         </div>
       </div>
-
-      <div className={styles.phraseContainer}>
-        <textarea
-          value={displayPhrase}
-          onChange={handlePhraseChange}
-          placeholder={phrase}
-          className={styles.editInput}
-          style={fontStyleVars}
-          spellCheck={false}
-        />
-      </div>
     </article>
   );
 };
 
-export default ListView;
+export default CardView;

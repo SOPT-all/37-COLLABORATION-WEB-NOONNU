@@ -74,11 +74,12 @@ export const phraseContainer = style({
   display: 'flex',
   alignItems: 'flex-start',
   height: '10.8rem',
-  padding: '4rem 2rem',
+  padding: '3.3rem 2rem',
   borderRadius: '0 0 4px 4px',
   borderRight: `1px solid ${themeVars.color.gray_02}`,
   borderBottom: `1px solid ${themeVars.color.gray_02}`,
   borderLeft: `1px solid ${themeVars.color.gray_02}`,
+  overflow: 'hidden',
 });
 
 export const arrowIcon = style({
@@ -94,12 +95,9 @@ export const arrowIcon = style({
 export const editInput = style({
   width: '100%',
   whiteSpace: 'nowrap',
-  overflowX: 'auto',
+  outline: 'none',
+  resize: 'none',
   ...themeVars.fontStyles.font_sample,
   fontFamily: fontFamilyVar,
   fontWeight: fontWeightVar,
-
-  '::-webkit-scrollbar': {
-    display: 'none',
-  },
 });
