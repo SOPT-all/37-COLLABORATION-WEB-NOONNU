@@ -1,14 +1,7 @@
 import { GridviewIcon, ListviewIcon, WordviewIcon } from '@/shared/icons';
+import { type LayoutToggleType, TOGGLE } from '@/shared/types/layout-toggle';
 
 import * as styles from './layout-toggle.css';
-
-export const TOGGLE = {
-  GRID: 'grid',
-  LIST: 'list',
-  WORD: 'word',
-} as const;
-
-export type LayoutToggleType = (typeof TOGGLE)[keyof typeof TOGGLE];
 
 interface LayoutToggleProps {
   value: LayoutToggleType;
@@ -16,36 +9,38 @@ interface LayoutToggleProps {
 }
 
 export const LayoutToggle = ({ value, onClick }: LayoutToggleProps) => {
-  const isGridSelected = value === TOGGLE.GRID;
-  const isListSelected = value === TOGGLE.LIST;
-  const isWordSelected = value === TOGGLE.WORD;
+  const isSelected = (target: LayoutToggleType) => value === target;
   return (
-    <>
-      <div className={styles.toggleContainer}>
-        <button
-          type='button'
-          className={styles.toggleButton({ selected: isGridSelected })}
-          onClick={() => onClick(TOGGLE.GRID)}
-        >
-          <GridviewIcon />
-        </button>
+    <div className={styles.toggleContainer}>
+      <button
+        type='button'
+        className={styles.toggleButton({
+          selected: isSelected(TOGGLE.GRID),
+        })}
+        onClick={() => onClick(TOGGLE.GRID)}
+      >
+        <GridviewIcon />
+      </button>
 
-        <button
-          type='button'
-          className={styles.toggleButton({ selected: isListSelected })}
-          onClick={() => onClick(TOGGLE.LIST)}
-        >
-          <ListviewIcon />
-        </button>
+      <button
+        type='button'
+        className={styles.toggleButton({
+          selected: isSelected(TOGGLE.LIST),
+        })}
+        onClick={() => onClick(TOGGLE.LIST)}
+      >
+        <ListviewIcon />
+      </button>
 
-        <button
-          type='button'
-          className={styles.toggleButton({ selected: isWordSelected })}
-          onClick={() => onClick(TOGGLE.WORD)}
-        >
-          <WordviewIcon />
-        </button>
-      </div>
-    </>
+      <button
+        type='button'
+        className={styles.toggleButton({
+          selected: isSelected(TOGGLE.WORD),
+        })}
+        onClick={() => onClick(TOGGLE.WORD)}
+      >
+        <WordviewIcon />
+      </button>
+    </div>
   );
 };

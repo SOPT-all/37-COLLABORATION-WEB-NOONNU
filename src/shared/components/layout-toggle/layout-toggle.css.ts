@@ -5,10 +5,7 @@ import { themeVars } from '@/shared/styles';
 
 export const toggleContainer = style({
   display: 'flex',
-  width: '9.8rem',
-  border: `1px solid ${themeVars.color.gray_03}`,
-  borderRadius: '4px',
-  overflow: 'hidden',
+  width: '9.4rem',
 });
 
 export const toggleButton = recipe({
@@ -17,14 +14,22 @@ export const toggleButton = recipe({
     justifyContent: 'center',
     alignItems: 'center',
     padding: '0.4rem',
+    border: `1px solid ${themeVars.color.gray_03}`,
     backgroundColor: 'transparent',
     color: themeVars.color.gray_04,
     cursor: 'pointer',
-    transition: 'all 0.2s ease',
 
     selectors: {
       '&:not(:first-child)': {
-        borderLeft: `1px solid ${themeVars.color.gray_03}`,
+        marginLeft: '-1px',
+      },
+      '&:first-child': {
+        borderTopLeftRadius: '4px',
+        borderBottomLeftRadius: '4px',
+      },
+      '&:last-child': {
+        borderTopRightRadius: '4px',
+        borderBottomRightRadius: '4px',
       },
       '&:hover': {
         backgroundColor: themeVars.color.gray_01,
