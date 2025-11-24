@@ -15,5 +15,3 @@ export interface FontItemType {
   isCompared: boolean;
   fontMetadata: FontMetadataType;
 }
-
-export type FontDisplay = 'auto' | 'block' | 'swap' | 'fallback' | 'optional';
