@@ -4,16 +4,16 @@ import { PenIcon, SearchIcon, XIcon } from '@/shared/icons';
 
 import * as styles from './input-field.css';
 
-export type InputFieldVariant = 'write' | 'search';
+type InputFieldVariant = 'write' | 'search';
 
-export interface InputFieldProps {
+interface InputFieldProps {
   value: string;
   onChange: (nextValue: string) => void;
   placeholder: string;
   variant: InputFieldVariant;
 }
 
-export const InputField = ({
+const InputField = ({
   value,
   onChange,
   placeholder,
@@ -50,3 +50,5 @@ export const InputField = ({
     </div>
   );
 };
+
+export default InputField;
