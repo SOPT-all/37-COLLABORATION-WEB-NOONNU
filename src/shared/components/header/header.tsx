@@ -11,6 +11,7 @@ import {
   StarIcon,
 } from '@/shared/icons';
 
+import InputField from '../input-field/input-field';
 import * as styles from './header.css';
 
 const TEXT = {
@@ -36,6 +37,7 @@ const initialActiveMenu = (pathname: string): TextValue | null => {
 const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const [search, setSearch] = useState<string>('');
   const [activeMenu, setActiveMenu] = useState<TextValue | null>(
     initialActiveMenu(location.pathname),
   );
@@ -97,7 +99,14 @@ const Header = () => {
         </div>
       </div>
       <div className={styles.rightContainer}>
-        {/* input 컴포넌트 위치 */}
+        <div className={styles.inputContainer}>
+          <InputField
+            value={search}
+            onChange={setSearch}
+            variant='search'
+            placeholder='폰트 이름 및 제작자로 검색'
+          />
+        </div>
         <div className={styles.iconContainer}>
           <button className={styles.icon}>
             <NightIcon width={24} height={24} />

@@ -28,6 +28,7 @@ export const inputFieldInput = style({
   ...fontStyles.body_14m,
   flex: 1,
   color: themeVars.color.black,
+  outline: 'none',
 
   selectors: {
     '&::placeholder': {

@@ -48,6 +48,10 @@ export const rightContainer = style({
   gap: '2rem',
 });
 
+export const inputContainer = style({
+  width: '32rem',
+});
+
 export const iconContainer = style({
   display: 'flex',
   gap: '0.8rem',
