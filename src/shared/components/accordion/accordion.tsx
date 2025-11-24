@@ -11,6 +11,18 @@ interface AccordionContextValue {
 
 const AccordionContext = createContext<AccordionContextValue | null>(null);
 
+const useAccordionContext = () => {
+  const context = useContext(AccordionContext);
+
+  if (!context) {
+    throw new Error(
+      'Accordion.* 컴포넌트는 반드시 <Accordion> 내부에서 사용해야 합니다.',
+    );
+  }
+
+  return context;
+};
+
 interface AccordionProviderProps {
   children: ReactNode;
 }
@@ -35,8 +47,7 @@ interface AccordionHeaderProps {
 }
 
 const Header = ({ subtitle }: AccordionHeaderProps) => {
-  const context = useContext(AccordionContext);
-  const { isOpen, toggle } = context!;
+  const { isOpen, toggle } = useAccordionContext();
 
   return (
     <div className={styles.header}>
@@ -58,8 +69,7 @@ interface AccordionPanelProps {
 }
 
 const Panel = ({ children }: AccordionPanelProps) => {
-  const context = useContext(AccordionContext);
-  const { isOpen } = context!;
+  const { isOpen } = useAccordionContext();
 
   return (
     <div
