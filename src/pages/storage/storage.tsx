@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router';
 
 import { fontItem } from '@/shared/mocks/font-item';
 import DeleteButtonBar from '@/widgets/storage/components/delete-buttonbar/delete-buttonbar';
@@ -10,8 +11,14 @@ import FontListView from '@/widgets/storage/ui/font-list-view/font-list-view';
 
 import * as styles from './storage.css';
 
+type TabType = 'compare' | 'bookmark';
+type viewType = 'list' | 'grid';
+
 const Storage = () => {
-  const [viewMode, setViewMode] = useState<'list' | 'grid'>('list');
+  const navigate = useNavigate();
+
+  const [viewMode, setViewMode] = useState<viewType>('list');
+  const [currentTab, setCurrentTab] = useState<TabType>('compare');
   const [globalPhrase, setGlobalPhrase] = useState('');
 
   const handleViewModeChange = () => {
@@ -26,7 +33,11 @@ const Storage = () => {
     <main className={styles.storagePageContainer}>
       <div className={styles.pageTitle}>
         <h2>보관함</h2>
-        <FreeFontButton onClick={() => {}} />
+        <FreeFontButton
+          onClick={() => {
+            navigate('/free');
+          }}
+        />
       </div>
 
       <section className={styles.pageMainSection}>
@@ -34,14 +45,17 @@ const Storage = () => {
         <div className={styles.filterComponent}></div>
 
         <div className={styles.fontInfoContainer}>
-          <Tab value='compare' onClick={() => {}} />
+          <Tab
+            value={currentTab}
+            onClick={(newTab) => setCurrentTab(newTab as TabType)}
+          />
 
           <div className={styles.fontContent}>
             <FontToolBar
               viewMode={viewMode}
               previewText={globalPhrase}
-              onPreviewChange={handleGlobalPhraseChange}
               onViewModeChange={handleViewModeChange}
+              onPreviewChange={handleGlobalPhraseChange}
             />
             <DeleteButtonBar onClick={() => {}} />
 
