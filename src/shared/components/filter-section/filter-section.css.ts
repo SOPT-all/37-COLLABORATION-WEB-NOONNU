@@ -19,4 +19,9 @@ export const chipSet = style({
   gap: '0.8rem',
   marginTop: '1.2rem',
   width: '28rem',
+  selectors: {
+    '&[data-has-subtitle="false"]': {
+      marginTop: 0,
+    },
+  },
 });

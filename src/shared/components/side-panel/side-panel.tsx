@@ -1,0 +1,142 @@
+import { useState } from 'react';
+
+import {
+  INITIAL_FILTERS,
+  type FilterKey,
+  type Filters,
+} from '@/shared/constants/filter-keys';
+import {
+  LICENSE_ITEMS,
+  MOOD_ITEMS,
+  SHAPE_ITEMS,
+  USAGE_SECTIONS,
+} from '@/shared/constants/filter-data';
+import Accordion from '@/shared/components/accordion/accordion';
+import AllowedRangeChip from '@/shared/components/chip/allowed-range-chip';
+import FilterSection from '@/shared/components/filter-section/filter-section';
+import TitleChip from '@/shared/components/chip/title-chip';
+import { FilterIcon, ResetIcon } from '@/shared/icons';
+
+import * as styles from './side-panel.css';
+
+const SidePanel = () => {
+  const [filters, setFilters] = useState<Filters>({ ...INITIAL_FILTERS });
+
+  const toggleFilter = (key: FilterKey) => {
+    setFilters((prev) => ({
+      ...prev,
+      [key]: !prev[key],
+    }));
+  };
+
+  const handleReset = () => {
+    setFilters({ ...INITIAL_FILTERS });
+  };
+
+  return (
+    <aside className={styles.container}>
+      <header className={styles.header}>
+        <div className={styles.filterLabel}>
+          <FilterIcon className={styles.filterIcon} />
+          <span className={styles.filterText}>필터</span>
+        </div>
+        <button
+          type='button'
+          className={styles.resetButton}
+          onClick={handleReset}
+          aria-label='필터 초기화'
+        >
+          <span className={styles.resetText}>초기화</span>
+          <ResetIcon className={styles.resetIcon} />
+        </button>
+      </header>
+      <div className={styles.content}>
+        <Accordion>
+          <Accordion.Container>
+            <Accordion.Header subtitle='용도' />
+            <Accordion.Panel>
+              {USAGE_SECTIONS.map((section) => (
+                <FilterSection
+                  key={section.sectionId}
+                  type='title'
+                  subtitle={section.title}
+                >
+                  {section.items.map((item) => (
+                    <TitleChip
+                      key={item.id}
+                      isSelected={filters[item.id]}
+                      Icon={item.Icon}
+                      onClick={() => toggleFilter(item.id)}
+                      label={item.label}
+                    />
+                  ))}
+                </FilterSection>
+              ))}
+            </Accordion.Panel>
+          </Accordion.Container>
+        </Accordion>
+        <div className={styles.sectionDivider}>
+          <Accordion>
+            <Accordion.Container>
+              <Accordion.Header subtitle='형태' />
+              <Accordion.Panel>
+                <FilterSection type='title'>
+                  {SHAPE_ITEMS.map((item) => (
+                    <TitleChip
+                      key={item.id}
+                      isSelected={filters[item.id]}
+                      Icon={item.Icon}
+                      onClick={() => toggleFilter(item.id)}
+                      label={item.label}
+                    />
+                  ))}
+                </FilterSection>
+              </Accordion.Panel>
+            </Accordion.Container>
+          </Accordion>
+        </div>
+        <div className={styles.sectionDivider}>
+          <Accordion>
+            <Accordion.Container>
+              <Accordion.Header subtitle='분위기' />
+              <Accordion.Panel>
+                <FilterSection type='title'>
+                  {MOOD_ITEMS.map((item) => (
+                    <TitleChip
+                      key={item.id}
+                      isSelected={filters[item.id]}
+                      Icon={item.Icon}
+                      onClick={() => toggleFilter(item.id)}
+                      label={item.label}
+                    />
+                  ))}
+                </FilterSection>
+              </Accordion.Panel>
+            </Accordion.Container>
+          </Accordion>
+        </div>
+        <div className={styles.sectionDivider}>
+          <Accordion>
+            <Accordion.Container>
+              <Accordion.Header subtitle='허용범위' />
+              <Accordion.Panel>
+                <FilterSection type='range'>
+                  {LICENSE_ITEMS.map((item) => (
+                    <AllowedRangeChip
+                      key={item.id}
+                      isSelected={filters[item.id]}
+                      onClick={() => toggleFilter(item.id)}
+                      label={item.label}
+                    />
+                  ))}
+                </FilterSection>
+              </Accordion.Panel>
+            </Accordion.Container>
+          </Accordion>
+        </div>
+      </div>
+    </aside>
+  );
+};
+
+export default SidePanel;
