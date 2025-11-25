@@ -2,7 +2,7 @@ import { style } from '@vanilla-extract/css';
 import { themeVars } from '@/shared/styles';
 
 export const container = style({
-  margin: '2rem 3.2rem 6.8rem',
+  padding: '2rem 3.2rem 6.8rem',
 });
 
 export const banner = style({
