@@ -1,87 +1,65 @@
-import { createContext, useContext, useState } from 'react';
+import { useState } from 'react';
 
 import { ArrowDownSmIcon, ArrowUpSmIcon } from '@/shared/icons';
+import type { SortType } from '@/shared/types/drop-down';
 
 import * as styles from './drop-down.css';
-import type {
-  DropDownContextType,
-  DropDownItemProps,
-  DropDownMenuProps,
-  DropDownProps,
-  SortType,
-} from './types/type';
 
-const DropDownContext = createContext<DropDownContextType | null>(null);
+const SORT_OPTIONS = ['인기순', '조회순', '최신순', '이름순'] as const;
 
-export const useDropDownContext = () => {
-  const context = useContext(DropDownContext);
-  if (!context) {
-    throw new Error('DropDown 컴포넌트 내부에서만 사용 가능해요.');
-  }
-  return context;
-};
+interface DropDownProps {
+  value: SortType;
+  onChange: (next: SortType) => void;
+}
 
-const DropDown = ({
-  initialSort = '인기순',
-  defaultOpen = false,
-  children,
-  onChange,
-}: DropDownProps) => {
-  const [sort, setSort] = useState<SortType>(initialSort);
-  const [isOpen, setIsOpen] = useState(defaultOpen);
+const DropDown = ({ value, onChange }: DropDownProps) => {
+  const [isOpen, setIsOpen] = useState(false);
 
   const toggleOpen = () => {
     setIsOpen((prev) => !prev);
   };
 
-  const selectSort = (next: SortType) => {
-    setSort(next);
+  const handleSelect = (next: SortType) => {
+    onChange(next);
     setIsOpen(false);
-    onChange?.(next);
   };
-  return (
-    <DropDownContext.Provider value={{ sort, isOpen, toggleOpen, selectSort }}>
-      <div className={styles.allContainer}>{children}</div>
-    </DropDownContext.Provider>
-  );
-};
 
-const DropDownTrigger = () => {
-  const { sort, isOpen, toggleOpen } = useDropDownContext();
+  const sortedOptions = [
+    value,
+    ...SORT_OPTIONS.filter((option) => option !== value),
+  ];
+
   return (
-    <button
-      type='button'
-      className={styles.triggerContainer}
-      onClick={toggleOpen}
-    >
-      <span className={styles.sortText}>{sort}</span>
-      {isOpen ? (
-        <ArrowUpSmIcon width={24} height={24} />
-      ) : (
-        <ArrowDownSmIcon width={24} height={24} />
+    <div className={styles.allContainer}>
+      <button
+        type='button'
+        className={styles.triggerContainer}
+        onClick={toggleOpen}
+      >
+        <span className={styles.sortText}>{value}</span>
+        {isOpen ? (
+          <ArrowUpSmIcon width={24} height={24} />
+        ) : (
+          <ArrowDownSmIcon width={24} height={24} />
+        )}
+      </button>
+
+      {isOpen && (
+        <div className={styles.menuContainer}>
+          {sortedOptions.map((option) => (
+            <button
+              key={option}
+              type='button'
+              onClick={() => handleSelect(option)}
+              className={styles.itemContainer}
+            >
+              <p className={styles.sortText}>{option}</p>
+            </button>
+          ))}
+        </div>
       )}
-    </button>
+    </div>
   );
 };
-
-const DropDownMenu = ({ children }: DropDownMenuProps) => {
-  const { isOpen } = useDropDownContext();
-  if (!isOpen) {
-    return null;
-  }
-  return <div className={styles.menuContainer}>{children}</div>;
-};
-
-const DropDownItem = ({ children }: DropDownItemProps) => {
-  return (
-    <button className={styles.itemContainer}>
-      <p className={styles.sortText}>{children}</p>
-    </button>
-  );
-};
-
-DropDown.Trigger = DropDownTrigger;
-DropDown.Menu = DropDownMenu;
-DropDown.Item = DropDownItem;
 
 export default DropDown;
