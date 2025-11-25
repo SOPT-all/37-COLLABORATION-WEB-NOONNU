@@ -1,13 +1,18 @@
 import { style } from '@vanilla-extract/css';
 import { themeVars } from '@/shared/styles';
 
+export const container = style({
+  margin: '2rem 3.2rem 6.8rem',
+});
+
 export const banner = style({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
   gap: '0.8rem',
-  borderRadius: '0.8px',
+  borderRadius: '8px',
   padding: '2.2rem 0',
+  backgroundColor: themeVars.color.negative,
 });
 
 export const bannerSubtitle = style({

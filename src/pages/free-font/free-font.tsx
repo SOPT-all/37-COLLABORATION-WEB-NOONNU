@@ -2,7 +2,7 @@ import * as styles from './free-font.css';
 
 const FreeFont = () => {
   return (
-    <div>
+    <div className={styles.container}>
       <div className={styles.banner}>
         <span className={styles.bannerSubtitle}>
           폰트 판매, 눈누가 도와드릴게요
