@@ -21,11 +21,12 @@ export const sliderContainer = style({
 });
 
 export const slider = style({
-  width: '17.5rem',
+  width: '19.2rem',
+  WebkitAppearance: 'none',
+
   selectors: {
     '&::-webkit-slider-runnable-track': {
       backgroundColor: themeVars.color.gray_03,
-      width: '17.5rem',
       height: '0.1rem',
       borderRadius: '0.1rem',
     },

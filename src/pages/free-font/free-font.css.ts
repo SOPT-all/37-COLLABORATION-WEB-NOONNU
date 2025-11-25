@@ -12,7 +12,7 @@ export const banner = style({
   gap: '0.8rem',
   borderRadius: '8px',
   padding: '2.2rem 0',
-  backgroundColor: themeVars.color.negative,
+  backgroundColor: themeVars.color.primary,
 });
 
 export const bannerSubtitle = style({

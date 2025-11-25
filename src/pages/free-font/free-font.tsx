@@ -1,6 +1,13 @@
+import Slider from '@/shared/components/slider/slider';
 import * as styles from './free-font.css';
+import { useState, useCallback } from 'react';
 
 const FreeFont = () => {
+  const [fontSize, setFontSize] = useState(30);
+  const handleSizeChange = useCallback((value: number) => {
+    setFontSize(value);
+  }, []);
+
   return (
     <div className={styles.container}>
       <div className={styles.banner}>
@@ -12,6 +19,14 @@ const FreeFont = () => {
           <br />
           폰트 디자이너를 찾아요
         </span>
+      </div>
+      <div>
+        <Slider
+          label='크기'
+          value={fontSize}
+          unit='px'
+          onChange={handleSizeChange}
+        />
       </div>
     </div>
   );
