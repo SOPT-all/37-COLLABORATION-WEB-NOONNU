@@ -1,19 +1,14 @@
 import { ArrowRightLineMdIcon } from '@/shared/icons';
-
 import * as styles from './compare-floating-button.css';
 
 interface CompareFloatingButtonProps {
   count: number;
   onClick: () => void;
-  handleHoverStart: () => void;
-  handleHoverEnd: () => void;
 }
 
 const CompareFloatingButton = ({
   count,
   onClick,
-  handleHoverStart,
-  handleHoverEnd,
 }: CompareFloatingButtonProps) => {
   const isEmpty = count === 0;
 
@@ -26,12 +21,7 @@ const CompareFloatingButton = ({
   }
 
   return (
-    <button
-      className={styles.compareButton}
-      onClick={onClick}
-      onMouseEnter={handleHoverStart}
-      onMouseLeave={handleHoverEnd}
-    >
+    <button className={styles.compareButton} onClick={onClick}>
       <span className={styles.textContainer}>
         <span key={count} className={styles.animateText}>
           {count}개

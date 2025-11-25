@@ -1,34 +1,36 @@
-import Slider from '@/shared/components/slider/slider';
-import * as styles from './free-font.css';
 import { useState, useCallback } from 'react';
+import Slider from '@/shared/components/slider/slider';
 import Accordion from '@/shared/components/accordion/accordion';
 import InputField from '@/shared/components/input-field/input-field';
 import { LayoutToggle } from '@/shared/components/layout-toggle/layout-toggle';
 import { type LayoutToggleType, TOGGLE } from '@/shared/types/layout-toggle';
-import { fontItem } from '@/shared/mocks/font-item';
-import ListView from '@/shared/components/list-view/list-view';
-import CardView from '@/shared/components/card-view/card-view';
-import CompareFloatingButton from '@/widgets/free-font/components/compare-floating-button/compare-floating-button';
+import FloatingButton from '@/widgets/free-font/components/floating-button/floating-button';
+import { type FontItemType } from '@/shared/types/font';
+import * as styles from './free-font.css';
 
 const FreeFont = () => {
   const [fontSize, setFontSize] = useState(30);
-  const handleSizeChange = useCallback((value: number) => {
-    setFontSize(value);
-  }, []);
-
   const [placeholderText, setPlaceholderText] = useState('');
-
   const [layout, setLayout] = useState<LayoutToggleType>(TOGGLE.GRID);
 
+  const [selectedFonts, setSelectedFonts] = useState<FontItemType[]>([]);
+
+  const handleSizeChange = useCallback(
+    (value: number) => setFontSize(value),
+    [],
+  );
   const handleLayoutChange = (nextLayout: LayoutToggleType) => {
-    if (layout === nextLayout) return;
-
-    setLayout(nextLayout);
+    if (layout !== nextLayout) setLayout(nextLayout);
   };
+  const handleInputChange = (text: string) => setPlaceholderText(text);
 
-  const handleInputChange = (text: string) => {
-    setPlaceholderText(text);
-  };
+  const handleDeleteFont = useCallback((id: number) => {
+    setSelectedFonts((prev) => prev.filter((font) => font.id !== id));
+  }, []);
+
+  const handleDeleteAll = useCallback(() => {
+    setSelectedFonts([]);
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -67,42 +69,15 @@ const FreeFont = () => {
             />
             <LayoutToggle value={layout} onClick={handleLayoutChange} />
           </div>
-          <div className={styles.viewSection}>
-            {layout === TOGGLE.GRID && (
-              <div className={styles.cardSection}>
-                {fontItem.map((ele) => (
-                  <CardView
-                    key={ele.id}
-                    {...ele}
-                    globalPhrase={placeholderText}
-                    onToggleLike={() => {}}
-                    onToggleCompare={() => {}}
-                  />
-                ))}
-              </div>
-            )}
-
-            {layout === TOGGLE.LIST && (
-              <div>
-                {fontItem.map((ele) => (
-                  <ListView
-                    key={ele.id}
-                    {...ele}
-                    globalPhrase={placeholderText}
-                    onToggleLike={() => {}}
-                    onToggleCompare={() => {}}
-                  />
-                ))}
-              </div>
-            )}
-
-            {layout === TOGGLE.WORD && (
-              <div>🔤 워드 뷰 카드 리스트가 렌더링될 영역</div>
-            )}
-          </div>
-          <CompareFloatingButton />
+          <div className={styles.viewSection}>ㅌㄴㅈ</div>
         </div>
       </div>
+
+      <FloatingButton
+        selectedFonts={selectedFonts}
+        onDeleteFont={handleDeleteFont}
+        onDeleteAll={handleDeleteAll}
+      />
     </div>
   );
 };
