@@ -45,10 +45,7 @@ const Storage = () => {
         <div className={styles.filterComponent}></div>
 
         <div className={styles.fontInfoContainer}>
-          <Tab
-            value={currentTab}
-            onClick={(newTab) => setCurrentTab(newTab as TabType)}
-          />
+          <Tab value={currentTab} onClick={setCurrentTab} />
 
           <div className={styles.fontContent}>
             <FontToolBar
