@@ -33,7 +33,6 @@ import type { FilterKey } from './filter-keys';
 export interface FilterItem {
   id: FilterKey;
   label: string;
-  Icon?: FC<SVGProps<SVGSVGElement>>;
 }
 
 export interface IconFilterItem {
