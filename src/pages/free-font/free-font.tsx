@@ -5,6 +5,8 @@ import Accordion from '@/shared/components/accordion/accordion';
 import InputField from '@/shared/components/input-field/input-field';
 import { LayoutToggle } from '@/shared/components/layout-toggle/layout-toggle';
 import { type LayoutToggleType, TOGGLE } from '@/shared/types/layout-toggle';
+import { fontItem } from '@/shared/mocks/font-item';
+import ListView from '@/shared/components/list-view/list-view';
 
 const FreeFont = () => {
   const [fontSize, setFontSize] = useState(30);
@@ -20,6 +22,10 @@ const FreeFont = () => {
     if (layout === nextLayout) return;
 
     setLayout(nextLayout);
+  };
+
+  const handleInputChange = (text: string) => {
+    setPlaceholderText(text);
   };
 
   return (
@@ -43,28 +49,39 @@ const FreeFont = () => {
             </Accordion.Panel>
           </Accordion.Container>
         </Accordion>
-        <div className={styles.articleHeader}>
-          <Slider
-            label='크기'
-            value={fontSize}
-            unit='px'
-            onChange={handleSizeChange}
-          />
-          <InputField
-            value={placeholderText}
-            onChange={setPlaceholderText}
-            placeholder='폰트 이름 및 제작자로 검색'
-            variant='search'
-          />
-          <LayoutToggle value={layout} onClick={handleLayoutChange} />
-
+        <div className={styles.rightSection}>
+          <div className={styles.articleHeader}>
+            <Slider
+              label='크기'
+              value={fontSize}
+              unit='px'
+              onChange={handleSizeChange}
+            />
+            <InputField
+              value={placeholderText}
+              onChange={handleInputChange}
+              placeholder='폰트 이름 및 제작자로 검색'
+              variant='search'
+            />
+            <LayoutToggle value={layout} onClick={handleLayoutChange} />
+          </div>
           <div>
             {layout === TOGGLE.GRID && (
               <div>📦 그리드 뷰 카드 리스트가 렌더링될 영역</div>
             )}
 
             {layout === TOGGLE.LIST && (
-              <div>📃 리스트 뷰 카드 리스트가 렌더링될 영역</div>
+              <div>
+                {fontItem.map((ele) => (
+                  <ListView
+                    key={ele.id}
+                    {...ele}
+                    globalPhrase={placeholderText}
+                    onToggleLike={() => {}}
+                    onToggleCompare={() => {}}
+                  />
+                ))}
+              </div>
             )}
 
             {layout === TOGGLE.WORD && (

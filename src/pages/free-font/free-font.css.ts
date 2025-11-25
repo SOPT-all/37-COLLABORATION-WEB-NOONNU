@@ -31,11 +31,17 @@ export const article = style({
   gap: '3.6rem',
 });
 
+export const rightSection = style({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '1.2rem',
+  width: '100%',
+});
+
 export const articleHeader = style({
   display: 'flex',
   height: '3.8rem',
   margin: '1.2rem 2rem',
   alignItems: 'center',
-  width: '100%',
   justifyContent: 'space-around',
 });
