@@ -1,4 +1,5 @@
-import { useState, useCallback } from 'react';
+import { useCallback, useState } from 'react';
+
 import type { FontItemType } from '@/shared/types/font';
 
 export const useFontSelection = () => {

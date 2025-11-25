@@ -2,13 +2,14 @@ import { useCallback, useState } from 'react';
 
 import Accordion from '@/shared/components/accordion/accordion';
 import CardView from '@/shared/components/card-view/card-view';
+import ListView from '@/shared/components/list-view/list-view';
+import { fontItem } from '@/shared/mocks/font-item';
 import { type LayoutToggleType, TOGGLE } from '@/shared/types/layout-toggle';
 import FloatingButton from '@/widgets/free-font/components/floating-button/floating-button';
 import FontToolBar from '@/widgets/free-font/components/font-toolbar/font-toolbar';
-import * as styles from './free-font.css';
-import ListView from '@/shared/components/list-view/list-view';
 import { useFontSelection } from '@/widgets/free-font/hooks/use-font-selection';
-import { fontItem } from '@/shared/mocks/font-item';
+
+import * as styles from './free-font.css';
 
 const FreeFont = () => {
   const [fontSize, setFontSize] = useState(30);
