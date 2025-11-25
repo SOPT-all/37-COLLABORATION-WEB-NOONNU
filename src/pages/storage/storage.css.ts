@@ -18,6 +18,7 @@ export const pageTitle = style({
 export const pageMainSection = style({
   display: 'flex',
   gap: '3.6rem',
+  alignItems: 'flex-start',
 });
 
 export const fontInfoContainer = style({
@@ -32,12 +33,9 @@ export const fontContent = style({
   gap: '1.6rem',
 });
 
-// -----------------------------------------------
-
-// 미완성 컴포넌트 임시 영역 스타일
-
-export const filterComponent = style({
-  width: '312px',
-  backgroundColor: themeVars.color.gray_03,
+export const sidePanelContainer = style({
+  width: '31.2rem',
   flexShrink: 0,
+  position: 'sticky',
+  top: '2rem',
 });

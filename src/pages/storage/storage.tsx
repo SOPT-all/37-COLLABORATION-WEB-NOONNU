@@ -48,7 +48,9 @@ const Storage = () => {
       </div>
 
       <div className={styles.pageMainSection}>
-        <SidePanel />
+        <div className={styles.sidePanelContainer}>
+          <SidePanel />
+        </div>
 
         <main className={styles.fontInfoContainer}>
           <Tab value={currentTab} onClick={setCurrentTab} />
