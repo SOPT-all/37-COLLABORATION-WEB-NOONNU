@@ -23,7 +23,7 @@ export const pageMainSection = style({
 export const fontInfoContainer = style({
   display: 'flex',
   flexDirection: 'column',
-  width: '100%',
+  flex: 1,
 });
 
 export const fontContent = style({
