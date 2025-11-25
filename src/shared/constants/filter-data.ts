@@ -1,4 +1,4 @@
-import type { SVGProps } from 'react';
+import type { FC, SVGProps } from 'react';
 
 import {
   AngularButtonIcon,
@@ -28,17 +28,17 @@ import {
   TitleButtonIcon,
   UniqueButtonIcon,
 } from '../icons';
+import type { FilterKey } from './filter-keys';
 
 export interface FilterItem {
-  id: string;
+  id: FilterKey;
   label: string;
-  Icon?: React.FC<SVGProps<SVGSVGElement>>;
 }
 
 export interface IconFilterItem {
-  id: string;
+  id: FilterKey;
   label: string;
-  Icon: React.FC<SVGProps<SVGSVGElement>>;
+  Icon: FC<SVGProps<SVGSVGElement>>;
 }
 
 export interface FilterSection {
@@ -54,7 +54,7 @@ export const USAGE_SECTIONS: FilterSection[] = [
     items: [
       { id: 'title', label: '제목용', Icon: TitleButtonIcon },
       { id: 'body', label: '본문용', Icon: BodyButtonIcon },
-      { id: 'emphasis', label: '강조용', Icon: EmphasisButtonIcon },
+      { id: 'emphasis', label: '장식용', Icon: EmphasisButtonIcon },
     ],
   },
   {
@@ -70,7 +70,7 @@ export const USAGE_SECTIONS: FilterSection[] = [
     title: '디자인',
     items: [
       { id: 'ppt', label: 'PPT용', Icon: PptButtonIcon },
-      { id: 'cardnews', label: '카드뉴스용', Icon: CardNewsButtonIcon },
+      { id: 'cardNews', label: '카드뉴스용', Icon: CardNewsButtonIcon },
       { id: 'poster', label: '포스터용', Icon: PosterButtonIcon },
     ],
   },
