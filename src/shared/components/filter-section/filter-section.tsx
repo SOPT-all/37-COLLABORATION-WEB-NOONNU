@@ -12,7 +12,9 @@ const FilterSection = ({ subtitle, children, type }: FilterSectionProps) => {
   return (
     <section className={styles.container} data-type={type}>
       {subtitle && <p className={styles.subtitle}>{subtitle}</p>}
-      <div className={styles.chipSet}>{children}</div>
+      <div className={styles.chipSet} data-has-subtitle={Boolean(subtitle)}>
+        {children}
+      </div>
     </section>
   );
 };
