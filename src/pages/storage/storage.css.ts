@@ -41,9 +41,3 @@ export const filterComponent = style({
   backgroundColor: themeVars.color.gray_03,
   flexShrink: 0,
 });
-
-export const tabComponent = style({
-  width: '154px',
-  height: '28px',
-  backgroundColor: themeVars.color.gray_03,
-});

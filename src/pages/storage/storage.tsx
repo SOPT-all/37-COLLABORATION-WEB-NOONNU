@@ -4,6 +4,7 @@ import { fontItem } from '@/shared/mocks/font-item';
 import DeleteButtonBar from '@/widgets/storage/components/delete-buttonbar/delete-buttonbar';
 import FontToolBar from '@/widgets/storage/components/font-toolbar/font-toolbar';
 import FreeFontButton from '@/widgets/storage/components/free-font-button/free-font-button';
+import Tab from '@/widgets/storage/components/tab/tab';
 import FontCardView from '@/widgets/storage/ui/font-card-view/font-card-view';
 import FontListView from '@/widgets/storage/ui/font-list-view/font-list-view';
 
@@ -33,8 +34,7 @@ const Storage = () => {
         <div className={styles.filterComponent}></div>
 
         <div className={styles.fontInfoContainer}>
-          {/* 탭 컴포넌트로 대체 예정 */}
-          <div className={styles.tabComponent}></div>
+          <Tab value='compare' onClick={() => {}} />
 
           <div className={styles.fontContent}>
             <FontToolBar
