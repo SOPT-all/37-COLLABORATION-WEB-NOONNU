@@ -36,6 +36,8 @@ export const rightSection = style({
   flexDirection: 'column',
   gap: '1.2rem',
   width: '100%',
+  minWidth: 0,
+  flex: 1,
 });
 
 export const articleHeader = style({
@@ -44,4 +46,12 @@ export const articleHeader = style({
   margin: '1.2rem 2rem',
   alignItems: 'center',
   justifyContent: 'space-around',
+});
+
+export const viewSection = style({});
+
+export const cardSection = style({
+  display: 'grid',
+  gridTemplateColumns: 'repeat(auto-fill, minmax(30.4rem, 1fr))',
+  gap: '20px',
 });

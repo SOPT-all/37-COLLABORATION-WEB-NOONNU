@@ -7,6 +7,7 @@ import { LayoutToggle } from '@/shared/components/layout-toggle/layout-toggle';
 import { type LayoutToggleType, TOGGLE } from '@/shared/types/layout-toggle';
 import { fontItem } from '@/shared/mocks/font-item';
 import ListView from '@/shared/components/list-view/list-view';
+import CardView from '@/shared/components/card-view/card-view';
 
 const FreeFont = () => {
   const [fontSize, setFontSize] = useState(30);
@@ -65,9 +66,19 @@ const FreeFont = () => {
             />
             <LayoutToggle value={layout} onClick={handleLayoutChange} />
           </div>
-          <div>
+          <div className={styles.viewSection}>
             {layout === TOGGLE.GRID && (
-              <div>📦 그리드 뷰 카드 리스트가 렌더링될 영역</div>
+              <div className={styles.cardSection}>
+                {fontItem.map((ele) => (
+                  <CardView
+                    key={ele.id}
+                    {...ele}
+                    globalPhrase={placeholderText}
+                    onToggleLike={() => {}}
+                    onToggleCompare={() => {}}
+                  />
+                ))}
+              </div>
             )}
 
             {layout === TOGGLE.LIST && (
