@@ -42,6 +42,7 @@ export default defineConfig([
       ],
 
       'react/prop-types': 'off',
+      'react-refresh/only-export-components': 'off',
 
       'prettier/prettier': ['error', { endOfLine: 'auto' }],
 
