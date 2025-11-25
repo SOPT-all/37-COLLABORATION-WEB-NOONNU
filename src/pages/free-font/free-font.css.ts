@@ -41,18 +41,12 @@ export const rightSection = style({
   flex: 1,
 });
 
-export const articleHeader = style({
-  display: 'flex',
-  height: '3.8rem',
-  margin: '1.2rem 2rem',
-  alignItems: 'center',
-  justifyContent: 'space-around',
-});
-
-export const viewSection = style({});
-
 export const cardSection = style({
   display: 'grid',
   gridTemplateColumns: 'repeat(auto-fill, minmax(30.4rem, 1fr))',
-  gap: '20px',
+  rowGap: '1.6rem',
+  columnGap: '2.1rem',
+  width: '100%',
 });
+
+export const listSection = style({ display: 'grid', gap: '1.2rem' });
