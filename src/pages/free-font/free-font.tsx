@@ -1,8 +1,8 @@
 import { useCallback, useState } from 'react';
 
-import Accordion from '@/shared/components/accordion/accordion';
 import CardView from '@/shared/components/card-view/card-view';
 import ListView from '@/shared/components/list-view/list-view';
+import SidePanel from '@/shared/components/side-panel/side-panel';
 import { fontItem } from '@/shared/mocks/font-item';
 import { type LayoutToggleType, TOGGLE } from '@/shared/types/layout-toggle';
 import FloatingButton from '@/widgets/free-font/components/floating-button/floating-button';
@@ -23,12 +23,16 @@ const FreeFont = () => {
     (value: number) => setFontSize(value),
     [],
   );
+
+  const handleInputChange = useCallback((text: string) => {
+    setPreviewText(text);
+  }, []);
+
   const handleLayoutChange = (nextLayout: LayoutToggleType) => {
     if (layout !== nextLayout) {
       setLayout(nextLayout);
     }
   };
-  const handleInputChange = (text: string) => setPreviewText(text);
 
   return (
     <div className={styles.container}>
@@ -44,14 +48,7 @@ const FreeFont = () => {
       </div>
 
       <div className={styles.article}>
-        <Accordion>
-          <Accordion.Container>
-            <Accordion.Header subtitle='용도별' />
-            <Accordion.Panel>
-              <div>필터 콘텐츠</div>
-            </Accordion.Panel>
-          </Accordion.Container>
-        </Accordion>
+        <SidePanel />
 
         <div className={styles.rightSection}>
           <FontToolBar
@@ -63,38 +60,35 @@ const FreeFont = () => {
             onLayoutChange={handleLayoutChange}
           />
 
-          <div>
+          {layout === TOGGLE.GRID ? (
             <div className={styles.cardSection}>
-              {layout === TOGGLE.GRID &&
-                fonts.map((font) => (
-                  <CardView
-                    key={font.id}
-                    {...font}
-                    globalPhrase={previewText}
-                    isCompared={isSelected(font.id)}
-                    onToggleCompare={() => toggleFont(font)}
-                    onToggleLike={() => {}}
-                  />
-                ))}
+              {fonts.map((font) => (
+                <CardView
+                  key={font.id}
+                  {...font}
+                  globalPhrase={previewText}
+                  isCompared={isSelected(font.id)}
+                  onToggleCompare={() => toggleFont(font)}
+                  onToggleLike={() => {}}
+                />
+              ))}
             </div>
-
+          ) : (
             <div className={styles.listSection}>
-              {layout === TOGGLE.LIST &&
-                fonts.map((font) => (
-                  <ListView
-                    key={font.id}
-                    {...font}
-                    globalPhrase={previewText}
-                    isCompared={isSelected(font.id)}
-                    onToggleCompare={() => toggleFont(font)}
-                    onToggleLike={() => {}}
-                  />
-                ))}
+              {fonts.map((font) => (
+                <ListView
+                  key={font.id}
+                  {...font}
+                  globalPhrase={previewText}
+                  isCompared={isSelected(font.id)}
+                  onToggleCompare={() => toggleFont(font)}
+                  onToggleLike={() => {}}
+                />
+              ))}
             </div>
-          </div>
+          )}
         </div>
       </div>
-
       <FloatingButton
         selectedFonts={selectedFonts}
         onDeleteFont={deleteFont}
