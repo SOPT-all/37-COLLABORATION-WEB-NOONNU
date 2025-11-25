@@ -1,7 +1,9 @@
 import { memo } from 'react';
+
+import type { FontItemType } from '@/shared/types/font';
+
 import FontList from '../font-list/font-list';
 import * as styles from './font-list-box.css';
-import type { FontItemType } from '@/shared/types/font';
 
 interface FontListBoxProps {
   fonts: FontItemType[];

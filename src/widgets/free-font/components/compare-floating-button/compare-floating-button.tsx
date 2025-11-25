@@ -1,4 +1,5 @@
 import { ArrowRightLineMdIcon } from '@/shared/icons';
+
 import * as styles from './compare-floating-button.css';
 
 interface CompareFloatingButtonProps {
