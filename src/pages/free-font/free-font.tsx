@@ -1,5 +1,11 @@
+import SidePanel from '@/shared/components/side-panel/side-panel';
+
 const FreeFont = () => {
-  return <div>무료폰트 페이지</div>;
+  return (
+    <div style={{ display: 'flex', padding: '2rem' }}>
+      <SidePanel />
+    </div>
+  );
 };
 
 export default FreeFont;
