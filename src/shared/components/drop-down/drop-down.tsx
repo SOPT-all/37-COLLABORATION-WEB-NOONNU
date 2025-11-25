@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import { ArrowDownSmIcon, ArrowUpSmIcon } from '@/shared/icons';
+import { themeVars } from '@/shared/styles';
 import type { SortType } from '@/shared/types/drop-down';
 
 import * as styles from './drop-down.css';
@@ -38,9 +39,17 @@ const DropDown = ({ value, onChange }: DropDownProps) => {
       >
         <span className={styles.sortText}>{value}</span>
         {isOpen ? (
-          <ArrowUpSmIcon width={24} height={24} />
+          <ArrowUpSmIcon
+            width={24}
+            height={24}
+            color={themeVars.color.gray_05}
+          />
         ) : (
-          <ArrowDownSmIcon width={24} height={24} />
+          <ArrowDownSmIcon
+            width={24}
+            height={24}
+            color={themeVars.color.gray_05}
+          />
         )}
       </button>
 
@@ -51,7 +60,7 @@ const DropDown = ({ value, onChange }: DropDownProps) => {
               key={option}
               type='button'
               onClick={() => handleSelect(option)}
-              className={styles.itemContainer}
+              className={styles.itemContainer({ selected: option === value })}
             >
               <p className={styles.sortText}>{option}</p>
             </button>

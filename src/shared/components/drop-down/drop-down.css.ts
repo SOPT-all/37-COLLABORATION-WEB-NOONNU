@@ -1,4 +1,5 @@
 import { style } from '@vanilla-extract/css';
+import { recipe } from '@vanilla-extract/recipes';
 
 import { themeVars } from '@/shared/styles';
 
@@ -33,13 +34,22 @@ export const menuContainer = style({
   border: `1px solid ${themeVars.color.gray_03}`,
 });
 
-export const itemContainer = style({
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  width: '100%',
-  height: '4.2rem',
-  ':hover': {
-    backgroundColor: themeVars.color.gray_01,
+export const itemContainer = recipe({
+  base: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+    height: '4.2rem',
+    ':hover': {
+      backgroundColor: themeVars.color.gray_01,
+    },
+  },
+  variants: {
+    selected: {
+      true: {
+        backgroundColor: themeVars.color.gray_01,
+      },
+    },
   },
 });
