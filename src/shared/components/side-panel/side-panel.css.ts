@@ -10,7 +10,7 @@ export const container = style({
   backgroundColor: themeVars.color.gray_01,
   borderRadius: '8px',
   overflowY: 'auto',
-  padding: '2.4rem 1.6rem',
+  padding: '2.4rem 1.6rem 2.8rem 1.6rem',
   selectors: {
     '&::-webkit-scrollbar': {
       display: 'none',
