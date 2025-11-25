@@ -8,6 +8,7 @@ import { type LayoutToggleType, TOGGLE } from '@/shared/types/layout-toggle';
 import { fontItem } from '@/shared/mocks/font-item';
 import ListView from '@/shared/components/list-view/list-view';
 import CardView from '@/shared/components/card-view/card-view';
+import CompareFloatingButton from '@/widgets/free-font/components/compare-floating-button/compare-floating-button';
 
 const FreeFont = () => {
   const [fontSize, setFontSize] = useState(30);
@@ -99,6 +100,7 @@ const FreeFont = () => {
               <div>🔤 워드 뷰 카드 리스트가 렌더링될 영역</div>
             )}
           </div>
+          <CompareFloatingButton />
         </div>
       </div>
     </div>
