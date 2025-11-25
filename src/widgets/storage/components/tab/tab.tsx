@@ -8,18 +8,11 @@ interface TabLabelProps {
 }
 
 const Tab = ({ value, onClick }: TabLabelProps) => {
-  const handleClick = (target: TabLabelTypes) => {
-    if (value === target) {
-      return;
-    }
-    onClick(target);
-  };
-
   return (
     <div className={styles.container}>
       <button
         type='button'
-        onClick={() => handleClick('compare')}
+        onClick={() => onClick('compare')}
         className={styles.tabButton({
           state: value === 'compare' ? 'active' : 'inactive',
         })}
@@ -31,7 +24,7 @@ const Tab = ({ value, onClick }: TabLabelProps) => {
 
       <button
         type='button'
-        onClick={() => handleClick('bookmark')}
+        onClick={() => onClick('bookmark')}
         className={styles.tabButton({
           state: value === 'bookmark' ? 'active' : 'inactive',
         })}
