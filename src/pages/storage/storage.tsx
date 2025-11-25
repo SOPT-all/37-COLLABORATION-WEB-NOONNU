@@ -3,11 +3,11 @@ import { useNavigate } from 'react-router';
 
 import { fontItem } from '@/shared/mocks/font-item';
 import DeleteButtonBar from '@/widgets/storage/components/delete-buttonbar/delete-buttonbar';
+import FontCardView from '@/widgets/storage/components/font-card-view/font-card-view';
+import FontListView from '@/widgets/storage/components/font-list-view/font-list-view';
 import FontToolBar from '@/widgets/storage/components/font-toolbar/font-toolbar';
 import FreeFontButton from '@/widgets/storage/components/free-font-button/free-font-button';
 import Tab from '@/widgets/storage/components/tab/tab';
-import FontCardView from '@/widgets/storage/ui/font-card-view/font-card-view';
-import FontListView from '@/widgets/storage/ui/font-list-view/font-list-view';
 
 import * as styles from './storage.css';
 
