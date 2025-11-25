@@ -24,3 +24,18 @@ export const bannerTitle = style({
   color: themeVars.color.black,
   textAlign: 'center',
 });
+
+export const article = style({
+  display: 'flex',
+  paddingTop: '2rem',
+  gap: '3.6rem',
+});
+
+export const articleHeader = style({
+  display: 'flex',
+  height: '3.8rem',
+  margin: '1.2rem 2rem',
+  alignItems: 'center',
+  width: '100%',
+  justifyContent: 'space-around',
+});
