@@ -36,7 +36,7 @@ const FontToolBar = ({
         value={previewText}
         onChange={onInputChange}
         placeholder='문구 적고 폰트 미리보기'
-        variant='search'
+        variant='write'
       />
       <DropDown value={sort} onChange={setSort} />
       <LayoutToggle value={layout} onClick={onLayoutChange} />

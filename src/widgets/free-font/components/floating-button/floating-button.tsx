@@ -7,6 +7,7 @@ import CompareFloatingButton from '../compare-floating-button/compare-floating-b
 import DeleteButton from '../floating-contents/delete-floating-button/delete-button';
 import FontListBox from '../floating-contents/font-list-box/font-list-box';
 import * as styles from './floating-button.css';
+import { routePath } from '@/router/path';
 
 interface FloatingButtonProps {
   selectedFonts: FontItemType[];
@@ -28,7 +29,7 @@ const FloatingButton = ({
   const hasFonts = selectedFonts.length > 0;
 
   const handleCompareClick = () => {
-    navigate('/storage', { state: { fonts: selectedFonts } });
+    navigate(routePath.STORAGE, { state: { fonts: selectedFonts } });
   };
 
   return (
