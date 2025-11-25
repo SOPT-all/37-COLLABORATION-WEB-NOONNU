@@ -1,5 +1,4 @@
-import { useCallback, useState } from 'react';
-
+import { useState, useCallback } from 'react';
 import type { FontItemType } from '@/shared/types/font';
 
 export const useFontSelection = () => {
@@ -15,12 +14,22 @@ export const useFontSelection = () => {
     });
   }, []);
 
-  const deleteFont = useCallback((id: number) => {
-    setSelectedFonts((prev) => prev.filter((item) => item.id !== id));
-  }, []);
+  const deleteFont = useCallback(
+    (id: number) => {
+      const targetFont = selectedFonts.find((font) => font.id === id);
+      const fontName = targetFont ? targetFont.name : '선택한 폰트';
+
+      if (window.confirm(`${fontName}을(를) 삭제할까요?`)) {
+        setSelectedFonts((prev) => prev.filter((item) => item.id !== id));
+      }
+    },
+    [selectedFonts],
+  );
 
   const clearFonts = useCallback(() => {
-    setSelectedFonts([]);
+    if (window.confirm('폰트비교에 담긴 모든 폰트를 삭제할까요?')) {
+      setSelectedFonts([]);
+    }
   }, []);
 
   const isSelected = useCallback(

@@ -8,7 +8,7 @@ import { type LayoutToggleType, TOGGLE } from '@/shared/types/layout-toggle';
 import FloatingButton from '@/widgets/free-font/components/floating-button/floating-button';
 import FontToolBar from '@/widgets/free-font/components/font-toolbar/font-toolbar';
 import { useFontSelection } from '@/widgets/free-font/hooks/use-font-selection';
-
+import TopButton from '@/widgets/free-font/components/top-button/top-button';
 import * as styles from './free-font.css';
 
 const FreeFont = () => {
@@ -89,6 +89,7 @@ const FreeFont = () => {
           )}
         </div>
       </div>
+      <TopButton />
       <FloatingButton
         selectedFonts={selectedFonts}
         onDeleteFont={deleteFont}

@@ -4,6 +4,8 @@ import { themeVars } from '@/shared/styles';
 
 export const container = style({
   padding: '2rem 3.2rem 6.8rem',
+  width: '100%',
+  minHeight: '100vh',
 });
 
 export const banner = style({
