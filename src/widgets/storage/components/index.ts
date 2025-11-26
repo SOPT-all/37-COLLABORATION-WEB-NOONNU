@@ -1,3 +1,4 @@
+export { default as SidePanel } from '@/shared/components/side-panel/side-panel';
 export { default as DeleteButtonBar } from '@/widgets/storage/components/delete-buttonbar/delete-buttonbar';
 export { default as FontCardView } from '@/widgets/storage/components/font-card-view/font-card-view';
 export { default as FontListView } from '@/widgets/storage/components/font-list-view/font-list-view';
