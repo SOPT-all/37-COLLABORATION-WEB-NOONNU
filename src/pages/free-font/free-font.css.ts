@@ -39,8 +39,6 @@ export const rightSection = style({
   flexDirection: 'column',
   gap: '1.2rem',
   width: '100%',
-  minWidth: 0,
-  flex: 1,
 });
 
 export const cardSection = style({

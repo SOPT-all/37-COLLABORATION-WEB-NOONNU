@@ -15,6 +15,7 @@ export const triggerContainer = style({
   display: 'flex',
   gap: '0.4rem',
   padding: '0.4rem 0.4rem 0.4rem 0.8rem',
+  whiteSpace: 'nowrap',
 });
 
 export const sortText = style({

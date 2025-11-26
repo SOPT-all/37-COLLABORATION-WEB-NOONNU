@@ -32,12 +32,15 @@ const FontToolBar = ({
   return (
     <div className={styles.container}>
       <Slider label='크기' value={fontSize} unit='px' onChange={onSizeChange} />
-      <InputField
-        value={previewText}
-        onChange={onInputChange}
-        placeholder='문구 적고 폰트 미리보기'
-        variant='write'
-      />
+
+      <div className={styles.input}>
+        <InputField
+          value={previewText}
+          onChange={onInputChange}
+          placeholder='문구 적고 폰트 미리보기'
+          variant='write'
+        />
+      </div>
       <DropDown value={sort} onChange={setSort} />
       <LayoutToggle value={layout} onClick={onLayoutChange} />
     </div>
