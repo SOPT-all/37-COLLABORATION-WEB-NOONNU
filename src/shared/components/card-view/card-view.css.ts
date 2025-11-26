@@ -95,6 +95,10 @@ export const editInput = style({
       backgroundColor: themeVars.color.gray_02,
       borderRadius: '8px',
     },
+    '&::placeholder': {
+      color: themeVars.color.black,
+      opacity: 1,
+    },
   },
 });
 

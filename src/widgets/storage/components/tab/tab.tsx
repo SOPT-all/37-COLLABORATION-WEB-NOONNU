@@ -1,7 +1,6 @@
+import type { TabLabelTypes } from '@/shared/types/tab';
+
 import * as styles from './tab.css';
-
-export type TabLabelTypes = 'compare' | 'bookmark';
-
 interface TabLabelProps {
   value: TabLabelTypes;
   onClick: (nextValue: TabLabelTypes) => void;

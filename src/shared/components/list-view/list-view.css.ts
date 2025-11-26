@@ -100,4 +100,11 @@ export const editInput = style({
   ...themeVars.fontStyles.font_sample,
   fontFamily: fontFamilyVar,
   fontWeight: fontWeightVar,
+
+  selectors: {
+    '&::placeholder': {
+      color: themeVars.color.black,
+      opacity: 1,
+    },
+  },
 });
