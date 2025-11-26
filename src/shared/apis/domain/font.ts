@@ -1,3 +1,29 @@
-/**
- * 무료 폰트 전체 조회
- */
+import { useQuery } from '@tanstack/react-query';
+
+import { END_POINT } from '../config/end-point';
+import { queryKey } from '../keys/query-key';
+import { instance } from '../instance';
+import type { ApiResponse } from '../types/api-response';
+import type { FontListResponse, GetFontsParams } from '../types/font';
+
+const userId = 1;
+
+const getFonts = async (params: GetFontsParams) => {
+  const response = await instance.get<ApiResponse<FontListResponse>>(
+    END_POINT.GET_FONTS,
+    {
+      params,
+      headers: {
+        userId: userId,
+      },
+    },
+  );
+  return response.data;
+};
+
+export const useGetFonts = (params: GetFontsParams) => {
+  return useQuery({
+    queryKey: [queryKey.GET_FONTS, params],
+    queryFn: () => getFonts(params),
+  });
+};
