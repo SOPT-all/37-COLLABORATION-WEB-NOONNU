@@ -5,12 +5,13 @@ import ListView from '@/shared/components/list-view/list-view';
 import SidePanel from '@/shared/components/side-panel/side-panel';
 import { fontItem } from '@/shared/mocks/font-item';
 import { type LayoutToggleType, TOGGLE } from '@/shared/types/layout-toggle';
+import Banner from '@/widgets/free-font/components/banner/banner';
 import FloatingButton from '@/widgets/free-font/components/floating-button/floating-button';
 import FontToolBar from '@/widgets/free-font/components/font-toolbar/font-toolbar';
-import { useFontSelection } from '@/widgets/free-font/hooks/use-font-selection';
 import TopButton from '@/widgets/free-font/components/top-button/top-button';
+import { useFontSelection } from '@/widgets/free-font/hooks/use-font-selection';
+
 import * as styles from './free-font.css';
-import Banner from '@/widgets/free-font/components/banner/banner';
 
 const FreeFont = () => {
   const [fontSize, setFontSize] = useState(30);

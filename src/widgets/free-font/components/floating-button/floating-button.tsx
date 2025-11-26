@@ -1,13 +1,13 @@
 import { memo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { routePath } from '@/router/path';
 import type { FontItemType } from '@/shared/types/font';
 
 import CompareFloatingButton from '../compare-floating-button/compare-floating-button';
 import DeleteButton from '../floating-contents/delete-floating-button/delete-button';
 import FontListBox from '../floating-contents/font-list-box/font-list-box';
 import * as styles from './floating-button.css';
-import { routePath } from '@/router/path';
 
 interface FloatingButtonProps {
   selectedFonts: FontItemType[];

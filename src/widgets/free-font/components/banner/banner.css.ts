@@ -1,4 +1,5 @@
 import { style } from '@vanilla-extract/css';
+
 import { themeVars } from '@/shared/styles';
 
 export const banner = style({

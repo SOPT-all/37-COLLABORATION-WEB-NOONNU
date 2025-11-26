@@ -1,7 +1,9 @@
 import { useCallback } from 'react';
-import { useScrollToggle } from '@/widgets/free-font/hooks/use-scroll-toggle';
-import * as styles from './top-button.css';
+
 import { ArrowUpLgIcon } from '@/shared/icons';
+import { useScrollToggle } from '@/widgets/free-font/hooks/use-scroll-toggle';
+
+import * as styles from './top-button.css';
 
 const TopButton = () => {
   const isVisible = useScrollToggle();

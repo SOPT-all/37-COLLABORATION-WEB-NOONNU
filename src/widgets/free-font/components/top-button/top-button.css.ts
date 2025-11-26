@@ -1,5 +1,6 @@
-import { themeVars } from '@/shared/styles';
 import { style } from '@vanilla-extract/css';
+
+import { themeVars } from '@/shared/styles';
 
 export const button = style({
   width: '5rem',
