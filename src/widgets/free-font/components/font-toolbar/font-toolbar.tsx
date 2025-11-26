@@ -1,5 +1,4 @@
 import { memo } from 'react';
-import { useState } from 'react';
 
 import DropDown from '@/shared/components/drop-down/drop-down';
 import InputField from '@/shared/components/input-field/input-field';
@@ -14,21 +13,23 @@ interface FontToolBarProps {
   fontSize: number;
   previewText: string;
   layout: LayoutToggleType;
+  sort: SortType;
   onSizeChange: (value: number) => void;
   onInputChange: (text: string) => void;
   onLayoutChange: (layout: LayoutToggleType) => void;
+  onSortChange: (sort: SortType) => void;
 }
 
 const FontToolBar = ({
   fontSize,
   previewText,
   layout,
+  sort,
   onSizeChange,
   onInputChange,
   onLayoutChange,
+  onSortChange,
 }: FontToolBarProps) => {
-  const [sort, setSort] = useState<SortType>('인기순');
-
   return (
     <div className={styles.container}>
       <div className={styles.slider}>
@@ -48,7 +49,7 @@ const FontToolBar = ({
           variant='write'
         />
       </div>
-      <DropDown value={sort} onChange={setSort} />
+      <DropDown value={sort} onChange={onSortChange} />
       <LayoutToggle value={layout} onClick={onLayoutChange} />
     </div>
   );

@@ -1,12 +1,22 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
+import { useGetFonts } from '@/shared/apis/domain/font';
 import { usePostCompare } from '@/shared/apis/domain/user-font';
 import CardView from '@/shared/components/card-view/card-view';
+import EmptyFont from '@/shared/components/empty-font/empty-font';
 import ListView from '@/shared/components/list-view/list-view';
 import SidePanel from '@/shared/components/side-panel/side-panel';
-import { fontItem } from '@/shared/mocks/font-item';
+import {
+  INITIAL_FILTERS,
+  type FilterKey,
+  type Filters,
+} from '@/shared/constants/filter-keys';
 import type { FontItemType } from '@/shared/types/font';
+import type { SortType } from '@/shared/types/drop-down';
 import { type LayoutToggleType, TOGGLE } from '@/shared/types/layout-toggle';
+import { convertFiltersToApiParams } from '@/shared/utils/filter-mapper';
+import { mapFontResponseToFontItem } from '@/shared/utils/font-mapper';
+import { convertSortToApiParam } from '@/shared/utils/sort-mapper';
 import Banner from '@/widgets/free-font/components/banner/banner';
 import FloatingButton from '@/widgets/free-font/components/floating-button/floating-button';
 import FontToolBar from '@/widgets/free-font/components/font-toolbar/font-toolbar';
@@ -19,7 +29,25 @@ const FreeFont = () => {
   const [fontSize, setFontSize] = useState(30);
   const [previewText, setPreviewText] = useState('');
   const [layout, setLayout] = useState<LayoutToggleType>(TOGGLE.GRID);
-  const [fonts] = useState(fontItem);
+  const [sort, setSort] = useState<SortType>('인기순');
+  const [filters, setFilters] = useState<Filters>({ ...INITIAL_FILTERS });
+
+  const apiParams = useMemo(() => {
+    const filterParams = convertFiltersToApiParams(filters);
+    return {
+      sortBy: convertSortToApiParam(sort),
+      ...filterParams,
+    };
+  }, [sort, filters]);
+
+  const { data: fontsData, isLoading } = useGetFonts(apiParams);
+
+  const fonts: FontItemType[] = useMemo(() => {
+    if (!fontsData?.result?.fonts) {
+      return [];
+    }
+    return fontsData.result.fonts.map(mapFontResponseToFontItem);
+  }, [fontsData]);
   const { selectedFonts, toggleFont, deleteFont, clearFonts, isSelected } =
     useFontSelection();
 
@@ -52,24 +80,47 @@ const FreeFont = () => {
     }
   };
 
+  const handleSortChange = useCallback((nextSort: SortType) => {
+    setSort(nextSort);
+  }, []);
+
+  const handleToggleFilter = useCallback((key: FilterKey) => {
+    setFilters((prev) => ({
+      ...prev,
+      [key]: !prev[key],
+    }));
+  }, []);
+
+  const handleResetFilters = useCallback(() => {
+    setFilters({ ...INITIAL_FILTERS });
+  }, []);
+
   return (
     <div className={styles.container}>
       <Banner />
 
       <div className={styles.article}>
-        <SidePanel />
+        <SidePanel
+          filters={filters}
+          onToggleFilter={handleToggleFilter}
+          onReset={handleResetFilters}
+        />
 
         <div className={styles.rightSection}>
           <FontToolBar
             fontSize={fontSize}
             previewText={previewText}
             layout={layout}
+            sort={sort}
             onSizeChange={handleSizeChange}
             onInputChange={handleInputChange}
             onLayoutChange={handleLayoutChange}
+            onSortChange={handleSortChange}
           />
 
-          {layout === TOGGLE.GRID ? (
+          {fonts.length === 0 && !isLoading ? (
+            <EmptyFont />
+          ) : layout === TOGGLE.GRID ? (
             <div className={styles.cardSection}>
               {fonts.map((font) => (
                 <CardView
