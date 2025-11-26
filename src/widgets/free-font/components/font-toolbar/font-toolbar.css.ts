@@ -7,4 +7,8 @@ export const container = style({
   marginBottom: '1.2rem',
 });
 
+export const slider = style({
+  width: '24.8rem',
+});
+
 export const input = style({ width: '45.2rem' });

@@ -22,7 +22,7 @@ export const sliderContainer = style({
 });
 
 export const slider = style({
-  width: '100%',
+  minWidth: '100%',
   WebkitAppearance: 'none',
 
   selectors: {

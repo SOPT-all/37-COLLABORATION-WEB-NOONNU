@@ -31,7 +31,14 @@ const FontToolBar = ({
 
   return (
     <div className={styles.container}>
-      <Slider label='크기' value={fontSize} unit='px' onChange={onSizeChange} />
+      <div className={styles.slider}>
+        <Slider
+          label='크기'
+          value={fontSize}
+          unit='px'
+          onChange={onSizeChange}
+        />
+      </div>
 
       <div className={styles.input}>
         <InputField
