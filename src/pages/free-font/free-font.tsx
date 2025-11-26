@@ -15,8 +15,6 @@ import { useFontSelection } from '@/widgets/free-font/hooks/use-font-selection';
 
 import * as styles from './free-font.css';
 
-const fontId = 2;
-
 const FreeFont = () => {
   const [fontSize, setFontSize] = useState(30);
   const [previewText, setPreviewText] = useState('');
@@ -27,10 +25,14 @@ const FreeFont = () => {
 
   const { mutate: changeCompareState } = usePostCompare();
 
-  const handleToggleCompare = (isCompared: boolean, font: FontItemType) => {
+  const handleToggleCompare = (
+    isCompared: boolean,
+    font: FontItemType,
+    fontId: number,
+  ) => {
     changeCompareState({
       fontId,
-      request: { isCompared },
+      request: { isCompared: !isCompared },
     });
     toggleFont(font);
   };
@@ -76,7 +78,7 @@ const FreeFont = () => {
                   globalPhrase={previewText}
                   isCompared={isSelected(font.id)}
                   onToggleCompare={() =>
-                    handleToggleCompare(isSelected(font.id), font)
+                    handleToggleCompare(isSelected(font.id), font, font.id)
                   }
                   onToggleLike={() => {}}
                 />
@@ -91,7 +93,7 @@ const FreeFont = () => {
                   globalPhrase={previewText}
                   isCompared={isSelected(font.id)}
                   onToggleCompare={() =>
-                    handleToggleCompare(isSelected(font.id), font)
+                    handleToggleCompare(isSelected(font.id), font, font.id)
                   }
                   onToggleLike={() => {}}
                 />
