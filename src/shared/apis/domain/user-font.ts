@@ -1,10 +1,15 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { END_POINT } from '../config/end-point';
 import { instance } from '../instance';
 import { queryClient } from '../query-client';
 import type { ApiResponse } from '../types/api-response';
-import type { CompareStateRequest } from '../types/user-font';
+import type {
+  CompareStateRequest,
+  CompareFontPreviewResponse,
+  CompareFontPreviewType,
+} from '../types/user-font';
+import { queryKey } from '../keys/query-key';
 
 const userId = 1;
 
@@ -53,3 +58,17 @@ export const usePostCompare = () => {
 /**
  * 폰트 비교하기 플로팅 버튼 조회
  */
+const getComparedFontPreview = async (): Promise<CompareFontPreviewType[]> => {
+  const response = await instance.get<ApiResponse<CompareFontPreviewResponse>>(
+    END_POINT.COMPARE_FONT_BUTTON,
+    { headers: { userId: String(userId) } },
+  );
+  return response.data.result.items;
+};
+
+export const useGetComparePreview = () => {
+  return useQuery({
+    queryKey: [queryKey.GET_COMPARE_FONT_PREVIEW],
+    queryFn: () => getComparedFontPreview(),
+  });
+};

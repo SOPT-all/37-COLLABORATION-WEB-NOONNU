@@ -1,7 +1,6 @@
 import { useCallback, useState } from 'react';
 
 import type { FontItemType } from '@/shared/types/font';
-
 export const useFontSelection = () => {
   const [selectedFonts, setSelectedFonts] = useState<FontItemType[]>([]);
 

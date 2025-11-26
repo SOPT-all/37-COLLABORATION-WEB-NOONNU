@@ -103,11 +103,7 @@ const FreeFont = () => {
         </div>
       </div>
       <TopButton />
-      <FloatingButton
-        selectedFonts={selectedFonts}
-        onDeleteFont={deleteFont}
-        onDeleteAll={clearFonts}
-      />
+      <FloatingButton onDeleteFont={deleteFont} onDeleteAll={clearFonts} />
     </div>
   );
 };
