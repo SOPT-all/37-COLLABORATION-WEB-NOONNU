@@ -8,12 +8,14 @@ import type { SortType } from '@/shared/types/drop-down';
 import type { FontItemType } from '@/shared/types/font';
 import type { LayoutToggleType } from '@/shared/types/layout-toggle';
 import type { TabLabelTypes } from '@/shared/types/tab';
-import DeleteButtonBar from '@/widgets/storage/components/delete-buttonbar/delete-buttonbar';
-import FontCardView from '@/widgets/storage/components/font-card-view/font-card-view';
-import FontListView from '@/widgets/storage/components/font-list-view/font-list-view';
-import FontToolBar from '@/widgets/storage/components/font-toolbar/font-toolbar';
-import FreeFontButton from '@/widgets/storage/components/free-font-button/free-font-button';
-import Tab from '@/widgets/storage/components/tab/tab';
+import {
+  DeleteButtonBar,
+  FontCardView,
+  FontListView,
+  FontToolBar,
+  FreeFontButton,
+  Tab,
+} from '@/widgets/storage/components/index.ts';
 
 import * as styles from './storage.css';
 
