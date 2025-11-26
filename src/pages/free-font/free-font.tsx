@@ -1,9 +1,11 @@
 import { useCallback, useState } from 'react';
 
+import { usePostCompare } from '@/shared/apis/domain/user-font';
 import CardView from '@/shared/components/card-view/card-view';
 import ListView from '@/shared/components/list-view/list-view';
 import SidePanel from '@/shared/components/side-panel/side-panel';
 import { fontItem } from '@/shared/mocks/font-item';
+import type { FontItemType } from '@/shared/types/font';
 import { type LayoutToggleType, TOGGLE } from '@/shared/types/layout-toggle';
 import Banner from '@/widgets/free-font/components/banner/banner';
 import FloatingButton from '@/widgets/free-font/components/floating-button/floating-button';
@@ -13,6 +15,8 @@ import { useFontSelection } from '@/widgets/free-font/hooks/use-font-selection';
 
 import * as styles from './free-font.css';
 
+const fontId = 2;
+
 const FreeFont = () => {
   const [fontSize, setFontSize] = useState(30);
   const [previewText, setPreviewText] = useState('');
@@ -20,6 +24,16 @@ const FreeFont = () => {
   const [fonts] = useState(fontItem);
   const { selectedFonts, toggleFont, deleteFont, clearFonts, isSelected } =
     useFontSelection();
+
+  const { mutate: changeCompareState } = usePostCompare();
+
+  const handleToggleCompare = (isCompared: boolean, font: FontItemType) => {
+    changeCompareState({
+      fontId,
+      request: { isCompared },
+    });
+    toggleFont(font);
+  };
 
   const handleSizeChange = useCallback(
     (value: number) => setFontSize(value),
@@ -61,7 +75,9 @@ const FreeFont = () => {
                   {...font}
                   globalPhrase={previewText}
                   isCompared={isSelected(font.id)}
-                  onToggleCompare={() => toggleFont(font)}
+                  onToggleCompare={() =>
+                    handleToggleCompare(isSelected(font.id), font)
+                  }
                   onToggleLike={() => {}}
                 />
               ))}
@@ -74,7 +90,9 @@ const FreeFont = () => {
                   {...font}
                   globalPhrase={previewText}
                   isCompared={isSelected(font.id)}
-                  onToggleCompare={() => toggleFont(font)}
+                  onToggleCompare={() =>
+                    handleToggleCompare(isSelected(font.id), font)
+                  }
                   onToggleLike={() => {}}
                 />
               ))}
