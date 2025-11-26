@@ -10,6 +10,7 @@ import FontToolBar from '@/widgets/free-font/components/font-toolbar/font-toolba
 import { useFontSelection } from '@/widgets/free-font/hooks/use-font-selection';
 import TopButton from '@/widgets/free-font/components/top-button/top-button';
 import * as styles from './free-font.css';
+import Banner from '@/widgets/free-font/components/banner/banner';
 
 const FreeFont = () => {
   const [fontSize, setFontSize] = useState(30);
@@ -36,16 +37,7 @@ const FreeFont = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.banner}>
-        <span className={styles.bannerSubtitle}>
-          폰트 판매, 눈누가 도와드릴게요
-        </span>
-        <span className={styles.bannerTitle}>
-          눈누마켓과 함께할
-          <br />
-          폰트 디자이너를 찾아요
-        </span>
-      </div>
+      <Banner />
 
       <div className={styles.article}>
         <SidePanel />
