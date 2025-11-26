@@ -1,20 +1,20 @@
 import { useState } from 'react';
 
-import {
-  INITIAL_FILTERS,
-  type FilterKey,
-  type Filters,
-} from '@/shared/constants/filter-keys';
+import Accordion from '@/shared/components/accordion/accordion';
+import AllowedRangeChip from '@/shared/components/chip/allowed-range-chip';
+import TitleChip from '@/shared/components/chip/title-chip';
+import FilterSection from '@/shared/components/filter-section/filter-section';
 import {
   LICENSE_ITEMS,
   MOOD_ITEMS,
   SHAPE_ITEMS,
   USAGE_SECTIONS,
 } from '@/shared/constants/filter-data';
-import Accordion from '@/shared/components/accordion/accordion';
-import AllowedRangeChip from '@/shared/components/chip/allowed-range-chip';
-import FilterSection from '@/shared/components/filter-section/filter-section';
-import TitleChip from '@/shared/components/chip/title-chip';
+import {
+  type FilterKey,
+  type Filters,
+  INITIAL_FILTERS,
+} from '@/shared/constants/filter-keys';
 import { FilterIcon, ResetIcon } from '@/shared/icons';
 
 import * as styles from './side-panel.css';

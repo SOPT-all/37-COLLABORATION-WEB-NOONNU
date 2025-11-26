@@ -3,9 +3,6 @@ import { keyframes, style } from '@vanilla-extract/css';
 import { themeVars } from '@/shared/styles';
 
 const baseButtonStyle = style({
-  position: 'fixed',
-  bottom: '4.8rem',
-  right: '2.8rem',
   display: 'flex',
   justifyContent: 'center',
   width: '18.8rem',

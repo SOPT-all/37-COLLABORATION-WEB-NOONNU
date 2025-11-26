@@ -1,16 +1,16 @@
-import { fontItem as initialData } from '@shared/mocks/font-item';
-import { useCallback, useState } from 'react';
+import { memo } from 'react';
+
+import type { FontItemType } from '@/shared/types/font';
 
 import FontList from '../font-list/font-list';
 import * as styles from './font-list-box.css';
 
-const FontListBox = () => {
-  const [fonts, setFonts] = useState(initialData);
+interface FontListBoxProps {
+  fonts: FontItemType[];
+  onDeleteFont: (id: number) => void;
+}
 
-  const handleDeleteFont = useCallback((id: number) => {
-    setFonts((prevFonts) => prevFonts.filter((item) => item.id !== id));
-  }, []);
-
+const FontListBox = ({ fonts, onDeleteFont }: FontListBoxProps) => {
   return (
     <div className={styles.outerContainer}>
       <div className={styles.innerContainer}>
@@ -21,7 +21,7 @@ const FontListBox = () => {
                 id={item.id}
                 fontName={item.name}
                 fontMetadata={item.fontMetadata}
-                onDelete={handleDeleteFont}
+                onDelete={onDeleteFont}
               />
             </div>
           );
@@ -31,4 +31,4 @@ const FontListBox = () => {
   );
 };
 
-export default FontListBox;
+export default memo(FontListBox);

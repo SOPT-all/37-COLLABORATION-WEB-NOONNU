@@ -5,7 +5,6 @@ import { themeVars } from '@/shared/styles';
 
 export const toggleContainer = style({
   display: 'flex',
-  width: '9.4rem',
 });
 
 export const toggleButton = recipe({
@@ -13,7 +12,8 @@ export const toggleButton = recipe({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    padding: '0.4rem',
+    width: '3.2rem',
+    height: '3.2rem',
     border: `1px solid ${themeVars.color.gray_03}`,
     backgroundColor: 'transparent',
     color: themeVars.color.gray_04,

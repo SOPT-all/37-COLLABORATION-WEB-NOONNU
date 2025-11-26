@@ -1,4 +1,5 @@
 import type { SVGProps } from 'react';
+
 import * as styles from './chip.css';
 
 interface TitleChipProps {
