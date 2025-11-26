@@ -12,6 +12,7 @@ export const container = style({
 export const label = style({
   ...themeVars.fontStyles.body_14r,
   color: themeVars.color.black,
+  whiteSpace: 'nowrap',
 });
 
 export const sliderContainer = style({
@@ -21,7 +22,7 @@ export const sliderContainer = style({
 });
 
 export const slider = style({
-  width: '17.5rem',
+  width: '100%',
   selectors: {
     '&::-webkit-slider-runnable-track': {
       backgroundColor: themeVars.color.gray_03,
