@@ -1,3 +1,4 @@
+import { usePostCompare } from '@/shared/apis/domain/user-font';
 import {
   DeleteButtonBar,
   FontCardView,
@@ -12,7 +13,23 @@ import { useStorage } from '@/widgets/storage/hooks/useStorage';
 import * as styles from './storage.css';
 
 const Storage = () => {
-  const { uiState, actionState, displayFonts, actions } = useStorage();
+  const { uiState, actionState, fonts, displayFonts, actions } = useStorage();
+  const { mutate: changeCompareState } = usePostCompare();
+
+  const handleToggleCompare = (fontId: number) => {
+    const target = fonts.find((font) => font.id === fontId);
+    if (!target) {
+      return;
+    }
+
+    const nextCompareState = !target.isCompared;
+
+    changeCompareState({
+      fontId,
+      request: { isCompared: nextCompareState },
+    });
+    actions.handleToggleCompare(fontId);
+  };
 
   return (
     <div className={styles.storagePageContainer}>
@@ -51,14 +68,14 @@ const Storage = () => {
                 items={displayFonts}
                 globalPhrase={actionState.globalPhrase}
                 onToggleLike={actions.handleToggleLike}
-                onToggleCompare={actions.handleToggleCompare}
+                onToggleCompare={handleToggleCompare}
               />
             ) : (
               <FontListView
                 items={displayFonts}
                 globalPhrase={actionState.globalPhrase}
                 onToggleLike={actions.handleToggleLike}
-                onToggleCompare={actions.handleToggleCompare}
+                onToggleCompare={handleToggleCompare}
               />
             )}
           </div>

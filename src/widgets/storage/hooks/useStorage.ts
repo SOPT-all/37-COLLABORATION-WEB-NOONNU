@@ -55,5 +55,6 @@ export const useStorage = () => {
       ...data.actions,
       handleNavigateToFree,
     },
+    fonts: data.fonts,
   };
 };
