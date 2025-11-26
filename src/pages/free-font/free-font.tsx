@@ -20,8 +20,7 @@ const FreeFont = () => {
   const [previewText, setPreviewText] = useState('');
   const [layout, setLayout] = useState<LayoutToggleType>(TOGGLE.GRID);
   const [fonts] = useState(fontItem);
-  const { selectedFonts, toggleFont, deleteFont, clearFonts, isSelected } =
-    useFontSelection();
+  const { toggleFont, deleteFont, clearFonts, isSelected } = useFontSelection();
 
   const { mutate: changeCompareState } = usePostCompare();
 
