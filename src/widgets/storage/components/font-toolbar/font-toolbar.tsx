@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import DropDown from '@/shared/components/drop-down/drop-down';
 import InputField from '@/shared/components/input-field/input-field';
 import { LayoutToggle } from '@/shared/components/layout-toggle/layout-toggle';
@@ -13,9 +11,13 @@ interface FontToolBarProps {
   viewMode: LayoutToggleType;
   previewText: string;
   fontSize: number;
+  searchText: string;
+  sortOption: SortType;
   onPreviewChange: (value: string) => void;
   onViewModeChange: () => void;
   onSizeChange: (value: number) => void;
+  onSearchChange: (value: string) => void;
+  onSortChange: (value: SortType) => void;
 
   /* 추가로 필요한 props 추후에 추가 */
 }
@@ -24,21 +26,23 @@ const FontToolBar = ({
   viewMode,
   previewText,
   fontSize,
+  searchText,
+  sortOption,
   onPreviewChange,
   onViewModeChange,
   onSizeChange,
+  onSearchChange,
+  onSortChange,
 }: FontToolBarProps) => {
-  const [sort, setSort] = useState<SortType>('인기순');
-
   return (
     <div className={styles.fontToolBar}>
       <div className={styles.fieldControl}>
         <div className={styles.searchInput}>
           <InputField
-            value=''
+            value={searchText}
             placeholder='폰트비교에서 검색'
             variant='search'
-            onChange={() => {}}
+            onChange={onSearchChange}
           />
         </div>
         <div className={styles.slider}>
@@ -61,7 +65,7 @@ const FontToolBar = ({
         </div>
       </div>
       <div className={styles.layoutControl}>
-        <DropDown value={sort} onChange={setSort} />
+        <DropDown value={sortOption} onChange={onSortChange} />
         <LayoutToggle value={viewMode} onClick={onViewModeChange} />
       </div>
     </div>
