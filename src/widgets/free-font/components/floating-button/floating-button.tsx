@@ -2,7 +2,7 @@ import { memo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { routePath } from '@/router/path';
-import type { FontItemType } from '@/shared/types/font';
+import { useGetComparePreview } from '@/shared/apis/domain/user-font';
 
 import CompareFloatingButton from '../compare-floating-button/compare-floating-button';
 import DeleteButton from '../floating-contents/delete-floating-button/delete-button';
@@ -10,18 +10,16 @@ import FontListBox from '../floating-contents/font-list-box/font-list-box';
 import * as styles from './floating-button.css';
 
 interface FloatingButtonProps {
-  selectedFonts: FontItemType[];
   onDeleteFont: (id: number) => void;
   onDeleteAll: () => void;
 }
 
-const FloatingButton = ({
-  selectedFonts,
-  onDeleteFont,
-  onDeleteAll,
-}: FloatingButtonProps) => {
+const FloatingButton = ({ onDeleteFont, onDeleteAll }: FloatingButtonProps) => {
   const navigate = useNavigate();
   const [isList, setIsList] = useState(false);
+  const { data } = useGetComparePreview();
+
+  const selectedFonts = data || [];
 
   const handleHoverStart = () => setIsList(true);
   const handleHoverEnd = () => setIsList(false);

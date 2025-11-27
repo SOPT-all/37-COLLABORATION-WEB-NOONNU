@@ -7,6 +7,8 @@ import { queryClient } from '../query-client';
 import type { ApiResponse } from '../types/api-response';
 import type {
   ComparedFont,
+  CompareFontPreviewResponse,
+  CompareFontPreviewType,
   CompareResult,
   CompareStateRequest,
   LikeStateRequest,
@@ -117,3 +119,17 @@ export const useCompareResetAll = () => {
 /**
  * 폰트 비교하기 플로팅 버튼 조회
  */
+const getComparedFontPreview = async (): Promise<CompareFontPreviewType[]> => {
+  const response = await instance.get<ApiResponse<CompareFontPreviewResponse>>(
+    END_POINT.COMPARE_FONT_BUTTON,
+    { headers: { userId: String(userId) } },
+  );
+  return response.data.result.items;
+};
+
+export const useGetComparePreview = () => {
+  return useQuery({
+    queryKey: [queryKey.GET_COMPARE_FONT_PREVIEW, userId],
+    queryFn: () => getComparedFontPreview(),
+  });
+};
