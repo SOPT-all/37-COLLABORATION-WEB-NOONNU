@@ -3,7 +3,6 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { END_POINT } from '../config/end-point';
 import { instance } from '../instance';
 import { queryKey } from '../keys/query-key';
-import { queryClient } from '../query-client';
 import type { ApiResponse } from '../types/api-response';
 import type {
   ComparedFont,
@@ -93,6 +92,7 @@ export const useGetLiked = () => {
   return useQuery({
     queryKey: [queryKey.GET_LIKED_FONTS, userId],
     queryFn: () => getLiked(),
+    refetchOnMount: 'always',
   });
 };
 /**
@@ -111,6 +111,7 @@ export const useGetCompare = () => {
   return useQuery({
     queryKey: [queryKey.GET_COMPARE, userId],
     queryFn: () => getCompare(),
+    refetchOnMount: 'always',
   });
 };
 

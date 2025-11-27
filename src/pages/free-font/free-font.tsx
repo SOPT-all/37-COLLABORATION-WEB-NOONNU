@@ -12,6 +12,7 @@ import {
   type Filters,
   INITIAL_FILTERS,
 } from '@/shared/constants/filter-keys';
+import { useFilteredFonts } from '@/shared/hooks/use-filtered-fonts';
 import type { SortType } from '@/shared/types/drop-down';
 import type { FontItemType } from '@/shared/types/font';
 import { type LayoutToggleType, TOGGLE } from '@/shared/types/layout-toggle';
@@ -22,7 +23,6 @@ import TopButton from '@/widgets/free-font/components/top-button/top-button';
 import { useFontSelection } from '@/widgets/free-font/hooks/use-font-selection';
 
 import * as styles from './free-font.css';
-import { useFilteredFonts } from '@/shared/hooks/use-filtered-fonts';
 
 const userId = 1;
 const FONT_SIZE = 30;
@@ -71,7 +71,7 @@ const FreeFont = () => {
             queryKey: [queryKey.GET_COMPARE, userId],
           });
           queryClient.invalidateQueries({
-            queryKey: [queryKey.GET_FONTS, userId],
+            queryKey: [queryKey.GET_FONTS],
           });
         },
       },
@@ -94,7 +94,7 @@ const FreeFont = () => {
             queryKey: [queryKey.GET_LIKED_FONTS, userId],
           });
           queryClient.invalidateQueries({
-            queryKey: [queryKey.GET_FONTS, userId],
+            queryKey: [queryKey.GET_FONTS],
           });
         },
       },
@@ -162,7 +162,7 @@ const FreeFont = () => {
                   key={font.id}
                   {...font}
                   globalPhrase={previewText}
-                  isCompared={isSelected(font.id)}
+                  isCompared={font.isCompared}
                   isLiked={font.isLiked}
                   onToggleCompare={() =>
                     handleToggleCompare(isSelected(font.id), font, font.id)
@@ -178,7 +178,7 @@ const FreeFont = () => {
                   key={font.id}
                   {...font}
                   globalPhrase={previewText}
-                  isCompared={isSelected(font.id)}
+                  isCompared={font.isCompared}
                   isLiked={font.isLiked}
                   onToggleCompare={() =>
                     handleToggleCompare(isSelected(font.id), font, font.id)

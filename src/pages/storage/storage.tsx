@@ -94,6 +94,7 @@ const Storage = () => {
     setIsComparedState((prev) => {
       const current = prev[fontId] ?? getCompared(fontId);
       const next = !current;
+
       changeCompareState(
         {
           fontId,
@@ -104,12 +105,14 @@ const Storage = () => {
             queryClient.invalidateQueries({
               queryKey: [queryKey.GET_COMPARE_FONT_PREVIEW, userId],
             });
+
             queryClient.invalidateQueries({
-              queryKey: [queryKey.GET_FONTS, userId],
+              queryKey: [queryKey.GET_FONTS],
             });
           },
         },
       );
+
       return {
         ...prev,
         [fontId]: next,
@@ -121,6 +124,7 @@ const Storage = () => {
     setIsLikedState((prev) => {
       const current = prev[fontId] ?? getLiked(fontId);
       const next = !current;
+
       changeLikeState(
         {
           fontId,
@@ -129,11 +133,12 @@ const Storage = () => {
         {
           onSuccess: () => {
             queryClient.invalidateQueries({
-              queryKey: [queryKey.GET_FONTS, userId],
+              queryKey: [queryKey.GET_FONTS],
             });
           },
         },
       );
+
       return {
         ...prev,
         [fontId]: next,

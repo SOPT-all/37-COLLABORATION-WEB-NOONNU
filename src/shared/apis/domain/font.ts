@@ -23,7 +23,8 @@ const getFonts = async (params: GetFontsParams) => {
 
 export const useGetFonts = (params: GetFontsParams) => {
   return useQuery({
-    queryKey: [queryKey.GET_FONTS, userId, params],
+    queryKey: [queryKey.GET_FONTS, params],
     queryFn: () => getFonts(params),
+    refetchOnMount: 'always',
   });
 };
