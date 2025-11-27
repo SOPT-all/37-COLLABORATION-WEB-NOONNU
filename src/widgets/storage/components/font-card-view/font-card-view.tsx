@@ -1,4 +1,5 @@
 import CardView from '@/shared/components/card-view/card-view';
+import EmptyFont from '@/shared/components/empty-font/empty-font';
 import type { FontItemType } from '@/shared/types/font';
 
 import * as styles from './font-card-view.css';
@@ -21,19 +22,25 @@ const FontCardView = ({
   getLiked,
 }: FontCardViewProps) => {
   return (
-    <div className={styles.gridContainer}>
-      {items.map((item) => (
-        <CardView
-          key={item.id}
-          {...item}
-          globalPhrase={globalPhrase}
-          onToggleCompare={onToggleCompare}
-          onToggleLike={onToggleLike}
-          isCompared={getCompared(item.id)}
-          isLiked={getLiked(item.id)}
-        />
-      ))}
-    </div>
+    <>
+      {items.length > 0 ? (
+        <div className={styles.gridContainer}>
+          {items.map((item) => (
+            <CardView
+              key={item.id}
+              {...item}
+              globalPhrase={globalPhrase}
+              onToggleCompare={onToggleCompare}
+              onToggleLike={onToggleLike}
+              isCompared={getCompared(item.id)}
+              isLiked={getLiked(item.id)}
+            />
+          ))}
+        </div>
+      ) : (
+        <EmptyFont text='아직 담은 폰트가 없어요' />
+      )}
+    </>
   );
 };
 

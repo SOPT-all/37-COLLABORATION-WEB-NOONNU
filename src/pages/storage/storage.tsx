@@ -206,7 +206,6 @@ const Storage = () => {
             {uiState.currentTab === 'compare' && (
               <DeleteButtonBar onClick={onDeleteAllCompare} />
             )}
-
             {uiState.viewMode === 'grid' ? (
               <FontCardView
                 items={

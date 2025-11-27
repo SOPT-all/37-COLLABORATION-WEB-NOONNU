@@ -1,3 +1,4 @@
+import EmptyFont from '@/shared/components/empty-font/empty-font';
 import ListView from '@/shared/components/list-view/list-view';
 import type { FontItemType } from '@/shared/types/font';
 
@@ -21,19 +22,25 @@ const FontListView = ({
   getLiked,
 }: FontListViewProps) => {
   return (
-    <div className={styles.listContainer}>
-      {items.map((item) => (
-        <ListView
-          key={item.id}
-          {...item}
-          globalPhrase={globalPhrase}
-          onToggleCompare={onToggleCompare}
-          onToggleLike={onToggleLike}
-          isCompared={getCompared(item.id)}
-          isLiked={getLiked(item.id)}
-        />
-      ))}
-    </div>
+    <>
+      {items.length > 0 ? (
+        <div className={styles.listContainer}>
+          {items.map((item) => (
+            <ListView
+              key={item.id}
+              {...item}
+              globalPhrase={globalPhrase}
+              onToggleCompare={onToggleCompare}
+              onToggleLike={onToggleLike}
+              isCompared={getCompared(item.id)}
+              isLiked={getLiked(item.id)}
+            />
+          ))}
+        </div>
+      ) : (
+        <EmptyFont text='아직 담은 폰트가 없어요' />
+      )}
+    </>
   );
 };
 

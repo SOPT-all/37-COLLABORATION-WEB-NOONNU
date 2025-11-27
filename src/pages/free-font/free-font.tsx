@@ -180,7 +180,7 @@ const FreeFont = () => {
           />
 
           {fonts.length === 0 && !isLoading ? (
-            <EmptyFont />
+            <EmptyFont text='앗 검색결과가 없어요!' />
           ) : layout === TOGGLE.GRID ? (
             <div className={styles.cardSection}>
               {fonts.map((font) => (
