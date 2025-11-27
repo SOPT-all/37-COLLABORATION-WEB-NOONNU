@@ -5,6 +5,8 @@ import {
   usePostCompare,
   usePostLike,
 } from '@/shared/apis/domain/user-font';
+import { queryKey } from '@/shared/apis/keys/query-key';
+import { queryClient } from '@/shared/apis/query-client';
 import {
   type FilterKey,
   type Filters,
@@ -24,6 +26,8 @@ import {
 import { useStorage } from '@/widgets/storage/hooks/use-storage';
 
 import * as styles from './storage.css';
+
+const userId = 1;
 
 const Storage = () => {
   const { uiState, actionState, fonts, actions } = useStorage();
@@ -74,10 +78,22 @@ const Storage = () => {
     setIsComparedState((prev) => {
       const current = prev[fontId] ?? getCompared(fontId);
       const next = !current;
-      changeCompareState({
-        fontId,
-        request: { isCompared: next },
-      });
+      changeCompareState(
+        {
+          fontId,
+          request: { isCompared: next },
+        },
+        {
+          onSuccess: () => {
+            queryClient.invalidateQueries({
+              queryKey: [queryKey.GET_COMPARE_FONT_PREVIEW, userId],
+            });
+            queryClient.invalidateQueries({
+              queryKey: [queryKey.GET_FONTS, userId],
+            });
+          },
+        },
+      );
       return {
         ...prev,
         [fontId]: next,

@@ -12,6 +12,7 @@ export interface LikeStateRequest {
 /**
  * 폰트 타입
  */
+
 export interface FontMetadataType {
   fontFamily: string;
   fontSource: string;
@@ -20,6 +21,20 @@ export interface FontMetadataType {
 }
 
 /**
+<<<<<<< HEAD
+ * 플루팅 버튼(get) 타입
+ */
+export interface CompareFontPreviewType {
+  id: number;
+  name: string;
+  fontMetadata: FontMetadataType;
+}
+
+export interface CompareFontPreviewResponse {
+  items: CompareFontPreviewType[];
+}
+
+/*
  * 폰트 정보 조회(get) 타입
  */
 export interface ComparedFont {
