@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { useGetFonts } from '@/shared/apis/domain/font';
 import { usePostCompare, usePostLike } from '@/shared/apis/domain/user-font';
@@ -28,13 +28,12 @@ import { useFontSelection } from '@/widgets/free-font/hooks/use-font-selection';
 import * as styles from './free-font.css';
 
 const userId = 1;
+const FONT_SIZE = 30;
 
 const FreeFont = () => {
-  const [fontSize, setFontSize] = useState(30);
+  const [fontSize, setFontSize] = useState(FONT_SIZE);
   const [previewText, setPreviewText] = useState('');
   const [layout, setLayout] = useState<LayoutToggleType>(TOGGLE.GRID);
-
-  const { toggleFont, deleteFont, clearFonts } = useFontSelection();
   const [sort, setSort] = useState<SortType>('인기순');
   const [filters, setFilters] = useState<Filters>({ ...INITIAL_FILTERS });
 
@@ -48,29 +47,6 @@ const FreeFont = () => {
 
   const { data: fontsData, isLoading } = useGetFonts(apiParams);
 
-  const [isComparedState, setIsComparedState] = useState<
-    Record<number, boolean>
-  >({});
-  const [isLikeState, setIsLikeState] = useState<Record<number, boolean>>({});
-
-  const getCompared = (id: number): boolean => {
-    const local = isComparedState[id];
-    if (local !== undefined) {
-      return local;
-    }
-    const server = fontsData?.result.fonts.find((font) => font.id === id);
-    return server?.isCompared ?? false;
-  };
-
-  const getLiked = (id: number): boolean => {
-    const local = isLikeState[id];
-    if (local !== undefined) {
-      return local;
-    }
-    const server = fontsData?.result.fonts.find((font) => font.id === id);
-    return server?.isLiked ?? false;
-  };
-
   const fonts: FontItemType[] = useMemo(() => {
     if (!fontsData?.result?.fonts) {
       return [];
@@ -78,60 +54,54 @@ const FreeFont = () => {
     return fontsData.result.fonts.map(mapFontResponseToFontItem);
   }, [fontsData]);
 
+  const { toggleFont, deleteFont, clearFonts, isSelected } = useFontSelection();
+
+  useEffect(() => {
+    if (fonts.length > 0) {
+      fonts.forEach((font) => {
+        if (font.isCompared && !isSelected(font.id)) {
+          toggleFont(font);
+        }
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [fonts]);
+
   const { mutate: changeCompareState } = usePostCompare();
+
   const { mutate: changeLikeState } = usePostLike();
 
-  const handleToggleCompare = (font: FontItemType) => {
-    setIsComparedState((prev) => {
-      const current = prev[font.id] ?? getCompared(font.id);
-      const next = !current;
-      toggleFont(font);
-      changeCompareState(
-        {
-          fontId: font.id,
-          request: { isCompared: next },
+  const handleToggleCompare = (
+    isCompared: boolean,
+    font: FontItemType,
+    fontId: number,
+  ) => {
+    changeCompareState(
+      {
+        fontId,
+        request: { isCompared: !isCompared },
+      },
+      {
+        onSuccess: () => {
+          queryClient.invalidateQueries({
+            queryKey: [queryKey.GET_COMPARE_FONT_PREVIEW, userId],
+          });
+          queryClient.invalidateQueries({
+            queryKey: [queryKey.GET_COMPARE, userId],
+          });
+          queryClient.invalidateQueries({
+            queryKey: [queryKey.GET_FONTS, userId],
+          });
         },
-        {
-          onSuccess: () => {
-            queryClient.invalidateQueries({
-              queryKey: [queryKey.GET_COMPARE_FONT_PREVIEW, userId],
-            });
-            queryClient.invalidateQueries({
-              queryKey: [queryKey.GET_COMPARE, userId],
-            });
-          },
-        },
-      );
-      return {
-        ...prev,
-        [font.id]: next,
-      };
-    });
+      },
+    );
+    toggleFont(font);
   };
 
-  const handleToggleLike = (font: FontItemType) => {
-    setIsLikeState((prev) => {
-      const current = prev[font.id] ?? getLiked(font.id);
-      const next = !current;
-      changeLikeState(
-        {
-          fontId: font.id,
-          request: { isLiked: next },
-        },
-        {
-          onSuccess: () => {
-            // @TODO
-            // queryClient.invalidateQueries({
-            //   queryKey: [queryKey.GET_LIKE, userId],
-            // });
-            toggleFont(font);
-          },
-        },
-      );
-      return {
-        ...prev,
-        [font.id]: next,
-      };
+  const handleToggleLike = (isLiked: boolean, fontId: number) => {
+    changeLikeState({
+      fontId,
+      request: { isLiked: !isLiked },
     });
   };
 
@@ -164,7 +134,6 @@ const FreeFont = () => {
   const handleResetFilters = useCallback(() => {
     setFilters({ ...INITIAL_FILTERS });
   }, []);
-
   return (
     <div className={styles.container}>
       <Banner />
@@ -197,10 +166,12 @@ const FreeFont = () => {
                   key={font.id}
                   {...font}
                   globalPhrase={previewText}
-                  isCompared={getCompared(font.id)}
-                  onToggleCompare={() => handleToggleCompare(font)}
-                  onToggleLike={() => handleToggleLike(font)}
-                  isLiked={getLiked(font.id)}
+                  isCompared={isSelected(font.id)}
+                  isLiked={font.isLiked}
+                  onToggleCompare={() =>
+                    handleToggleCompare(isSelected(font.id), font, font.id)
+                  }
+                  onToggleLike={() => handleToggleLike(font.isLiked, font.id)}
                 />
               ))}
             </div>
@@ -211,10 +182,12 @@ const FreeFont = () => {
                   key={font.id}
                   {...font}
                   globalPhrase={previewText}
-                  isCompared={getCompared(font.id)}
-                  onToggleCompare={() => handleToggleCompare(font)}
-                  onToggleLike={() => handleToggleLike(font)}
-                  isLiked={getLiked(font.id)}
+                  isCompared={isSelected(font.id)}
+                  isLiked={font.isLiked}
+                  onToggleCompare={() =>
+                    handleToggleCompare(isSelected(font.id), font, font.id)
+                  }
+                  onToggleLike={() => handleToggleLike(font.isLiked, font.id)}
                 />
               ))}
             </div>
