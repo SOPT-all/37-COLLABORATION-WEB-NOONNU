@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
 
-import { usePostCompare } from '@/shared/apis/domain/user-font';
+import { usePostCompare, usePostLike } from '@/shared/apis/domain/user-font';
 import CardView from '@/shared/components/card-view/card-view';
 import ListView from '@/shared/components/list-view/list-view';
 import SidePanel from '@/shared/components/side-panel/side-panel';
@@ -24,6 +24,7 @@ const FreeFont = () => {
     useFontSelection();
 
   const { mutate: changeCompareState } = usePostCompare();
+  const { mutate: changeLikeState } = usePostLike();
 
   const handleToggleCompare = (
     isCompared: boolean,
@@ -35,6 +36,13 @@ const FreeFont = () => {
       request: { isCompared: !isCompared },
     });
     toggleFont(font);
+  };
+
+  const handleToggleLike = (isLiked: boolean, fontId: number) => {
+    changeLikeState({
+      fontId,
+      request: { isLiked: !isLiked },
+    });
   };
 
   const handleSizeChange = useCallback(
@@ -80,7 +88,7 @@ const FreeFont = () => {
                   onToggleCompare={() =>
                     handleToggleCompare(isSelected(font.id), font, font.id)
                   }
-                  onToggleLike={() => {}}
+                  onToggleLike={() => handleToggleLike(font.isLiked, font.id)}
                 />
               ))}
             </div>
@@ -95,7 +103,7 @@ const FreeFont = () => {
                   onToggleCompare={() =>
                     handleToggleCompare(isSelected(font.id), font, font.id)
                   }
-                  onToggleLike={() => {}}
+                  onToggleLike={() => handleToggleLike(font.isLiked, font.id)}
                 />
               ))}
             </div>

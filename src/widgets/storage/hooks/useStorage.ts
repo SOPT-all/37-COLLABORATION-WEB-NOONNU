@@ -24,14 +24,6 @@ export const useStorage = () => {
     );
   }
 
-  if (ui.currentTab === 'bookmark') {
-    displayFonts = displayFonts.filter((font) => font.isLiked);
-  }
-
-  if (ui.currentTab === 'compare') {
-    displayFonts = displayFonts.filter((font) => font.isCompared);
-  }
-
   const handleNavigateToFree = () => navigate(routePath.FREE);
 
   return {

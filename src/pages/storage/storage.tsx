@@ -1,4 +1,4 @@
-import { usePostCompare } from '@/shared/apis/domain/user-font';
+import { usePostCompare, usePostLike } from '@/shared/apis/domain/user-font';
 import {
   DeleteButtonBar,
   FontCardView,
@@ -15,6 +15,7 @@ import * as styles from './storage.css';
 const Storage = () => {
   const { uiState, actionState, fonts, displayFonts, actions } = useStorage();
   const { mutate: changeCompareState } = usePostCompare();
+  const { mutate: changeLikeState } = usePostLike();
 
   const handleToggleCompare = (fontId: number) => {
     const target = fonts.find((font) => font.id === fontId);
@@ -29,6 +30,21 @@ const Storage = () => {
       request: { isCompared: nextCompareState },
     });
     actions.handleToggleCompare(fontId);
+  };
+
+  const handleToggleLike = (fontId: number) => {
+    const target = fonts.find((font) => font.id === fontId);
+    if (!target) {
+      return;
+    }
+
+    const nextLikeState = !target.isLiked;
+
+    changeLikeState({
+      fontId,
+      request: { isLiked: nextLikeState },
+    });
+    actions.handleToggleLike(fontId);
   };
 
   return (
@@ -67,14 +83,14 @@ const Storage = () => {
               <FontCardView
                 items={displayFonts}
                 globalPhrase={actionState.globalPhrase}
-                onToggleLike={actions.handleToggleLike}
+                onToggleLike={handleToggleLike}
                 onToggleCompare={handleToggleCompare}
               />
             ) : (
               <FontListView
                 items={displayFonts}
                 globalPhrase={actionState.globalPhrase}
-                onToggleLike={actions.handleToggleLike}
+                onToggleLike={handleToggleLike}
                 onToggleCompare={handleToggleCompare}
               />
             )}

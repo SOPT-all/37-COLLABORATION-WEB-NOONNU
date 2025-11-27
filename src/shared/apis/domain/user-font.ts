@@ -4,7 +4,7 @@ import { END_POINT } from '../config/end-point';
 import { instance } from '../instance';
 import { queryClient } from '../query-client';
 import type { ApiResponse } from '../types/api-response';
-import type { CompareStateRequest } from '../types/user-font';
+import type { CompareStateRequest, LikeStateRequest } from '../types/user-font';
 
 const userId = 1;
 
@@ -41,6 +41,32 @@ export const usePostCompare = () => {
 /**
  * 폰트 좋아요 상태 변경
  */
+const postLike = async (fontId: number, request: LikeStateRequest) => {
+  const response = await instance.post<ApiResponse<null>>(
+    END_POINT.LIKE_STATE_CHANGE(fontId),
+    request,
+    {
+      headers: {
+        userId: userId,
+      },
+    },
+  );
+  return response.data;
+};
+export const usePostLike = () => {
+  return useMutation({
+    mutationFn: ({
+      fontId,
+      request,
+    }: {
+      fontId: number;
+      request: LikeStateRequest;
+    }) => postLike(fontId, request),
+    onSuccess: () => {
+      queryClient.invalidateQueries({});
+    },
+  });
+};
 
 /**
  * 좋아요한 폰트 목록 조회
