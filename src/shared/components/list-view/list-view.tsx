@@ -22,7 +22,7 @@ interface ListViewProps {
   isCompared: boolean;
   fontMetadata: FontMetadataType;
   globalPhrase: string;
-  onToggleLike: (id: number) => void;
+  onToggleLike: (id: number, name: string, isCompared: boolean) => void;
   onToggleCompare: (id: number) => void;
 }
 
@@ -88,7 +88,7 @@ const ListView = ({
             <button
               type='button'
               aria-label='찜 목록에 추가'
-              onClick={() => onToggleLike(id)}
+              onClick={() => onToggleLike(id, name, isCompared)}
             >
               {isLiked ? (
                 <StarColorIcon width={24} height={24} />

@@ -22,7 +22,7 @@ interface CardViewProps {
   isCompared: boolean;
   fontMetadata: FontMetadataType;
   globalPhrase: string;
-  onToggleLike: (id: number) => void;
+  onToggleLike: (id: number, name: string, isCompared: boolean) => void;
   onToggleCompare: (id: number) => void;
 }
 
@@ -99,7 +99,7 @@ const CardView = ({
             <button
               type='button'
               aria-label='찜 목록에 추가'
-              onClick={() => onToggleLike(id)}
+              onClick={() => onToggleLike(id, name, isLiked)}
             >
               {isLiked ? (
                 <StarColorIcon width={24} height={24} />

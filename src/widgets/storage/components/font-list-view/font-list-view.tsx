@@ -6,7 +6,7 @@ import * as styles from './font-list-view.css';
 interface FontListViewProps {
   items: FontItemType[];
   globalPhrase: string;
-  onToggleLike: (id: number) => void;
+  onToggleLike: (id: number, name: string, isCompared: boolean) => void;
   onToggleCompare: (id: number) => void;
   getCompared: (id: number) => boolean;
   getLiked: (id: number) => boolean;

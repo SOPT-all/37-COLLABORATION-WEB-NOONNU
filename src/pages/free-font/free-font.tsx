@@ -35,7 +35,8 @@ const FreeFont = () => {
   const [filters, setFilters] = useState<Filters>({ ...INITIAL_FILTERS });
 
   const { fonts, isLoading } = useFilteredFonts(filters, sort);
-  const { toggleFont, deleteFont, clearFonts, isSelected } = useFontSelection();
+  const { toggleFont, isSelected } = useFontSelection();
+  const { mutate: deleteCompare } = usePostCompare();
 
   useEffect(() => {
     if (fonts.length > 0) {
@@ -130,6 +131,31 @@ const FreeFont = () => {
   const handleResetFilters = useCallback(() => {
     setFilters({ ...INITIAL_FILTERS });
   }, []);
+
+  const deleteFont = (fontId: number, fontName: string) => {
+    const isDelete = window.confirm(`${fontName}을(를) 삭제할까요?`);
+    if (!isDelete) {
+      return;
+    }
+    deleteCompare(
+      {
+        fontId,
+        request: { isCompared: false },
+      },
+      {
+        onSuccess: () => {
+          queryClient.invalidateQueries({
+            queryKey: [queryKey.GET_COMPARE_FONT_PREVIEW, userId],
+          });
+
+          queryClient.invalidateQueries({
+            queryKey: [queryKey.GET_FONTS],
+          });
+        },
+      },
+    );
+  };
+
   return (
     <div className={styles.container}>
       <Banner />
@@ -191,7 +217,7 @@ const FreeFont = () => {
         </div>
       </div>
       <TopButton />
-      <FloatingButton onDeleteFont={deleteFont} onDeleteAll={clearFonts} />
+      <FloatingButton onDeleteFont={deleteFont} />
     </div>
   );
 };
