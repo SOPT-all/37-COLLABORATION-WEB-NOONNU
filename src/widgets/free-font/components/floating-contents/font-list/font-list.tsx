@@ -11,7 +11,7 @@ interface FontListProps {
   id: number;
   fontName: string;
   fontMetadata: FontMetadataType;
-  onDelete: (id: number) => void;
+  onDelete: (id: number, name: string) => void;
 }
 
 const FontList = ({ id, fontName, fontMetadata, onDelete }: FontListProps) => {
@@ -30,7 +30,7 @@ const FontList = ({ id, fontName, fontMetadata, onDelete }: FontListProps) => {
       </div>
       <button
         className={styles.deleteBtn}
-        onClick={() => onDelete(id)}
+        onClick={() => onDelete(id, fontName)}
         aria-label='찜목록에서 제외'
       >
         <DeleteIcon />

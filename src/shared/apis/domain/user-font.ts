@@ -131,6 +131,12 @@ export const useCompareResetAll = () => {
       queryClient.invalidateQueries({
         queryKey: [queryKey.GET_COMPARE, userId],
       });
+      queryClient.invalidateQueries({
+        queryKey: [queryKey.GET_FONTS],
+      });
+      queryClient.invalidateQueries({
+        queryKey: [queryKey.GET_COMPARE_FONT_PREVIEW, userId],
+      });
     },
   });
 };
