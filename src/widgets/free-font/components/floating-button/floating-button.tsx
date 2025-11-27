@@ -36,13 +36,15 @@ const FloatingButton = ({ onDeleteFont, onDeleteAll }: FloatingButtonProps) => {
       onMouseEnter={handleHoverStart}
       onMouseLeave={handleHoverEnd}
     >
-      <TopButton />
-      {isList && hasFonts && (
-        <div className={styles.popupContainer}>
-          <DeleteButton onClick={onDeleteAll} />
-          <FontListBox fonts={selectedFonts} onDeleteFont={onDeleteFont} />
-        </div>
-      )}
+      <div className={styles.buttonContainer}>
+        <TopButton />
+        {isList && hasFonts && (
+          <div className={styles.popupContainer}>
+            <DeleteButton onClick={onDeleteAll} />
+            <FontListBox fonts={selectedFonts} onDeleteFont={onDeleteFont} />
+          </div>
+        )}
+      </div>
 
       <CompareFloatingButton
         count={selectedFonts.length}

@@ -12,9 +12,8 @@ export const button = style({
 
   position: 'sticky',
   display: 'flex',
-  marginRight: '-0.35rem',
 
-  marginBottom: '2.8rem',
+  marginBottom: '1.2rem',
   marginLeft: 'auto',
   backgroundColor: themeVars.color.white,
   border: `1px solid ${themeVars.color.gray_03}`,
