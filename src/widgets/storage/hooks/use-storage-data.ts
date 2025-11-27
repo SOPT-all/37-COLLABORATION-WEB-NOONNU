@@ -22,18 +22,11 @@ export const useStorageData = () => {
     );
   };
 
-  const handleDeleteAll = () => {
-    if (confirm('폰트비교에 담긴 모든 폰트를 삭제할까요?')) {
-      setFonts([]);
-    }
-  };
-
   return {
     fonts,
     actions: {
       handleToggleLike,
       handleToggleCompare,
-      handleDeleteAll,
     },
   };
 };

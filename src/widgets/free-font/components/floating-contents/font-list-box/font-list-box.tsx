@@ -7,7 +7,7 @@ import * as styles from './font-list-box.css';
 
 interface FontListBoxProps {
   fonts: CompareFontPreviewType[];
-  onDeleteFont: (id: number) => void;
+  onDeleteFont: (id: number, name: string) => void;
 }
 
 const FontListBox = ({ fonts, onDeleteFont }: FontListBoxProps) => {

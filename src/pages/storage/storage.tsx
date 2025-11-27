@@ -1,6 +1,8 @@
 import { useCallback, useMemo, useState } from 'react';
+import { toast } from 'react-toastify';
 
 import {
+  useCompareResetAll,
   useGetCompare,
   useGetLiked,
   usePostCompare,
@@ -8,6 +10,7 @@ import {
 } from '@/shared/apis/domain/user-font';
 import { queryKey } from '@/shared/apis/keys/query-key';
 import { queryClient } from '@/shared/apis/query-client';
+import Toast from '@/shared/components/toast/toast';
 import {
   type FilterKey,
   type Filters,
@@ -15,6 +18,7 @@ import {
 } from '@/shared/constants/filter-keys';
 import { useFilteredFonts } from '@/shared/hooks/use-filtered-fonts';
 import type { FontItemType } from '@/shared/types/font';
+import type { ToastProps } from '@/shared/types/toast';
 import {
   DeleteButtonBar,
   FontCardView,
@@ -35,6 +39,7 @@ const Storage = () => {
 
   const { mutate: changeCompareState } = usePostCompare();
   const { mutate: changeLikeState } = usePostLike();
+  const { mutate: deleteAllCompare } = useCompareResetAll();
 
   const { data: comparedData = [] } = useGetCompare();
   const { data: likedData = [] } = useGetLiked();
@@ -60,6 +65,10 @@ const Storage = () => {
     }
     const server = likedData.find((font) => font.id === id);
     return server?.isLiked ?? false;
+  };
+
+  const showToast = (props: Omit<ToastProps, 'onClose'>) => {
+    toast(({ closeToast }) => <Toast {...props} onClose={closeToast} />);
   };
 
   const [filters, setFilters] = useState<Filters>({ ...INITIAL_FILTERS });
@@ -120,30 +129,46 @@ const Storage = () => {
     });
   };
 
-  const handleToggleLike = (fontId: number) => {
-    setIsLikedState((prev) => {
-      const current = prev[fontId] ?? getLiked(fontId);
-      const next = !current;
+  const handleToggleLike = (fontId: number, fontName: string) => {
+    const current = getLiked(fontId);
+    const next = !current;
 
-      changeLikeState(
-        {
-          fontId,
-          request: { isLiked: next },
+    setIsLikedState((prev) => ({
+      ...prev,
+      [fontId]: next,
+    }));
+    changeLikeState(
+      {
+        fontId,
+        request: { isLiked: next },
+      },
+      {
+        onSuccess: () => {
+          queryClient.invalidateQueries({
+            queryKey: [queryKey.GET_FONTS],
+          });
         },
-        {
-          onSuccess: () => {
-            queryClient.invalidateQueries({
-              queryKey: [queryKey.GET_FONTS],
-            });
-          },
-        },
-      );
+      },
+    );
+    if (next) {
+      showToast({ fontName, status: 'added' });
+    } else {
+      showToast({ fontName, status: 'removed' });
+    }
+  };
 
-      return {
-        ...prev,
-        [fontId]: next,
-      };
-    });
+  const onDeleteAllCompare = () => {
+    const fontIds = comparedData.map((font) => font.id);
+    if (fontIds.length === 0) {
+      return;
+    }
+    const shouldDelete = window.confirm(
+      '폰트 비교에 담긴 모든 폰트를 삭제할까요?',
+    );
+    if (!shouldDelete) {
+      return;
+    }
+    deleteAllCompare(fontIds);
   };
 
   return (
@@ -179,9 +204,8 @@ const Storage = () => {
               onSortChange={actions.setSortOption}
             />
             {uiState.currentTab === 'compare' && (
-              <DeleteButtonBar onClick={actions.handleDeleteAll} />
+              <DeleteButtonBar onClick={onDeleteAllCompare} />
             )}
-
             {uiState.viewMode === 'grid' ? (
               <FontCardView
                 items={
