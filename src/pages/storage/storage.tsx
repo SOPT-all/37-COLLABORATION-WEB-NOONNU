@@ -43,6 +43,7 @@ const Storage = () => {
     const server = comparedData.find((font) => font.id === id);
     return server?.isCompared ?? false;
   };
+
   const [filters, setFilters] = useState<Filters>({ ...INITIAL_FILTERS });
 
   const handleToggleFilter = useCallback((key: FilterKey) => {

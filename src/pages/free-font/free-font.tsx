@@ -46,44 +46,65 @@ const FreeFont = () => {
 
   const { data: fontsData, isLoading } = useGetFonts(apiParams);
 
+  const [isComparedState, setIsComparedState] = useState<
+    Record<number, boolean>
+  >({});
+
+  const getCompared = (id: number): boolean => {
+    const local = isComparedState[id];
+    if (local !== undefined) {
+      return local;
+    }
+    const server = fontsData?.result.fonts.find((font) => font.id === id);
+    return server?.isCompared ?? false;
+  };
+
   const fonts: FontItemType[] = useMemo(() => {
     if (!fontsData?.result?.fonts) {
       return [];
     }
     return fontsData.result.fonts.map(mapFontResponseToFontItem);
   }, [fontsData]);
-  const { selectedFonts, toggleFont, deleteFont, clearFonts, isSelected } =
+  const { selectedFonts, toggleFont, deleteFont, clearFonts } =
     useFontSelection();
 
   const { mutate: changeCompareState } = usePostCompare();
   const { mutate: changeLikeState } = usePostLike();
 
-  const handleToggleCompare = (
-    isCompared: boolean,
-    font: FontItemType,
-    fontId: number,
-  ) => {
-    changeCompareState(
-      {
-        fontId,
-        request: { isCompared: !isCompared },
-      },
-      {
-        onSuccess: () => {
-          queryClient.invalidateQueries({
-            queryKey: [queryKey.GET_COMPARE, userId],
-          });
-          toggleFont(font);
+  const handleToggleCompare = (font: FontItemType) => {
+    setIsComparedState((prev) => {
+      const current = prev[font.id] ?? getCompared(font.id);
+      const next = !current;
+      changeCompareState(
+        {
+          fontId: font.id,
+          request: { isCompared: next },
         },
-      },
-    );
-    toggleFont(font);
+        {
+          onSuccess: () => {
+            queryClient.invalidateQueries({
+              queryKey: [queryKey.GET_COMPARE, userId],
+            });
+            toggleFont(font);
+          },
+        },
+      );
+      return {
+        ...prev,
+        [font.id]: next,
+      };
+    });
   };
 
-  const handleToggleLike = (isLiked: boolean, fontId: number) => {
+  const handleToggleLike = (fontId: number) => {
+    const target = fonts.find((font) => font.id === fontId);
+    if (!target) {
+      return;
+    }
+    const nextLikeState = !target.isLiked;
     changeLikeState({
       fontId,
-      request: { isLiked: !isLiked },
+      request: { isLiked: nextLikeState },
     });
   };
 
@@ -149,11 +170,9 @@ const FreeFont = () => {
                   key={font.id}
                   {...font}
                   globalPhrase={previewText}
-                  isCompared={isSelected(font.id)}
-                  onToggleCompare={() =>
-                    handleToggleCompare(isSelected(font.id), font, font.id)
-                  }
-                  onToggleLike={() => handleToggleLike(font.isLiked, font.id)}
+                  isCompared={getCompared(font.id)}
+                  onToggleCompare={() => handleToggleCompare(font)}
+                  onToggleLike={() => handleToggleLike(font.id)}
                 />
               ))}
             </div>
@@ -164,11 +183,9 @@ const FreeFont = () => {
                   key={font.id}
                   {...font}
                   globalPhrase={previewText}
-                  isCompared={isSelected(font.id)}
-                  onToggleCompare={() =>
-                    handleToggleCompare(isSelected(font.id), font, font.id)
-                  }
-                  onToggleLike={() => handleToggleLike(font.isLiked, font.id)}
+                  isCompared={getCompared(font.id)}
+                  onToggleCompare={() => handleToggleCompare(font)}
+                  onToggleLike={() => handleToggleLike(font.id)}
                 />
               ))}
             </div>
