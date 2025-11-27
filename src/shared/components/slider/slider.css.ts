@@ -7,6 +7,7 @@ export const container = style({
   height: '2rem',
   gap: '0.8rem',
   alignItems: 'center',
+  width: '100%',
 });
 
 export const label = style({
@@ -19,10 +20,11 @@ export const sliderContainer = style({
   display: 'flex',
   gap: '0.8rem',
   alignItems: 'center',
+  flex: 1,
 });
 
 export const slider = style({
-  minWidth: '100%',
+  width: '100%',
   WebkitAppearance: 'none',
 
   selectors: {

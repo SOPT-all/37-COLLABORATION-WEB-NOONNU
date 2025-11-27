@@ -7,6 +7,7 @@ import { useGetComparePreview } from '@/shared/apis/domain/user-font';
 import CompareFloatingButton from '../compare-floating-button/compare-floating-button';
 import DeleteButton from '../floating-contents/delete-floating-button/delete-button';
 import FontListBox from '../floating-contents/font-list-box/font-list-box';
+import TopButton from '../top-button/top-button';
 import * as styles from './floating-button.css';
 
 interface FloatingButtonProps {
@@ -36,12 +37,15 @@ const FloatingButton = ({ onDeleteFont, onDeleteAll }: FloatingButtonProps) => {
       onMouseEnter={handleHoverStart}
       onMouseLeave={handleHoverEnd}
     >
-      {isList && hasFonts && (
-        <div className={styles.popupContainer}>
-          <DeleteButton onClick={onDeleteAll} />
-          <FontListBox fonts={selectedFonts} onDeleteFont={onDeleteFont} />
-        </div>
-      )}
+      <div className={styles.buttonContainer}>
+        <TopButton />
+        {isList && hasFonts && (
+          <div className={styles.popupContainer}>
+            <DeleteButton onClick={onDeleteAll} />
+            <FontListBox fonts={selectedFonts} onDeleteFont={onDeleteFont} />
+          </div>
+        )}
+      </div>
 
       <CompareFloatingButton
         count={selectedFonts.length}

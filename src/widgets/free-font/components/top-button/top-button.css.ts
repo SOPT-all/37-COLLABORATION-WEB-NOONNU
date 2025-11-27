@@ -9,13 +9,12 @@ export const button = style({
   alignItems: 'center',
   justifyContent: 'center',
   color: themeVars.color.gray_03,
-  marginBottom: '2.4rem',
 
   position: 'sticky',
   display: 'flex',
-  marginRight: '-0.35rem',
-  marginLeft: 'auto',
 
+  marginBottom: '1.2rem',
+  marginLeft: 'auto',
   backgroundColor: themeVars.color.white,
   border: `1px solid ${themeVars.color.gray_03}`,
 });
