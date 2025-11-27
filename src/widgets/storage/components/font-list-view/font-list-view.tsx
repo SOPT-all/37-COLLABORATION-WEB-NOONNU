@@ -8,6 +8,7 @@ interface FontListViewProps {
   globalPhrase: string;
   onToggleLike: (id: number) => void;
   onToggleCompare: (id: number) => void;
+  getCompared: (id: number) => boolean;
 }
 
 const FontListView = ({
@@ -15,6 +16,7 @@ const FontListView = ({
   globalPhrase,
   onToggleLike,
   onToggleCompare,
+  getCompared,
 }: FontListViewProps) => {
   return (
     <div className={styles.listContainer}>
@@ -25,6 +27,7 @@ const FontListView = ({
           globalPhrase={globalPhrase}
           onToggleCompare={onToggleCompare}
           onToggleLike={onToggleLike}
+          isCompared={getCompared(item.id)}
         />
       ))}
     </div>

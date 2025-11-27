@@ -1,0 +1,52 @@
+import { useNavigate } from 'react-router';
+
+import { routePath } from '@/router/path';
+import { useStorageAction } from '@/widgets/storage/hooks/use-storage-action';
+import { useStorageUI } from '@/widgets/storage/hooks/use-storage-ui';
+
+import { useStorageData } from './use-storage-data';
+
+export const useStorage = () => {
+  const navigate = useNavigate();
+
+  const ui = useStorageUI();
+  const action = useStorageAction();
+  const data = useStorageData();
+
+  let displayFonts = data.fonts;
+
+  if (action.searchText) {
+    const lowerSearch = action.searchText.toLowerCase();
+    displayFonts = displayFonts.filter(
+      (font) =>
+        font.name.toLowerCase().includes(lowerSearch) ||
+        font.producer.toLowerCase().includes(lowerSearch),
+    );
+  }
+
+  const handleNavigateToFree = () => navigate(routePath.FREE);
+
+  return {
+    uiState: {
+      viewMode: ui.viewMode,
+      currentTab: ui.currentTab,
+    },
+
+    actionState: {
+      globalPhrase: action.globalPhrase,
+      fontSize: action.fontSize,
+      searchText: action.searchText,
+      sortOption: action.sortOption,
+    },
+
+    displayFonts,
+
+    actions: {
+      ...ui.actions,
+      ...action.actions,
+      ...data.actions,
+      handleNavigateToFree,
+    },
+    fonts: data.fonts,
+  };
+};
