@@ -52,4 +52,5 @@ export const slider = style({
 export const value = style({
   ...themeVars.fontStyles.body_14r,
   color: themeVars.color.black,
+  whiteSpace: 'nowrap',
 });

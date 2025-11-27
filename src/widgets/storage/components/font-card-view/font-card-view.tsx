@@ -8,6 +8,8 @@ interface FontCardViewProps {
   globalPhrase: string;
   onToggleLike: (id: number) => void;
   onToggleCompare: (id: number) => void;
+  getCompared: (id: number) => boolean;
+  getLiked: (id: number) => boolean;
 }
 
 const FontCardView = ({
@@ -15,6 +17,8 @@ const FontCardView = ({
   globalPhrase,
   onToggleLike,
   onToggleCompare,
+  getCompared,
+  getLiked,
 }: FontCardViewProps) => {
   return (
     <div className={styles.gridContainer}>
@@ -25,6 +29,8 @@ const FontCardView = ({
           globalPhrase={globalPhrase}
           onToggleCompare={onToggleCompare}
           onToggleLike={onToggleLike}
+          isCompared={getCompared(item.id)}
+          isLiked={getLiked(item.id)}
         />
       ))}
     </div>
