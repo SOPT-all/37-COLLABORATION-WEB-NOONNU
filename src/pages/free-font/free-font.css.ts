@@ -1,15 +1,23 @@
 import { style } from '@vanilla-extract/css';
 
 export const container = style({
+  display: 'flex',
+  flexDirection: 'column',
   padding: '2rem 3.2rem 6.8rem',
-  width: '100%',
-  minHeight: '100vh',
 });
 
 export const article = style({
   display: 'flex',
   paddingTop: '2rem',
   gap: '3.6rem',
+  alignItems: 'flex-start',
+});
+
+export const sidePanelContainer = style({
+  width: '31.2rem',
+  flexShrink: 0,
+  position: 'sticky',
+  top: '4rem',
 });
 
 export const rightSection = style({

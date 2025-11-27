@@ -139,11 +139,13 @@ const FreeFont = () => {
       <Banner />
 
       <div className={styles.article}>
-        <SidePanel
-          filters={filters}
-          onToggleFilter={handleToggleFilter}
-          onReset={handleResetFilters}
-        />
+        <div className={styles.sidePanelContainer}>
+          <SidePanel
+            filters={filters}
+            onToggleFilter={handleToggleFilter}
+            onReset={handleResetFilters}
+          />
+        </div>
 
         <div className={styles.rightSection}>
           <FontToolBar
