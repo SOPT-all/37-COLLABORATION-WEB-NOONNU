@@ -32,3 +32,7 @@ export interface ComparedFont {
 export interface CompareResult {
   items: ComparedFont[];
 }
+
+export interface LikeStateRequest {
+  isLiked: boolean;
+}
