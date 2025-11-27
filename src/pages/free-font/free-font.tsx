@@ -1,6 +1,5 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useState } from 'react';
 
-import { useGetFonts } from '@/shared/apis/domain/font';
 import { usePostCompare, usePostLike } from '@/shared/apis/domain/user-font';
 import { queryKey } from '@/shared/apis/keys/query-key';
 import { queryClient } from '@/shared/apis/query-client';
@@ -13,12 +12,10 @@ import {
   type Filters,
   INITIAL_FILTERS,
 } from '@/shared/constants/filter-keys';
+import { useFilteredFonts } from '@/shared/hooks/use-filtered-fonts';
 import type { SortType } from '@/shared/types/drop-down';
 import type { FontItemType } from '@/shared/types/font';
 import { type LayoutToggleType, TOGGLE } from '@/shared/types/layout-toggle';
-import { convertFiltersToApiParams } from '@/shared/utils/filter-mapper';
-import { mapFontResponseToFontItem } from '@/shared/utils/font-mapper';
-import { convertSortToApiParam } from '@/shared/utils/sort-mapper';
 import Banner from '@/widgets/free-font/components/banner/banner';
 import FloatingButton from '@/widgets/free-font/components/floating-button/floating-button';
 import FontToolBar from '@/widgets/free-font/components/font-toolbar/font-toolbar';
@@ -36,15 +33,7 @@ const FreeFont = () => {
   const [sort, setSort] = useState<SortType>('인기순');
   const [filters, setFilters] = useState<Filters>({ ...INITIAL_FILTERS });
 
-  const apiParams = useMemo(() => {
-    const filterParams = convertFiltersToApiParams(filters);
-    return {
-      sortBy: convertSortToApiParam(sort),
-      ...filterParams,
-    };
-  }, [sort, filters]);
-
-  const { data: fontsData, isLoading } = useGetFonts(apiParams);
+  const { fonts, isLoading } = useFilteredFonts(filters, sort);
 
   const [isComparedState, setIsComparedState] = useState<
     Record<number, boolean>
@@ -56,7 +45,7 @@ const FreeFont = () => {
     if (local !== undefined) {
       return local;
     }
-    const server = fontsData?.result.fonts.find((font) => font.id === id);
+    const server = fonts.find((font) => font.id === id);
     return server?.isCompared ?? false;
   };
 
@@ -65,16 +54,9 @@ const FreeFont = () => {
     if (local !== undefined) {
       return local;
     }
-    const server = fontsData?.result.fonts.find((font) => font.id === id);
+    const server = fonts.find((font) => font.id === id);
     return server?.isLiked ?? false;
   };
-
-  const fonts: FontItemType[] = useMemo(() => {
-    if (!fontsData?.result?.fonts) {
-      return [];
-    }
-    return fontsData.result.fonts.map(mapFontResponseToFontItem);
-  }, [fontsData]);
   const { selectedFonts, toggleFont, deleteFont, clearFonts } =
     useFontSelection();
 
