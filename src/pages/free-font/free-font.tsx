@@ -22,7 +22,6 @@ import { convertSortToApiParam } from '@/shared/utils/sort-mapper';
 import Banner from '@/widgets/free-font/components/banner/banner';
 import FloatingButton from '@/widgets/free-font/components/floating-button/floating-button';
 import FontToolBar from '@/widgets/free-font/components/font-toolbar/font-toolbar';
-import TopButton from '@/widgets/free-font/components/top-button/top-button';
 import { useFontSelection } from '@/widgets/free-font/hooks/use-font-selection';
 
 import * as styles from './free-font.css';
@@ -196,7 +195,6 @@ const FreeFont = () => {
           )}
         </div>
       </div>
-      <TopButton />
       <FloatingButton onDeleteFont={deleteFont} onDeleteAll={clearFonts} />
     </div>
   );

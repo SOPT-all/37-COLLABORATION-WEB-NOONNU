@@ -13,7 +13,7 @@ export const button = style({
   position: 'sticky',
   display: 'flex',
   marginRight: '-0.35rem',
-  marginTop: '-13rem',
+
   marginBottom: '2.8rem',
   marginLeft: 'auto',
   backgroundColor: themeVars.color.white,

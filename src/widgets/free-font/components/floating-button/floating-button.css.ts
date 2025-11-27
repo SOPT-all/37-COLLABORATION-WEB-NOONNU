@@ -8,6 +8,7 @@ export const container = style({
   bottom: '4.8rem',
   width: 'fit-content',
   marginLeft: 'auto',
+  marginTop: '-13rem',
 });
 
 export const popupContainer = style({
