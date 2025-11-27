@@ -1,6 +1,5 @@
 import { memo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import type { FontItemType } from '@/shared/types/font';
 import { routePath } from '@/router/path';
 import { useGetComparePreview } from '@/shared/apis/domain/user-font';
 import CompareFloatingButton from '../compare-floating-button/compare-floating-button';
@@ -17,15 +16,7 @@ const FloatingButton = ({ onDeleteFont, onDeleteAll }: FloatingButtonProps) => {
   const [isList, setIsList] = useState(false);
   const { data } = useGetComparePreview();
 
-  const selectedFonts = (data?.map((item) => ({
-    id: item.id,
-    name: item.name,
-    company: '',
-    owner: '',
-    category: '',
-    isFree: true,
-    fontMetadata: {},
-  })) || []) as unknown as FontItemType[];
+  const selectedFonts = data || [];
 
   console.log(selectedFonts);
 
