@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import Accordion from '@/shared/components/accordion/accordion';
 import AllowedRangeChip from '@/shared/components/chip/allowed-range-chip';
 import TitleChip from '@/shared/components/chip/title-chip';
@@ -11,29 +9,20 @@ import {
   SHAPE_ITEMS,
   USAGE_SECTIONS,
 } from '@/shared/constants/filter-data';
-import {
-  type FilterKey,
-  type Filters,
-  INITIAL_FILTERS,
-} from '@/shared/constants/filter-keys';
+import { type FilterKey, type Filters } from '@/shared/constants/filter-keys';
 import { FilterIcon, ResetIcon } from '@/shared/icons';
 
 import * as styles from './side-panel.css';
+import { useState } from 'react';
 
-const SidePanel = () => {
-  const [filters, setFilters] = useState<Filters>({ ...INITIAL_FILTERS });
+interface SidePanelProps {
+  filters: Filters;
+  onToggleFilter: (key: FilterKey) => void;
+  onReset: () => void;
+}
+
+const SidePanel = ({ filters, onToggleFilter, onReset }: SidePanelProps) => {
   const [weightCount, setWeightCount] = useState(1);
-
-  const toggleFilter = (key: FilterKey) => {
-    setFilters((prev) => ({
-      ...prev,
-      [key]: !prev[key],
-    }));
-  };
-
-  const handleReset = () => {
-    setFilters({ ...INITIAL_FILTERS });
-  };
 
   return (
     <aside className={styles.container}>
@@ -45,7 +34,7 @@ const SidePanel = () => {
         <button
           type='button'
           className={styles.resetButton}
-          onClick={handleReset}
+          onClick={onReset}
           aria-label='필터 초기화'
         >
           <span className={styles.resetText}>초기화</span>
@@ -68,7 +57,7 @@ const SidePanel = () => {
                       key={item.id}
                       isSelected={filters[item.id]}
                       Icon={item.Icon}
-                      onClick={() => toggleFilter(item.id)}
+                      onClick={() => onToggleFilter(item.id as FilterKey)}
                       label={item.label}
                     />
                   ))}
@@ -88,7 +77,7 @@ const SidePanel = () => {
                       key={item.id}
                       isSelected={filters[item.id]}
                       Icon={item.Icon}
-                      onClick={() => toggleFilter(item.id)}
+                      onClick={() => onToggleFilter(item.id as FilterKey)}
                       label={item.label}
                     />
                   ))}
@@ -108,7 +97,7 @@ const SidePanel = () => {
                       key={item.id}
                       isSelected={filters[item.id]}
                       Icon={item.Icon}
-                      onClick={() => toggleFilter(item.id)}
+                      onClick={() => onToggleFilter(item.id as FilterKey)}
                       label={item.label}
                     />
                   ))}
@@ -127,7 +116,7 @@ const SidePanel = () => {
                     <AllowedRangeChip
                       key={item.id}
                       isSelected={filters[item.id]}
-                      onClick={() => toggleFilter(item.id)}
+                      onClick={() => onToggleFilter(item.id as FilterKey)}
                       label={item.label}
                     />
                   ))}
