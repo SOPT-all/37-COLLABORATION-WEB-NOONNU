@@ -1,41 +1,94 @@
-import { usePostCompare } from '@/shared/apis/domain/user-font';
+import { useCallback, useState } from 'react';
+import { useNavigate } from 'react-router';
+
+import { routePath } from '@/router/path';
+import {
+  useCompareResetAll,
+  useGetCompare,
+  usePostCompare,
+} from '@/shared/apis/domain/user-font';
+import SidePanel from '@/shared/components/side-panel/side-panel';
+import { fontItem } from '@/shared/mocks/font-item';
+import type { SortType } from '@/shared/types/drop-down';
+import type { LayoutToggleType } from '@/shared/types/layout-toggle';
+import type { TabLabelTypes } from '@/shared/types/tab';
 import {
   DeleteButtonBar,
   FontCardView,
   FontListView,
   FontToolBar,
   FreeFontButton,
-  SidePanel,
   Tab,
 } from '@/widgets/storage/components/index.ts';
-import { useStorage } from '@/widgets/storage/hooks/useStorage';
 
 import * as styles from './storage.css';
 
+const FONT_SIZE = 30;
+
 const Storage = () => {
-  const { uiState, actionState, fonts, displayFonts, actions } = useStorage();
+  const navigate = useNavigate();
+
+  const [viewMode, setViewMode] = useState<LayoutToggleType>('list');
+  const [currentTab, setCurrentTab] = useState<TabLabelTypes>('compare');
+  const [globalPhrase, setGlobalPhrase] = useState('');
+  const [fontSize, setFontSize] = useState(FONT_SIZE);
+  const [searchText, setSearchText] = useState('');
+  const [sortOption, setSortOption] = useState<SortType>('인기순');
+
+  const { data: comparedFonts = [] } = useGetCompare();
   const { mutate: changeCompareState } = usePostCompare();
+  const { mutate: resetAllCompare } = useCompareResetAll();
+
+  const handleSizeChange = useCallback(
+    (value: number) => setFontSize(value),
+    [],
+  );
+
+  const handleViewModeChange = () => {
+    setViewMode((prev) => (prev === 'list' ? 'grid' : 'list'));
+  };
+
+  const handleGlobalPhraseChange = (value: string) => {
+    setGlobalPhrase(value);
+  };
+
+  const handleToggleLike = (id: number) => {
+    console.log(id, 'Like 연결');
+    // 추후 API 로직 추가
+  };
 
   const handleToggleCompare = (fontId: number) => {
-    const target = fonts.find((font) => font.id === fontId);
+    const target = comparedFonts.find((font) => font.id === fontId);
     if (!target) {
       return;
     }
-
-    const nextCompareState = !target.isCompared;
-
     changeCompareState({
       fontId,
-      request: { isCompared: nextCompareState },
+      request: { isCompared: !target.isCompared },
     });
-    actions.handleToggleCompare(fontId);
+  };
+
+  const handleDeleteAll = () => {
+    if (!window.confirm('폰트비교에 담긴 모든 폰트를 삭제할까요?')) {
+      return;
+    }
+    const fontIds = comparedFonts.map((font) => font.id);
+    resetAllCompare(fontIds);
+  };
+
+  const handleSearchChange = (value: string) => {
+    setSearchText(value);
   };
 
   return (
     <div className={styles.storagePageContainer}>
       <div className={styles.pageTitle}>
         <h2>보관함</h2>
-        <FreeFontButton onClick={actions.handleNavigateToFree} />
+        <FreeFontButton
+          onClick={() => {
+            navigate(routePath.FREE);
+          }}
+        />
       </div>
 
       <div className={styles.pageMainSection}>
@@ -44,37 +97,37 @@ const Storage = () => {
         </div>
 
         <main className={styles.fontInfoContainer}>
-          <Tab value={uiState.currentTab} onClick={actions.setCurrentTab} />
+          <Tab value={currentTab} onClick={setCurrentTab} />
 
           <div className={styles.fontContent}>
             <FontToolBar
-              viewMode={uiState.viewMode}
-              previewText={actionState.globalPhrase}
-              fontSize={actionState.fontSize}
-              searchText={actionState.searchText}
-              sortOption={actionState.sortOption}
-              onViewModeChange={actions.handleViewModeChange}
-              onPreviewChange={actions.handleGlobalPhraseChange}
-              onSizeChange={actions.handleSizeChange}
-              onSearchChange={actions.handleSearchChange}
-              onSortChange={actions.setSortOption}
+              viewMode={viewMode}
+              previewText={globalPhrase}
+              fontSize={fontSize}
+              searchText={searchText}
+              sortOption={sortOption}
+              onViewModeChange={handleViewModeChange}
+              onPreviewChange={handleGlobalPhraseChange}
+              onSizeChange={handleSizeChange}
+              onSearchChange={handleSearchChange}
+              onSortChange={setSortOption}
             />
-            {uiState.currentTab === 'compare' && (
-              <DeleteButtonBar onClick={actions.handleDeleteAll} />
+            {currentTab === 'compare' && (
+              <DeleteButtonBar onClick={handleDeleteAll} />
             )}
 
-            {uiState.viewMode === 'grid' ? (
+            {viewMode === 'grid' ? (
               <FontCardView
-                items={displayFonts}
-                globalPhrase={actionState.globalPhrase}
-                onToggleLike={actions.handleToggleLike}
+                items={currentTab === 'compare' ? comparedFonts : fontItem}
+                globalPhrase={globalPhrase}
+                onToggleLike={handleToggleLike}
                 onToggleCompare={handleToggleCompare}
               />
             ) : (
               <FontListView
-                items={displayFonts}
-                globalPhrase={actionState.globalPhrase}
-                onToggleLike={actions.handleToggleLike}
+                items={currentTab === 'compare' ? comparedFonts : fontItem}
+                globalPhrase={globalPhrase}
+                onToggleLike={handleToggleLike}
                 onToggleCompare={handleToggleCompare}
               />
             )}
