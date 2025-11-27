@@ -9,7 +9,7 @@ export const loadFont = async (meta: FontMetadataType) => {
 
   const fontFace = new FontFace(meta.fontFamily, `${meta.fontSource}`, {
     weight: meta.fontWeight,
-    display: meta.fontDisplay,
+    display: meta.fontDisplay as 'swap',
     style: 'normal',
   });
 

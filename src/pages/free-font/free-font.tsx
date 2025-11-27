@@ -1,14 +1,24 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
+import { useGetFonts } from '@/shared/apis/domain/font';
 import { usePostCompare, usePostLike } from '@/shared/apis/domain/user-font';
 import { queryKey } from '@/shared/apis/keys/query-key';
 import { queryClient } from '@/shared/apis/query-client';
 import CardView from '@/shared/components/card-view/card-view';
+import EmptyFont from '@/shared/components/empty-font/empty-font';
 import ListView from '@/shared/components/list-view/list-view';
 import SidePanel from '@/shared/components/side-panel/side-panel';
-import { fontItem } from '@/shared/mocks/font-item';
+import {
+  type FilterKey,
+  type Filters,
+  INITIAL_FILTERS,
+} from '@/shared/constants/filter-keys';
+import type { SortType } from '@/shared/types/drop-down';
 import type { FontItemType } from '@/shared/types/font';
 import { type LayoutToggleType, TOGGLE } from '@/shared/types/layout-toggle';
+import { convertFiltersToApiParams } from '@/shared/utils/filter-mapper';
+import { mapFontResponseToFontItem } from '@/shared/utils/font-mapper';
+import { convertSortToApiParam } from '@/shared/utils/sort-mapper';
 import Banner from '@/widgets/free-font/components/banner/banner';
 import FloatingButton from '@/widgets/free-font/components/floating-button/floating-button';
 import FontToolBar from '@/widgets/free-font/components/font-toolbar/font-toolbar';
@@ -23,38 +33,105 @@ const FreeFont = () => {
   const [fontSize, setFontSize] = useState(30);
   const [previewText, setPreviewText] = useState('');
   const [layout, setLayout] = useState<LayoutToggleType>(TOGGLE.GRID);
-  const [fonts] = useState(fontItem);
-  const { toggleFont, deleteFont, clearFonts, isSelected } = useFontSelection();
+
+  const { toggleFont, deleteFont, clearFonts } = useFontSelection();
+  const [sort, setSort] = useState<SortType>('인기순');
+  const [filters, setFilters] = useState<Filters>({ ...INITIAL_FILTERS });
+
+  const apiParams = useMemo(() => {
+    const filterParams = convertFiltersToApiParams(filters);
+    return {
+      sortBy: convertSortToApiParam(sort),
+      ...filterParams,
+    };
+  }, [sort, filters]);
+
+  const { data: fontsData, isLoading } = useGetFonts(apiParams);
+
+  const [isComparedState, setIsComparedState] = useState<
+    Record<number, boolean>
+  >({});
+  const [isLikeState, setIsLikeState] = useState<Record<number, boolean>>({});
+
+  const getCompared = (id: number): boolean => {
+    const local = isComparedState[id];
+    if (local !== undefined) {
+      return local;
+    }
+    const server = fontsData?.result.fonts.find((font) => font.id === id);
+    return server?.isCompared ?? false;
+  };
+
+  const getLiked = (id: number): boolean => {
+    const local = isLikeState[id];
+    if (local !== undefined) {
+      return local;
+    }
+    const server = fontsData?.result.fonts.find((font) => font.id === id);
+    return server?.isLiked ?? false;
+  };
+
+  const fonts: FontItemType[] = useMemo(() => {
+    if (!fontsData?.result?.fonts) {
+      return [];
+    }
+    return fontsData.result.fonts.map(mapFontResponseToFontItem);
+  }, [fontsData]);
 
   const { mutate: changeCompareState } = usePostCompare();
   const { mutate: changeLikeState } = usePostLike();
 
-  const handleToggleCompare = (
-    isCompared: boolean,
-    font: FontItemType,
-    fontId: number,
-  ) => {
-    changeCompareState(
-      {
-        fontId,
-        request: { isCompared: !isCompared },
-      },
-      {
-        onSuccess: () => {
-          queryClient.invalidateQueries({
-            queryKey: [queryKey.GET_COMPARE, userId],
-          });
-          toggleFont(font);
+  const handleToggleCompare = (font: FontItemType) => {
+    setIsComparedState((prev) => {
+      const current = prev[font.id] ?? getCompared(font.id);
+      const next = !current;
+      toggleFont(font);
+      changeCompareState(
+        {
+          fontId: font.id,
+          request: { isCompared: next },
         },
-      },
-    );
-    toggleFont(font);
+        {
+          onSuccess: () => {
+            queryClient.invalidateQueries({
+              queryKey: [queryKey.GET_COMPARE_FONT_PREVIEW, userId],
+            });
+            queryClient.invalidateQueries({
+              queryKey: [queryKey.GET_COMPARE, userId],
+            });
+          },
+        },
+      );
+      return {
+        ...prev,
+        [font.id]: next,
+      };
+    });
   };
 
-  const handleToggleLike = (isLiked: boolean, fontId: number) => {
-    changeLikeState({
-      fontId,
-      request: { isLiked: !isLiked },
+  const handleToggleLike = (font: FontItemType) => {
+    setIsLikeState((prev) => {
+      const current = prev[font.id] ?? getLiked(font.id);
+      const next = !current;
+      changeLikeState(
+        {
+          fontId: font.id,
+          request: { isLiked: next },
+        },
+        {
+          onSuccess: () => {
+            // @TODO
+            // queryClient.invalidateQueries({
+            //   queryKey: [queryKey.GET_LIKE, userId],
+            // });
+            toggleFont(font);
+          },
+        },
+      );
+      return {
+        ...prev,
+        [font.id]: next,
+      };
     });
   };
 
@@ -73,35 +150,57 @@ const FreeFont = () => {
     }
   };
 
+  const handleSortChange = useCallback((nextSort: SortType) => {
+    setSort(nextSort);
+  }, []);
+
+  const handleToggleFilter = useCallback((key: FilterKey) => {
+    setFilters((prev) => ({
+      ...prev,
+      [key]: !prev[key],
+    }));
+  }, []);
+
+  const handleResetFilters = useCallback(() => {
+    setFilters({ ...INITIAL_FILTERS });
+  }, []);
+
   return (
     <div className={styles.container}>
       <Banner />
 
       <div className={styles.article}>
-        <SidePanel />
+        <SidePanel
+          filters={filters}
+          onToggleFilter={handleToggleFilter}
+          onReset={handleResetFilters}
+        />
 
         <div className={styles.rightSection}>
           <FontToolBar
             fontSize={fontSize}
             previewText={previewText}
             layout={layout}
+            sort={sort}
             onSizeChange={handleSizeChange}
             onInputChange={handleInputChange}
             onLayoutChange={handleLayoutChange}
+            onSortChange={handleSortChange}
           />
 
-          {layout === TOGGLE.GRID ? (
+          {fonts.length === 0 && !isLoading ? (
+            <EmptyFont />
+          ) : layout === TOGGLE.GRID ? (
             <div className={styles.cardSection}>
               {fonts.map((font) => (
                 <CardView
                   key={font.id}
                   {...font}
                   globalPhrase={previewText}
-                  isCompared={isSelected(font.id)}
-                  onToggleCompare={() =>
-                    handleToggleCompare(isSelected(font.id), font, font.id)
-                  }
-                  onToggleLike={() => handleToggleLike(font.isLiked, font.id)}
+                  isCompared={getCompared(font.id)}
+                  onToggleCompare={() => handleToggleCompare(font)}
+                  onToggleLike={() => handleToggleLike(font)}
+                  isLiked={getLiked(font.id)}
                 />
               ))}
             </div>
@@ -112,11 +211,10 @@ const FreeFont = () => {
                   key={font.id}
                   {...font}
                   globalPhrase={previewText}
-                  isCompared={isSelected(font.id)}
-                  onToggleCompare={() =>
-                    handleToggleCompare(isSelected(font.id), font, font.id)
-                  }
-                  onToggleLike={() => handleToggleLike(font.isLiked, font.id)}
+                  isCompared={getCompared(font.id)}
+                  onToggleCompare={() => handleToggleCompare(font)}
+                  onToggleLike={() => handleToggleLike(font)}
+                  isLiked={getLiked(font.id)}
                 />
               ))}
             </div>

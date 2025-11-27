@@ -129,7 +129,7 @@ const getComparedFontPreview = async (): Promise<CompareFontPreviewType[]> => {
 
 export const useGetComparePreview = () => {
   return useQuery({
-    queryKey: [queryKey.GET_COMPARE_FONT_PREVIEW],
+    queryKey: [queryKey.GET_COMPARE_FONT_PREVIEW, userId],
     queryFn: () => getComparedFontPreview(),
   });
 };
