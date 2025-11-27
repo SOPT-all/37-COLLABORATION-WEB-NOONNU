@@ -1,10 +1,10 @@
 import { useNavigate } from 'react-router';
 
 import { routePath } from '@/router/path';
-import { useStorageAction } from '@/widgets/storage/hooks/useStorageAction';
-import { useStorageUI } from '@/widgets/storage/hooks/useStorageUI';
+import { useStorageAction } from '@/widgets/storage/hooks/use-storage-action';
+import { useStorageUI } from '@/widgets/storage/hooks/use-storage-ui';
 
-import { useStorageData } from './useStorageData';
+import { useStorageData } from './use-storage-data';
 
 export const useStorage = () => {
   const navigate = useNavigate();

@@ -1,6 +1,8 @@
 import { useCallback, useState } from 'react';
 
 import { usePostCompare, usePostLike } from '@/shared/apis/domain/user-font';
+import { queryKey } from '@/shared/apis/keys/query-key';
+import { queryClient } from '@/shared/apis/query-client';
 import CardView from '@/shared/components/card-view/card-view';
 import ListView from '@/shared/components/list-view/list-view';
 import SidePanel from '@/shared/components/side-panel/side-panel';
@@ -14,6 +16,8 @@ import TopButton from '@/widgets/free-font/components/top-button/top-button';
 import { useFontSelection } from '@/widgets/free-font/hooks/use-font-selection';
 
 import * as styles from './free-font.css';
+
+const userId = 1;
 
 const FreeFont = () => {
   const [fontSize, setFontSize] = useState(30);
@@ -31,10 +35,20 @@ const FreeFont = () => {
     font: FontItemType,
     fontId: number,
   ) => {
-    changeCompareState({
-      fontId,
-      request: { isCompared: !isCompared },
-    });
+    changeCompareState(
+      {
+        fontId,
+        request: { isCompared: !isCompared },
+      },
+      {
+        onSuccess: () => {
+          queryClient.invalidateQueries({
+            queryKey: [queryKey.GET_COMPARE, userId],
+          });
+          toggleFont(font);
+        },
+      },
+    );
     toggleFont(font);
   };
 
