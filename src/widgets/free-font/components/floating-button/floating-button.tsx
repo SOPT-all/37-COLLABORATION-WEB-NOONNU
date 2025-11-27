@@ -23,7 +23,7 @@ const FloatingButton = ({ onDeleteFont, onDeleteAll }: FloatingButtonProps) => {
   const handleHoverStart = () => setIsList(true);
   const handleHoverEnd = () => setIsList(false);
 
-  const hasFonts = selectedFonts?.length > 0;
+  const hasFonts = selectedFonts.length > 0;
 
   const handleCompareClick = () => {
     navigate(routePath.STORAGE, { state: { fonts: selectedFonts } });
