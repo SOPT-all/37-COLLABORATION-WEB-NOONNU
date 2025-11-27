@@ -1,10 +1,15 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
 import {
   useGetCompare,
   usePostCompare,
   usePostLike,
 } from '@/shared/apis/domain/user-font';
+import {
+  type FilterKey,
+  type Filters,
+  INITIAL_FILTERS,
+} from '@/shared/constants/filter-keys';
 import {
   DeleteButtonBar,
   FontCardView,
@@ -37,6 +42,19 @@ const Storage = () => {
     const server = comparedData.find((font) => font.id === id);
     return server?.isCompared ?? false;
   };
+
+  const [filters, setFilters] = useState<Filters>({ ...INITIAL_FILTERS });
+
+  const handleToggleFilter = useCallback((key: FilterKey) => {
+    setFilters((prev) => ({
+      ...prev,
+      [key]: !prev[key],
+    }));
+  }, []);
+
+  const handleResetFilters = useCallback(() => {
+    setFilters({ ...INITIAL_FILTERS });
+  }, []);
 
   const handleToggleCompare = (fontId: number) => {
     setIsComparedState((prev) => {
@@ -75,7 +93,11 @@ const Storage = () => {
 
       <div className={styles.pageMainSection}>
         <div className={styles.sidePanelContainer}>
-          <SidePanel />
+          <SidePanel
+            filters={filters}
+            onToggleFilter={handleToggleFilter}
+            onReset={handleResetFilters}
+          />
         </div>
 
         <main className={styles.fontInfoContainer}>
