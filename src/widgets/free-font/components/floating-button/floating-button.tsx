@@ -7,8 +7,9 @@ import { useGetComparePreview } from '@/shared/apis/domain/user-font';
 import CompareFloatingButton from '../compare-floating-button/compare-floating-button';
 import DeleteButton from '../floating-contents/delete-floating-button/delete-button';
 import FontListBox from '../floating-contents/font-list-box/font-list-box';
-import * as styles from './floating-button.css';
 import TopButton from '../top-button/top-button';
+import * as styles from './floating-button.css';
+
 interface FloatingButtonProps {
   onDeleteFont: (id: number) => void;
   onDeleteAll: () => void;

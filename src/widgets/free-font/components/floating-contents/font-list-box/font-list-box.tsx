@@ -1,6 +1,7 @@
 import { memo } from 'react';
 
 import type { CompareFontPreviewType } from '@/shared/apis/types/user-font';
+
 import FontList from '../font-list/font-list';
 import * as styles from './font-list-box.css';
 

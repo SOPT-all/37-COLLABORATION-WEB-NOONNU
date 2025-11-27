@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import Accordion from '@/shared/components/accordion/accordion';
 import AllowedRangeChip from '@/shared/components/chip/allowed-range-chip';
 import TitleChip from '@/shared/components/chip/title-chip';
@@ -13,7 +15,6 @@ import { type FilterKey, type Filters } from '@/shared/constants/filter-keys';
 import { FilterIcon, ResetIcon } from '@/shared/icons';
 
 import * as styles from './side-panel.css';
-import { useState } from 'react';
 
 interface SidePanelProps {
   filters: Filters;
