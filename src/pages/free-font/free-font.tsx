@@ -19,7 +19,6 @@ import { type LayoutToggleType, TOGGLE } from '@/shared/types/layout-toggle';
 import Banner from '@/widgets/free-font/components/banner/banner';
 import FloatingButton from '@/widgets/free-font/components/floating-button/floating-button';
 import FontToolBar from '@/widgets/free-font/components/font-toolbar/font-toolbar';
-import TopButton from '@/widgets/free-font/components/top-button/top-button';
 import { useFontSelection } from '@/widgets/free-font/hooks/use-font-selection';
 
 import * as styles from './free-font.css';
@@ -161,11 +160,13 @@ const FreeFont = () => {
       <Banner />
 
       <div className={styles.article}>
-        <SidePanel
-          filters={filters}
-          onToggleFilter={handleToggleFilter}
-          onReset={handleResetFilters}
-        />
+        <div className={styles.sidePanelContainer}>
+          <SidePanel
+            filters={filters}
+            onToggleFilter={handleToggleFilter}
+            onReset={handleResetFilters}
+          />
+        </div>
 
         <div className={styles.rightSection}>
           <FontToolBar
@@ -216,7 +217,6 @@ const FreeFont = () => {
           )}
         </div>
       </div>
-      <TopButton />
       <FloatingButton onDeleteFont={deleteFont} />
     </div>
   );
