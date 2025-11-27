@@ -4,6 +4,7 @@ export const container = style({
   position: 'sticky',
   display: 'grid',
   marginRight: '-0.35rem',
+  bottom: '4.8rem',
   marginLeft: 'auto',
   marginTop: '-13rem',
   gap: '1.2rem',
