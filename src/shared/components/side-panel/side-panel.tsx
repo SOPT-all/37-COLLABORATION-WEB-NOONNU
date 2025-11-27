@@ -2,6 +2,7 @@ import Accordion from '@/shared/components/accordion/accordion';
 import AllowedRangeChip from '@/shared/components/chip/allowed-range-chip';
 import TitleChip from '@/shared/components/chip/title-chip';
 import FilterSection from '@/shared/components/filter-section/filter-section';
+import Slider from '@/shared/components/slider/slider';
 import {
   LICENSE_ITEMS,
   MOOD_ITEMS,
@@ -12,6 +13,7 @@ import { type FilterKey, type Filters } from '@/shared/constants/filter-keys';
 import { FilterIcon, ResetIcon } from '@/shared/icons';
 
 import * as styles from './side-panel.css';
+import { useState } from 'react';
 
 interface SidePanelProps {
   filters: Filters;
@@ -20,6 +22,8 @@ interface SidePanelProps {
 }
 
 const SidePanel = ({ filters, onToggleFilter, onReset }: SidePanelProps) => {
+  const [weightCount, setWeightCount] = useState(1);
+
   return (
     <aside className={styles.container}>
       <header className={styles.header}>
@@ -116,6 +120,25 @@ const SidePanel = ({ filters, onToggleFilter, onReset }: SidePanelProps) => {
                       label={item.label}
                     />
                   ))}
+                </FilterSection>
+              </Accordion.Panel>
+            </Accordion.Container>
+          </Accordion>
+        </div>
+        <div className={styles.sectionDivider}>
+          <Accordion>
+            <Accordion.Container>
+              <Accordion.Header subtitle='특성' />
+              <Accordion.Panel>
+                <FilterSection type='title'>
+                  <Slider
+                    label='굵기 개수'
+                    value={weightCount}
+                    unit='가지'
+                    onChange={setWeightCount}
+                    min={1}
+                    max={10}
+                  />
                 </FilterSection>
               </Accordion.Panel>
             </Accordion.Container>
