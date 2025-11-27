@@ -1,6 +1,8 @@
 import { useCallback, useState } from 'react';
 
-import { usePostCompare } from '@/shared/apis/domain/user-font';
+import { usePostCompare, usePostLike } from '@/shared/apis/domain/user-font';
+import { queryKey } from '@/shared/apis/keys/query-key';
+import { queryClient } from '@/shared/apis/query-client';
 import CardView from '@/shared/components/card-view/card-view';
 import ListView from '@/shared/components/list-view/list-view';
 import SidePanel from '@/shared/components/side-panel/side-panel';
@@ -15,6 +17,8 @@ import { useFontSelection } from '@/widgets/free-font/hooks/use-font-selection';
 
 import * as styles from './free-font.css';
 
+const userId = 1;
+
 const FreeFont = () => {
   const [fontSize, setFontSize] = useState(30);
   const [previewText, setPreviewText] = useState('');
@@ -24,17 +28,35 @@ const FreeFont = () => {
     useFontSelection();
 
   const { mutate: changeCompareState } = usePostCompare();
+  const { mutate: changeLikeState } = usePostLike();
 
   const handleToggleCompare = (
     isCompared: boolean,
     font: FontItemType,
     fontId: number,
   ) => {
-    changeCompareState({
-      fontId,
-      request: { isCompared: !isCompared },
-    });
+    changeCompareState(
+      {
+        fontId,
+        request: { isCompared: !isCompared },
+      },
+      {
+        onSuccess: () => {
+          queryClient.invalidateQueries({
+            queryKey: [queryKey.GET_COMPARE, userId],
+          });
+          toggleFont(font);
+        },
+      },
+    );
     toggleFont(font);
+  };
+
+  const handleToggleLike = (isLiked: boolean, fontId: number) => {
+    changeLikeState({
+      fontId,
+      request: { isLiked: !isLiked },
+    });
   };
 
   const handleSizeChange = useCallback(
@@ -80,7 +102,7 @@ const FreeFont = () => {
                   onToggleCompare={() =>
                     handleToggleCompare(isSelected(font.id), font, font.id)
                   }
-                  onToggleLike={() => {}}
+                  onToggleLike={() => handleToggleLike(font.isLiked, font.id)}
                 />
               ))}
             </div>
@@ -95,7 +117,7 @@ const FreeFont = () => {
                   onToggleCompare={() =>
                     handleToggleCompare(isSelected(font.id), font, font.id)
                   }
-                  onToggleLike={() => {}}
+                  onToggleLike={() => handleToggleLike(font.isLiked, font.id)}
                 />
               ))}
             </div>
