@@ -2,6 +2,7 @@ import { useCallback, useMemo, useState } from 'react';
 
 import {
   useGetCompare,
+  useGetLiked,
   usePostCompare,
   usePostLike,
 } from '@/shared/apis/domain/user-font';
@@ -30,15 +31,18 @@ import * as styles from './storage.css';
 const userId = 1;
 
 const Storage = () => {
-  const { uiState, actionState, fonts, actions } = useStorage();
+  const { uiState, actionState, actions } = useStorage();
+
   const { mutate: changeCompareState } = usePostCompare();
   const { mutate: changeLikeState } = usePostLike();
 
   const { data: comparedData = [] } = useGetCompare();
+  const { data: likedData = [] } = useGetLiked();
 
   const [isComparedState, setIsComparedState] = useState<
     Record<number, boolean>
   >({});
+  const [isLikedState, setIsLikedState] = useState<Record<number, boolean>>({});
 
   const getCompared = (id: number): boolean => {
     const local = isComparedState[id];
@@ -47,6 +51,15 @@ const Storage = () => {
     }
     const server = comparedData.find((font) => font.id === id);
     return server?.isCompared ?? false;
+  };
+
+  const getLiked = (id: number): boolean => {
+    const local = isLikedState[id];
+    if (local !== undefined) {
+      return local;
+    }
+    const server = likedData.find((font) => font.id === id);
+    return server?.isLiked ?? false;
   };
 
   const [filters, setFilters] = useState<Filters>({ ...INITIAL_FILTERS });
@@ -61,7 +74,10 @@ const Storage = () => {
     return allFilteredFonts.filter((font) => comparedIds.has(font.id));
   }, [allFilteredFonts, comparedData]);
 
-  const filteredFonts = allFilteredFonts;
+  const filteredLikedFonts: FontItemType[] = useMemo(() => {
+    const likedIds = new Set(likedData.map((font) => font.id));
+    return allFilteredFonts.filter((font) => likedIds.has(font.id));
+  }, [allFilteredFonts, likedData]);
 
   const handleToggleFilter = useCallback((key: FilterKey) => {
     setFilters((prev) => ({
@@ -78,6 +94,7 @@ const Storage = () => {
     setIsComparedState((prev) => {
       const current = prev[fontId] ?? getCompared(fontId);
       const next = !current;
+
       changeCompareState(
         {
           fontId,
@@ -88,12 +105,14 @@ const Storage = () => {
             queryClient.invalidateQueries({
               queryKey: [queryKey.GET_COMPARE_FONT_PREVIEW, userId],
             });
+
             queryClient.invalidateQueries({
-              queryKey: [queryKey.GET_FONTS, userId],
+              queryKey: [queryKey.GET_FONTS],
             });
           },
         },
       );
+
       return {
         ...prev,
         [fontId]: next,
@@ -102,16 +121,29 @@ const Storage = () => {
   };
 
   const handleToggleLike = (fontId: number) => {
-    const target = fonts.find((font) => font.id === fontId);
-    if (!target) {
-      return;
-    }
-    const nextLikeState = !target.isLiked;
-    changeLikeState({
-      fontId,
-      request: { isLiked: nextLikeState },
+    setIsLikedState((prev) => {
+      const current = prev[fontId] ?? getLiked(fontId);
+      const next = !current;
+
+      changeLikeState(
+        {
+          fontId,
+          request: { isLiked: next },
+        },
+        {
+          onSuccess: () => {
+            queryClient.invalidateQueries({
+              queryKey: [queryKey.GET_FONTS],
+            });
+          },
+        },
+      );
+
+      return {
+        ...prev,
+        [fontId]: next,
+      };
     });
-    actions.handleToggleLike(fontId);
   };
 
   return (
@@ -155,24 +187,26 @@ const Storage = () => {
                 items={
                   uiState.currentTab === 'compare'
                     ? filteredComparedFonts
-                    : filteredFonts
+                    : filteredLikedFonts
                 }
                 globalPhrase={actionState.globalPhrase}
                 onToggleLike={handleToggleLike}
                 onToggleCompare={handleToggleCompare}
                 getCompared={getCompared}
+                getLiked={getLiked}
               />
             ) : (
               <FontListView
                 items={
                   uiState.currentTab === 'compare'
                     ? filteredComparedFonts
-                    : filteredFonts
+                    : filteredLikedFonts
                 }
                 globalPhrase={actionState.globalPhrase}
                 onToggleLike={handleToggleLike}
                 onToggleCompare={handleToggleCompare}
                 getCompared={getCompared}
+                getLiked={getLiked}
               />
             )}
           </div>

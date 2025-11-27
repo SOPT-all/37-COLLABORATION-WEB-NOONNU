@@ -3,7 +3,6 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { END_POINT } from '../config/end-point';
 import { instance } from '../instance';
 import { queryKey } from '../keys/query-key';
-import { queryClient } from '../query-client';
 import type { ApiResponse } from '../types/api-response';
 import type {
   ComparedFont,
@@ -11,6 +10,8 @@ import type {
   CompareFontPreviewType,
   CompareResult,
   CompareStateRequest,
+  LikedFont,
+  LikedFontResult,
   LikeStateRequest,
 } from '../types/user-font';
 
@@ -67,16 +68,33 @@ export const usePostLike = () => {
       fontId: number;
       request: LikeStateRequest;
     }) => postLike(fontId, request),
-    onSuccess: () => {
-      queryClient.invalidateQueries({});
-    },
   });
 };
 
 /**
  * 좋아요한 폰트 목록 조회
  */
+const getLiked = async (): Promise<LikedFont[]> => {
+  const response = await instance.get<ApiResponse<LikedFontResult>>(
+    END_POINT.LIKED_FONT,
+    {
+      headers: { userId: String(userId) },
+    },
+  );
+  const likedFonts = response.data.result;
+  if (!likedFonts) {
+    return [];
+  }
+  return likedFonts.items;
+};
 
+export const useGetLiked = () => {
+  return useQuery({
+    queryKey: [queryKey.GET_LIKED_FONTS, userId],
+    queryFn: () => getLiked(),
+    refetchOnMount: 'always',
+  });
+};
 /**
  * 비교하기에 담긴 폰트 목록 조회
  */
@@ -93,6 +111,7 @@ export const useGetCompare = () => {
   return useQuery({
     queryKey: [queryKey.GET_COMPARE, userId],
     queryFn: () => getCompare(),
+    refetchOnMount: 'always',
   });
 };
 

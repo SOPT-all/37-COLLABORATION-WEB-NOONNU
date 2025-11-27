@@ -9,6 +9,7 @@ interface FontListViewProps {
   onToggleLike: (id: number) => void;
   onToggleCompare: (id: number) => void;
   getCompared: (id: number) => boolean;
+  getLiked: (id: number) => boolean;
 }
 
 const FontListView = ({
@@ -17,6 +18,7 @@ const FontListView = ({
   onToggleLike,
   onToggleCompare,
   getCompared,
+  getLiked,
 }: FontListViewProps) => {
   return (
     <div className={styles.listContainer}>
@@ -28,6 +30,7 @@ const FontListView = ({
           onToggleCompare={onToggleCompare}
           onToggleLike={onToggleLike}
           isCompared={getCompared(item.id)}
+          isLiked={getLiked(item.id)}
         />
       ))}
     </div>
