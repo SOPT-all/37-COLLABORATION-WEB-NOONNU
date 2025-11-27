@@ -1,10 +1,15 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { END_POINT } from '../config/end-point';
 import { instance } from '../instance';
+import { queryKey } from '../keys/query-key';
 import { queryClient } from '../query-client';
 import type { ApiResponse } from '../types/api-response';
-import type { CompareStateRequest } from '../types/user-font';
+import type {
+  ComparedFont,
+  CompareResult,
+  CompareStateRequest,
+} from '../types/user-font';
 
 const userId = 1;
 
@@ -33,7 +38,9 @@ export const usePostCompare = () => {
       request: CompareStateRequest;
     }) => postCompare(fontId, request),
     onSuccess: () => {
-      queryClient.invalidateQueries({});
+      queryClient.invalidateQueries({
+        queryKey: [queryKey.GET_COMPARE, userId],
+      });
     },
   });
 };
@@ -49,6 +56,41 @@ export const usePostCompare = () => {
 /**
  * 비교하기에 담긴 폰트 목록 조회
  */
+const getCompare = async (): Promise<ComparedFont[]> => {
+  const response = await instance.get<ApiResponse<CompareResult>>(
+    END_POINT.COMPARE_FONT,
+    {
+      headers: { userId: String(userId) },
+    },
+  );
+  return response.data.result.items;
+};
+export const useGetCompare = () => {
+  return useQuery({
+    queryKey: [queryKey.GET_COMPARE, userId],
+    queryFn: () => getCompare(),
+  });
+};
+
+/**
+ * 모든 폰트 비교 상태 해제 API
+ */
+const compareResetAll = async (fontIds: number[]) => {
+  const requests = fontIds.map((id) => postCompare(id, { isCompared: false }));
+  return Promise.all(requests);
+};
+export const useCompareResetAll = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (fontIds: number[]) => compareResetAll(fontIds),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [queryKey.GET_COMPARE, userId],
+      });
+    },
+  });
+};
 
 /**
  * 폰트 비교하기 플로팅 버튼 조회
