@@ -1,10 +1,10 @@
-import type { FilterKey, Filters } from '@/shared/constants/filter-keys';
 import type {
   FontLicense,
   FontMood,
   FontPurpose,
   FontShape,
 } from '@/shared/apis/types/font';
+import type { FilterKey, Filters } from '@/shared/constants/filter-keys';
 
 const mapPurposeFilter = (filterKey: FilterKey): FontPurpose | null => {
   const purposeMap: Record<string, FontPurpose> = {
@@ -70,7 +70,9 @@ export const convertFiltersToApiParams = (filters: Filters) => {
   const licenses: FontLicense[] = [];
 
   Object.entries(filters).forEach(([key, isSelected]) => {
-    if (!isSelected) return;
+    if (!isSelected) {
+      return;
+    }
 
     const filterKey = key as FilterKey;
     const purpose = mapPurposeFilter(filterKey);
@@ -78,10 +80,18 @@ export const convertFiltersToApiParams = (filters: Filters) => {
     const mood = mapMoodFilter(filterKey);
     const license = mapLicenseFilter(filterKey);
 
-    if (purpose) purposes.push(purpose);
-    if (shape) shapes.push(shape);
-    if (mood) moods.push(mood);
-    if (license) licenses.push(license);
+    if (purpose) {
+      purposes.push(purpose);
+    }
+    if (shape) {
+      shapes.push(shape);
+    }
+    if (mood) {
+      moods.push(mood);
+    }
+    if (license) {
+      licenses.push(license);
+    }
   });
 
   return {

@@ -1,5 +1,5 @@
-import type { SortType } from '@/shared/types/drop-down';
 import type { FontSort } from '@/shared/apis/types/font';
+import type { SortType } from '@/shared/types/drop-down';
 
 export const convertSortToApiParam = (sort: SortType): FontSort => {
   const sortMap: Record<SortType, FontSort> = {

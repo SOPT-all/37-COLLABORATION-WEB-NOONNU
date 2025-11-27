@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 
 import { END_POINT } from '../config/end-point';
-import { queryKey } from '../keys/query-key';
 import { instance } from '../instance';
+import { queryKey } from '../keys/query-key';
 import type { ApiResponse } from '../types/api-response';
 import type { FontListResponse, GetFontsParams } from '../types/font';
 

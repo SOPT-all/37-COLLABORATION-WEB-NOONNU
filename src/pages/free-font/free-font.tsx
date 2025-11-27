@@ -1,20 +1,20 @@
 import { useCallback, useMemo, useState } from 'react';
 
+import { useGetFonts } from '@/shared/apis/domain/font';
 import { usePostCompare, usePostLike } from '@/shared/apis/domain/user-font';
 import { queryKey } from '@/shared/apis/keys/query-key';
 import { queryClient } from '@/shared/apis/query-client';
-import { useGetFonts } from '@/shared/apis/domain/font';
 import CardView from '@/shared/components/card-view/card-view';
 import EmptyFont from '@/shared/components/empty-font/empty-font';
 import ListView from '@/shared/components/list-view/list-view';
 import SidePanel from '@/shared/components/side-panel/side-panel';
 import {
-  INITIAL_FILTERS,
   type FilterKey,
   type Filters,
+  INITIAL_FILTERS,
 } from '@/shared/constants/filter-keys';
-import type { FontItemType } from '@/shared/types/font';
 import type { SortType } from '@/shared/types/drop-down';
+import type { FontItemType } from '@/shared/types/font';
 import { type LayoutToggleType, TOGGLE } from '@/shared/types/layout-toggle';
 import { convertFiltersToApiParams } from '@/shared/utils/filter-mapper';
 import { mapFontResponseToFontItem } from '@/shared/utils/font-mapper';
@@ -49,6 +49,7 @@ const FreeFont = () => {
   const [isComparedState, setIsComparedState] = useState<
     Record<number, boolean>
   >({});
+  const [isLikeState, setIsLikeState] = useState<Record<number, boolean>>({});
 
   const getCompared = (id: number): boolean => {
     const local = isComparedState[id];
@@ -57,6 +58,15 @@ const FreeFont = () => {
     }
     const server = fontsData?.result.fonts.find((font) => font.id === id);
     return server?.isCompared ?? false;
+  };
+
+  const getLiked = (id: number): boolean => {
+    const local = isLikeState[id];
+    if (local !== undefined) {
+      return local;
+    }
+    const server = fontsData?.result.fonts.find((font) => font.id === id);
+    return server?.isLiked ?? false;
   };
 
   const fonts: FontItemType[] = useMemo(() => {
@@ -96,15 +106,29 @@ const FreeFont = () => {
     });
   };
 
-  const handleToggleLike = (fontId: number) => {
-    const target = fonts.find((font) => font.id === fontId);
-    if (!target) {
-      return;
-    }
-    const nextLikeState = !target.isLiked;
-    changeLikeState({
-      fontId,
-      request: { isLiked: nextLikeState },
+  const handleToggleLike = (font: FontItemType) => {
+    setIsLikeState((prev) => {
+      const current = prev[font.id] ?? getLiked(font.id);
+      const next = !current;
+      changeLikeState(
+        {
+          fontId: font.id,
+          request: { isLiked: next },
+        },
+        {
+          onSuccess: () => {
+            // @TODO
+            // queryClient.invalidateQueries({
+            //   queryKey: [queryKey.GET_LIKE, userId],
+            // });
+            toggleFont(font);
+          },
+        },
+      );
+      return {
+        ...prev,
+        [font.id]: next,
+      };
     });
   };
 
@@ -172,7 +196,8 @@ const FreeFont = () => {
                   globalPhrase={previewText}
                   isCompared={getCompared(font.id)}
                   onToggleCompare={() => handleToggleCompare(font)}
-                  onToggleLike={() => handleToggleLike(font.id)}
+                  onToggleLike={() => handleToggleLike(font)}
+                  isLiked={getLiked(font.id)}
                 />
               ))}
             </div>
@@ -185,7 +210,8 @@ const FreeFont = () => {
                   globalPhrase={previewText}
                   isCompared={getCompared(font.id)}
                   onToggleCompare={() => handleToggleCompare(font)}
-                  onToggleLike={() => handleToggleLike(font.id)}
+                  onToggleLike={() => handleToggleLike(font)}
+                  isLiked={getLiked(font.id)}
                 />
               ))}
             </div>

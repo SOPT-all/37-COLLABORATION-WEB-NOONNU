@@ -6,11 +6,10 @@ import {
   usePostLike,
 } from '@/shared/apis/domain/user-font';
 import {
-  INITIAL_FILTERS,
   type FilterKey,
   type Filters,
+  INITIAL_FILTERS,
 } from '@/shared/constants/filter-keys';
-
 import {
   DeleteButtonBar,
   FontCardView,
