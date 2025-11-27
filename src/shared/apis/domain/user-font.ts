@@ -9,6 +9,8 @@ import type {
   ComparedFont,
   CompareResult,
   CompareStateRequest,
+  LikedFont,
+  LikedFontResult,
 } from '../types/user-font';
 
 const userId = 1;
@@ -52,7 +54,26 @@ export const usePostCompare = () => {
 /**
  * 좋아요한 폰트 목록 조회
  */
+const getLiked = async (): Promise<LikedFont[]> => {
+  const response = await instance.get<ApiResponse<LikedFontResult>>(
+    END_POINT.LIKED_FONT,
+    {
+      headers: { userId: String(userId) },
+    },
+  );
+  const likedFonts = response.data.result;
+  if (!likedFonts) {
+    return [];
+  }
+  return likedFonts.items;
+};
 
+export const useGetLiked = () => {
+  return useQuery({
+    queryKey: [queryKey.GET_LIKED_FONTS, userId],
+    queryFn: () => getLiked(),
+  });
+};
 /**
  * 비교하기에 담긴 폰트 목록 조회
  */

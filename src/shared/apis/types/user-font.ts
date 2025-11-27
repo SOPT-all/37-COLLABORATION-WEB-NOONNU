@@ -32,3 +32,22 @@ export interface ComparedFont {
 export interface CompareResult {
   items: ComparedFont[];
 }
+
+/**
+ * 폰트 찜 페이지 조회(get) 타입
+ */
+
+export interface LikedFont {
+  id: number;
+  name: string;
+  producer: string;
+  thicknessNum: number;
+  phrase: string;
+  isLiked: boolean;
+  isCompared: boolean;
+  fontMetadata: FontMetadataType;
+}
+
+export interface LikedFontResult {
+  items: LikedFont[];
+}

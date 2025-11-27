@@ -5,10 +5,11 @@ import { routePath } from '@/router/path';
 import {
   useCompareResetAll,
   useGetCompare,
+  useGetLiked,
   usePostCompare,
 } from '@/shared/apis/domain/user-font';
 import SidePanel from '@/shared/components/side-panel/side-panel';
-import { fontItem } from '@/shared/mocks/font-item';
+// import { fontItem } from '@/shared/mocks/font-item';
 import type { SortType } from '@/shared/types/drop-down';
 import type { LayoutToggleType } from '@/shared/types/layout-toggle';
 import type { TabLabelTypes } from '@/shared/types/tab';
@@ -36,6 +37,7 @@ const Storage = () => {
   const [sortOption, setSortOption] = useState<SortType>('인기순');
 
   const { data: comparedFonts = [] } = useGetCompare();
+  const { data: likedFonts = [] } = useGetLiked();
   const { mutate: changeCompareState } = usePostCompare();
   const { mutate: resetAllCompare } = useCompareResetAll();
 
@@ -57,8 +59,22 @@ const Storage = () => {
     // 추후 API 로직 추가
   };
 
+  const findFontById = (fontId: number) => {
+    const fromCompared = comparedFonts.find((font) => font.id === fontId);
+    if (fromCompared) {
+      return fromCompared;
+    }
+
+    const fromLiked = likedFonts.find((font) => font.id === fontId);
+    if (fromLiked) {
+      return fromLiked;
+    }
+
+    return null;
+  };
+
   const handleToggleCompare = (fontId: number) => {
-    const target = comparedFonts.find((font) => font.id === fontId);
+    const target = findFontById(fontId);
     if (!target) {
       return;
     }
@@ -79,6 +95,8 @@ const Storage = () => {
   const handleSearchChange = (value: string) => {
     setSearchText(value);
   };
+
+  const items = currentTab === 'compare' ? comparedFonts : likedFonts;
 
   return (
     <div className={styles.storagePageContainer}>
@@ -118,14 +136,14 @@ const Storage = () => {
 
             {viewMode === 'grid' ? (
               <FontCardView
-                items={currentTab === 'compare' ? comparedFonts : fontItem}
+                items={items}
                 globalPhrase={globalPhrase}
                 onToggleLike={handleToggleLike}
                 onToggleCompare={handleToggleCompare}
               />
             ) : (
               <FontListView
-                items={currentTab === 'compare' ? comparedFonts : fontItem}
+                items={items}
                 globalPhrase={globalPhrase}
                 onToggleLike={handleToggleLike}
                 onToggleCompare={handleToggleCompare}
