@@ -18,8 +18,6 @@ const FloatingButton = ({ onDeleteFont, onDeleteAll }: FloatingButtonProps) => {
 
   const selectedFonts = data || [];
 
-  console.log(selectedFonts);
-
   const handleHoverStart = () => setIsList(true);
   const handleHoverEnd = () => setIsList(false);
 
