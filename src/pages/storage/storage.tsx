@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
 import {
   useGetCompare,
@@ -12,6 +12,8 @@ import {
   type Filters,
   INITIAL_FILTERS,
 } from '@/shared/constants/filter-keys';
+import { useFilteredFonts } from '@/shared/hooks/use-filtered-fonts';
+import type { FontItemType } from '@/shared/types/font';
 import {
   DeleteButtonBar,
   FontCardView,
@@ -28,7 +30,7 @@ import * as styles from './storage.css';
 const userId = 1;
 
 const Storage = () => {
-  const { uiState, actionState, fonts, displayFonts, actions } = useStorage();
+  const { uiState, actionState, fonts, actions } = useStorage();
   const { mutate: changeCompareState } = usePostCompare();
   const { mutate: changeLikeState } = usePostLike();
 
@@ -48,6 +50,18 @@ const Storage = () => {
   };
 
   const [filters, setFilters] = useState<Filters>({ ...INITIAL_FILTERS });
+
+  const { fonts: allFilteredFonts } = useFilteredFonts(
+    filters,
+    actionState.sortOption,
+  );
+
+  const filteredComparedFonts: FontItemType[] = useMemo(() => {
+    const comparedIds = new Set(comparedData.map((font) => font.id));
+    return allFilteredFonts.filter((font) => comparedIds.has(font.id));
+  }, [allFilteredFonts, comparedData]);
+
+  const filteredFonts = allFilteredFonts;
 
   const handleToggleFilter = useCallback((key: FilterKey) => {
     setFilters((prev) => ({
@@ -139,7 +153,9 @@ const Storage = () => {
             {uiState.viewMode === 'grid' ? (
               <FontCardView
                 items={
-                  uiState.currentTab === 'compare' ? comparedData : displayFonts
+                  uiState.currentTab === 'compare'
+                    ? filteredComparedFonts
+                    : filteredFonts
                 }
                 globalPhrase={actionState.globalPhrase}
                 onToggleLike={handleToggleLike}
@@ -149,7 +165,9 @@ const Storage = () => {
             ) : (
               <FontListView
                 items={
-                  uiState.currentTab === 'compare' ? comparedData : displayFonts
+                  uiState.currentTab === 'compare'
+                    ? filteredComparedFonts
+                    : filteredFonts
                 }
                 globalPhrase={actionState.globalPhrase}
                 onToggleLike={handleToggleLike}
