@@ -82,7 +82,7 @@ const getCompare = async (): Promise<ComparedFont[]> => {
   const response = await instance.get<ApiResponse<CompareResult>>(
     END_POINT.COMPARE_FONT,
     {
-      headers: { userId: String(userId) },
+      headers: { userId: userId },
     },
   );
   return response.data.result.items;

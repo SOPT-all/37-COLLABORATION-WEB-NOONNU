@@ -57,9 +57,7 @@ const Storage = () => {
     if (!target) {
       return;
     }
-
     const nextLikeState = !target.isLiked;
-
     changeLikeState({
       fontId,
       request: { isLiked: nextLikeState },
