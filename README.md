@@ -1,6 +1,6 @@
 # 37-COLLABORATION-WEB-NOONNU
 
-🖊️ DIVE SOPT 37기 합동세미나 데스크탑 웹 2팀 눈누
+DIVE SOPT 37기 합동세미나 데스크탑 웹 2팀 눈누 🖊️
 
 ## 팀 소개
 
@@ -225,3 +225,15 @@
 ```
 
 ## 눈누난나
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/a398f9e8-5303-4900-b7cf-6a1cd5100db9" width="500"/>
+</p>
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/40a27239-4ed1-4c53-8322-eead7fc6aaab" width="500"/>
+</p>
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/a6c7d0b2-6f8d-4704-bef7-5a8d5b99013f" width="500"/>
+</p>
