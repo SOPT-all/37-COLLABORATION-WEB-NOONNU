@@ -2,6 +2,16 @@
 
 DIVE SOPT 37기 합동세미나 데스크탑 웹 2팀 눈누 🖊️
 
+<br/>
+
+## 프로젝트 소개
+
+![1](https://github.com/user-attachments/assets/283da1bc-5e7b-4bcc-83cf-55ec3512218c)
+![2](https://github.com/user-attachments/assets/9a5370fa-65cb-48c8-83e3-316760832cd3)
+![3](https://github.com/user-attachments/assets/4575b234-0d22-49fd-9adb-377880b01f84)
+![4](https://github.com/user-attachments/assets/a0e38561-2ac5-4f6d-ba23-034d54531194)
+
+
 ## 팀 소개
 
 <table>
